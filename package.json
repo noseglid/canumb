@@ -1,0 +1,34 @@
+{
+  "name" : "numbers",
+  "version" : "0.0.1",
+  "description" : "Number conversion as a service",
+  "main" : "main.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/noseglid/canumb.git"
+  },
+  "dependencies" : {},
+  "keywords" : [
+    "number",
+    "conversion",
+    "hex",
+    "bin",
+    "dec",
+    "decimal",
+    "hexadecimal",
+    "binary",
+    "double",
+    "float"
+  ],
+  "author" : "Alexander Olsson <noseglid@gmail.com>",
+  "contributors" : [],
+  "license" : "MIT",
+  "homepage" : "https://github.com/noseglid/canumb",
+  "bugs" : {
+    "url" : "https://github.com/noseglid/canumb/issues",
+    "email" : "noseglid@gmail.com"
+  },
+  "engines" : {
+    "node" : "0.10.x"
+  }
+}

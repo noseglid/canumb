@@ -1,11 +1,14 @@
 {
-  "name" : "numbers",
+  "name" : "canumb",
   "version" : "0.0.1",
   "description" : "Number conversion as a service",
   "main" : "main.js",
   "repository" : {
     "type" : "git",
     "url" : "https://github.com/noseglid/canumb.git"
+  },
+  "scripts" : {
+    "postinstall" : "./node_modules/.bin/grunt release"
   },
   "dependencies" : {
     "restify"    : "2.6.x",
@@ -33,5 +36,9 @@
   },
   "engines" : {
     "node" : "0.10.x"
+  },
+  "devDependencies": {
+    "grunt-contrib-sass" : "0.7.x",
+    "grunt-cli"          : "0.1.x"
   }
 }

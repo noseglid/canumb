@@ -1,3 +1,4 @@
+var fs      = require('fs');
 var restify = require('restify');
 
 var bin    = require('./numbers/bin.js');
@@ -19,7 +20,7 @@ function convert(from, number)
   };
 }
 
-function munch(request, response, next)
+function api(request, response, next)
 {
   try {
     var result = {};
@@ -54,7 +55,12 @@ var server = restify.createServer({
 
 server.pre(restify.pre.userAgentConnection());
 
-server.get('/:format/:number', munch);
+server.get('/:format/:number', api);
+
+server.get(/.+/, restify.serveStatic({
+  'default'   : 'index.html',
+  'directory' : './public/'
+}));
 
 server.listen(port, function() {
   console.log('%s listening at %s', server.name, server.url);

@@ -55,11 +55,11 @@ var server = restify.createServer({
 
 server.pre(restify.pre.userAgentConnection());
 
-server.get('/:format/:number', api);
+server.get('/convert/:format/:number', api);
 
-server.get(/.+/, restify.serveStatic({
+server.get(/^\/?.*/, restify.serveStatic({
   'default'   : 'index.html',
-  'directory' : './public/'
+  'directory' : './public'
 }));
 
 server.listen(port, function() {

@@ -13,7 +13,12 @@
     "grunt"              : "0.4.x",
     "grunt-cli"          : "0.1.x",
     "grunt-contrib-copy" : "0.5.x",
-    "grunt-contrib-sass" : "0.7.x"
+    "grunt-exec"         : "0.4.x",
+    "bower"              : "1.2.x",
+    "node-sass"          : "0.8.x"
+  },
+  "scripts" : {
+    "postinstall" : "./node_modules/.bin/bower install && ./node_modules/.bin/grunt"
   },
   "keywords" : [
     "number",
@@ -37,5 +42,6 @@
   },
   "engines" : {
     "node" : "0.10.x"
-  }
+  },
+  "private" : true
 }

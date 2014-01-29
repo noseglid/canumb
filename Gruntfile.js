@@ -57,7 +57,4 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-exec');
 
   grunt.registerTask('default', [ 'copy', 'exec' ]);
-
-  /* Leave this empty as npm's postinstall runs the 'default' grunt task */
-  grunt.registerTask('heroku', []);
 };

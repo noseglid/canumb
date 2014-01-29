@@ -1,6 +1,7 @@
 var _ = require('underscore');
 
-var bin = require('./bin.js');
+var errors = require('../errors.js');
+var bin    = require('./bin.js');
 
 /* TODO: Support arbitrary length numbers */
 function any2dec(base, number)
@@ -14,6 +15,9 @@ function any2dec(base, number)
 function dec2bin(number)
 {
   var r = parseInt(number, 10);
+  if (isNaN(r))
+    throw new errors.InvalidArgument('Invalid input number \'' + number + '\'');
+
   var ret = [ r % 2 ];
   while (0 !== (r = Math.floor(r / 2)))
     ret.push(r % 2);

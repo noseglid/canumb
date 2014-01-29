@@ -1,9 +1,27 @@
 <html>
-<head>
-  <title>Canumb - the number cruncher</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
-<body>
-<h1>Canumb</h1>
-</body>
+  <head>
+    <title>Canumb</title>
+    <link rel="stylesheet" href="style.css" />
+    <script data-main="scripts/main.js" src="scripts/libs/require.js"></script>
+  </head>
+  <body>
+    <div id="banner">
+      <h1>Canumb</h1>
+    </div>
+
+    <div id="content">
+      <div id="input-array">
+        <input type="text" id="number" placeholder="Type a number, any number..." />
+      </div>
+
+      <div id="button-array">
+        <input type="button" id="bin" value="Binary" />
+        <input type="button" id="oct" value="Octal" />
+        <input type="button" id="dec" value="Decimal" />
+        <input type="button" id="hex" value="Hexadecimal" />
+      </div>
+
+      <div id="result"></div>
+    </div>
+  </body>
 </html>

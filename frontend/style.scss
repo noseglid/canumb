@@ -1,4 +1,66 @@
+@import "bourbon";
+
+$color1 : #c0c0c0;
+$color2 : #ffffff;
+$color3 : #336699;
+$color4 : #dddddd;
+$color5 : #aaaaaa;
+$color6 : #ff0000;
+$color7 : #000000;
+
 body {
-  color: #222;
-  font-family: 'Helvetica Neue', Helvetica, Arial, Sans-Serif;
+  padding: 0px;
+  margin: 0px;
+  color: $color2;
+  background-color: $color3;
+  font-family: $helvetica;
+  font-size: 18px;
+}
+
+h1 {
+  text-align: center;
+  text-shadow: 2px 2px $color7;
+}
+
+div#banner {
+  margin: 0px;
+  width: 100%;
+  height: 70px;
+  @include linear-gradient(to bottom, $color1, $color3);
+}
+
+div#content {
+  margin: 0px auto;
+  width: 900px;
+}
+
+div#input-array {
+}
+
+div#button-array {
+  text-align: center;
+  margin: 10px;
+}
+
+div#result {
+  border-top: solid 2px $color1;
+}
+
+input#number {
+  @include linear-gradient(to bottom, $color2, $color4);
+  box-shadow: 0px 0px 2px 2px $color4;
+  border: solid 1px $color5;
+  border-radius: 5px;
+  width: 100%;
+  padding: 0px 10px;
+  font-size: 16px;
+  height: 24px;
+  @include placeholder {
+    text-align: center;
+  }
+}
+
+input[type="button"] {
+  width: 12em;
+  @include button(simple, $color6);
 }

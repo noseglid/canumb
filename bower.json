@@ -5,11 +5,12 @@
     "Alexander Olsson <noseglid@gmail.com>"
   ],
   "dependencies" :  {
-    "requirejs"  : "2.1.x",
-    "jQuery"     : "2.1.x",
-    "requirejs"  : "2.1.x",
-    "backbone"   : "1.1.x",
-    "underscore" : "1.5.x"
+    "requirejs"       : "2.1.x",
+    "jQuery"          : "2.1.x",
+    "requirejs"       : "2.1.x",
+    "requirejs-text"  : "2.0.x",
+    "backbone"        : "1.1.x",
+    "underscore"      : "1.5.x"
   },
   "description" : "number crunching",
   "main" : "src/main.js",

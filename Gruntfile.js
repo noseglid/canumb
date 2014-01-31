@@ -12,9 +12,20 @@ module.exports = function(grunt) {
               "bower_components/jQuery/dist/jquery.min.js",
               "bower_components/jQuery/dist/jquery.min.map",
               "bower_components/backbone/backbone-min.js",
-              "bower_components/underscore/underscore-min.js"
+              "bower_components/underscore/underscore-min.js",
+              "bower_components/underscore/underscore-min.map",
+              "bower_components/growl/javascripts/jquery.growl.js"
             ],
             "dest"   : "public/scripts/libs/",
+            "filter" : "isFile"
+          },
+          {
+            "expand" : true,
+            "flatten" : true,
+            "src"    : [
+              "bower_components/growl/stylesheets/jquery.growl.css"
+            ],
+            "dest"   : "public/stylesheets/",
             "filter" : "isFile"
           }
         ]
@@ -22,25 +33,32 @@ module.exports = function(grunt) {
       "main" : {
         "files" : [
           {
-            "expand" : true,
+            "expand"  : true,
             "flatten" : true,
-            "src"    : ["frontend/scripts/*.js"],
-            "dest"   : "public/scripts/",
-            "filter" : "isFile"
+            "src"     : ["frontend/scripts/*.js"],
+            "dest"    : "public/scripts/",
+            "filter"  : "isFile"
           },
           {
-            "expand" : true,
+            "expand"  : true,
             "flatten" : true,
-            "src"    : ["frontend/*.html"],
-            "dest"   : "public/",
-            "filter" : "isFile"
+            "src"     : ["frontend/*.html"],
+            "dest"    : "public/",
+            "filter"  : "isFile"
           },
           {
-            "expand" : true,
+            "expand"  : true,
             "flatten" : true,
-            "src"    : ["frontend/templates/*.tpl"],
-            "dest"   : "public/templates/",
-            "filter" : "isFile"
+            "src"     : ["frontend/images/*.gif", "frontend/images/*.png"],
+            "dest"    : "public/images/",
+            "filter"  : "isFile"
+          },
+          {
+            "expand"  : true,
+            "flatten" : true,
+            "src"     : ["frontend/templates/*.tpl"],
+            "dest"    : "public/templates/",
+            "filter"  : "isFile"
           }
         ]
       }
@@ -48,7 +66,7 @@ module.exports = function(grunt) {
 
     'exec' : {
       'sass' : {
-        'cmd' : './node_modules/.bin/node-sass --include-path ./node_modules/node-bourbon/assets/stylesheets/ ./frontend/style.scss ./public/style.css'
+        'cmd' : './node_modules/.bin/node-sass --include-path ./node_modules/node-bourbon/assets/stylesheets/ ./frontend/stylesheets/style.scss ./public/stylesheets/style.css'
       }
     }
   });

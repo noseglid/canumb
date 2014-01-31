@@ -1,19 +1,31 @@
-<div>
-  <span class="result-heading">Binary:</span>
-    <span class="result-value"><%-bin%></span>
-</div>
+<table>
 
-<div>
-  <span class="result-heading">Octal:</span>
-    <span class="result-value"><%-oct%></span>
-</div>
+  <tr>
+    <td class="result-heading">
+      <div id="align-button">
+        <label>
+          <input type="checkbox" value="0" <%-checked%> />
+          <span>align</span>
+        </label>
+      </div>
+      Binary:
+    </td>
+    <td class="result-value"><%-bin%></td>
+  </tr>
 
-<div>
-  <span class="result-heading">Decimal:</span>
-    <span class="result-value"><%-dec%></span>
-</div>
+  <tr>
+    <td class="result-heading">Octal:</td>
+    <td class="result-value"><%-oct%></td>
+  </tr>
 
-<div>
-  <span class="result-heading">Hexadecimal:</span>
-    <span class="result-value"><%-hex%></span>
-</div>
+  <tr>
+    <td class="result-heading">Decimal:</td>
+    <td class="result-value"><%-dec%></td>
+  </tr>
+
+  <tr>
+    <td class="result-heading">Hexadecimal:</td>
+    <td class="result-value"><%-hex%></td>
+  </tr>
+
+</table>

@@ -1,24 +1,28 @@
 <html>
   <head>
     <title>Canumb</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <link rel="stylesheet" href="stylesheets/jquery.growl.css" />
     <script data-main="scripts/main.js" src="scripts/libs/require.js"></script>
   </head>
   <body>
     <div id="banner">
+      <a href="https://github.com/noseglid/canumb">
+        <img id="github" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" />
+      </a>
       <h1>Canumb</h1>
     </div>
 
     <div id="content">
       <div id="input-array">
+        <span id="loader"><img src="images/ajax-loader.gif" /></span>
         <input type="text" id="number" placeholder="Type a number, any number..." />
-      </div>
-
-      <div id="button-array">
-        <input type="button" id="bin" value="Binary" />
-        <input type="button" id="oct" value="Octal" />
-        <input type="button" id="dec" value="Decimal" />
-        <input type="button" id="hex" value="Hexadecimal" />
+        <select id="type">
+          <option value="bin">Binary</option>
+          <option value="oct">Octal</option>
+          <option value="dec" selected="selected">Decimal</option>
+          <option value="hex">Hexadecimal</option>
+        </select>
       </div>
 
       <div id="result"></div>

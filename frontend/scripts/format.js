@@ -1,0 +1,6 @@
+
+define({
+  'bingroup' : function(bin) {
+
+  }
+});

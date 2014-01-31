@@ -73,13 +73,14 @@ require([
 
     var timeoutid;
     $('#input-array #number').keyup(function() {
-      if (!$(this).val()) {
-        $('#result').text('');
-        return;
-      }
-
       if (timeoutid) {
         clearTimeout(timeoutid);
+      }
+
+      if (!$(this).val()) {
+        $('#result').text('');
+        $('#loader').css('visibility', 'hidden');
+        return;
       }
 
       $('#loader').css('visibility', 'visible');

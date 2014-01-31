@@ -1,4 +1,9 @@
 Canumb - The number cruncher
 ============================
 
-Basically it's a service to convert, crunch or deploy meaning of any number, be it decimal, binary, hexadecimal or any other representation.
+Aims to be a simple conversion tool between various bases. Currently
+2 (binary), 8 (octal), 10 (decimal) and 16 (hexadecimal) is supported.
+
+Use it
+======
+A deployment of canumb is [available at heroku](https://canumb.herokuapp.com).

@@ -5,19 +5,10 @@ var dec     = require('./dec.js');
 
 function groupBinary(count, number)
 {
-  var ret = [];
-  var ctx = { current : ''};
+  var npad = count - (number.length % count);
+  var padded = numhelp.pad(number.length + npad, number);
 
-  _.each(number.split('').reverse(), function(element, index, list) {
-    this.current = element + this.current;
-    if (count - 1 === index % count) {
-      ret.push(this.current); /* No need to pad here */
-      this.current = '';
-    }
-  }, ctx);
-
-  ret.push(numhelp.pad(count, ctx.current));
-  return ret.reverse();
+  return padded.match(new RegExp('.{' + count + '}', 'g'), padded);
 }
 
 function bin2bin(number)

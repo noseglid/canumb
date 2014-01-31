@@ -72,7 +72,7 @@ function lookup(input, output, key) {
       'undefined' === typeof(table[input][output]) ||
       'undefined' === typeof(table[input][output][key]))
     throw new errors.InvalidArgument(
-      'Invalid input number \'' + key + '\' when interpreted as \'' + input + '\'');
+      'Invalid input number \'' + key + '\' when interpreted as \'' + input + '\'.');
 
   return table[input][output][key];
 }

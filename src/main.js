@@ -12,11 +12,27 @@ var port = Number(process.env.PORT || 5000);
 
 function convert(from, number)
 {
+  var binaryRep      = from.to.bin(number).replace(/^0*/, '');
+  var decimalRep     = from.to.dec(number).replace(/^0*/, '');
+  var octalRep       = from.to.oct(number).replace(/^0*/, '');
+  var hexadecimalRep = from.to.hex(number).replace(/^0*/, '');
   return {
-    'bin' : from.to.bin(number),
-    'dec' : from.to.dec(number),
-    'oct' : from.to.oct(number),
-    'hex' : from.to.hex(number)
+    'bin' : {
+      'standard' : binaryRep,
+      'group3'   : bin.format.group(3, binaryRep),
+      'group4'   : bin.format.group(4, binaryRep),
+      'group8'   : bin.format.group(8, binaryRep),
+      'group16'  : bin.format.group(16, binaryRep)
+    },
+    'dec' : {
+      'standard' : decimalRep
+    },
+    'oct' : {
+      'standard' : octalRep
+    },
+    'hex' : {
+      'standard' : hexadecimalRep
+    }
   };
 }
 

@@ -44,9 +44,18 @@ function bin2hex(number)
   }).join('');
 }
 
+function groupFormat(count, number)
+{
+  return groupBinary(count, number).join(' ');
+}
+
 exports.to = {
   bin : bin2bin,
   oct : bin2oct,
   dec : bin2dec,
   hex : bin2hex
+};
+
+exports.format = {
+  group : _.bind(groupFormat, {}),
 };

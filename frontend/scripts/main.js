@@ -25,6 +25,9 @@ require([
   "analytics",
   "text!templates/result.tpl"], function($, _, growl, analytics, resultTpl) {
 
+  var resultFadeTime = 100;
+  var queryDelay     = 300;
+
   var currentResult;
 
   function setResult()
@@ -36,7 +39,15 @@ require([
       dec : currentResult.dec['standard'],
       hex : currentResult.hex['standard'],
       checked : align ? 'checked="checked"' : ''
-    }));
+    })).fadeIn(resultFadeTime);
+  }
+
+  function unsetResult()
+  {
+    $('#loader').css('visibility', 'hidden');
+    $('#result').fadeOut(resultFadeTime, function() {
+      $('#result').text('');
+    });
   }
 
   function convertNumber(type, number)
@@ -44,11 +55,11 @@ require([
     $.ajax('/convert/' + type + '/' + number, {
       'error' : function(jqXHR, textStatus, errorThrown) {
         var data = JSON.parse(jqXHR.responseText);
-        console.log(data);
         $.growl.error({
           'title' : data.code,
           'message' : data.message
         });
+        unsetResult();
       },
       'success' : function(data, textStatus, jqXHR) {
         currentResult = data;
@@ -63,8 +74,7 @@ require([
   $(function() {
     $('#input-array #type').change(function() {
       if (!$('#input-array #number').val()) {
-        $('#result').text('');
-        return;
+        return unsetResult();
       }
 
       $('#loader').css('visibility', 'visible');
@@ -78,14 +88,12 @@ require([
       }
 
       if (!$(this).val()) {
-        $('#result').text('');
-        $('#loader').css('visibility', 'hidden');
-        return;
+        return unsetResult();
       }
 
       $('#loader').css('visibility', 'visible');
       var fn = _.bind(convertNumber, {}, $('#type').val(), $(this).val());
-      timeoutid = setTimeout(fn, 300);
+      timeoutid = setTimeout(fn, queryDelay);
     });
 
     $(document).on('click', '#align-button label', function(evt) {

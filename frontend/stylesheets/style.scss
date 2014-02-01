@@ -71,6 +71,7 @@ div#content {
 
 div#input-array {
   padding: 20px 1%;
+  border-bottom: solid 2px $color1;
 
   span#loader {
     visibility: hidden;
@@ -103,8 +104,8 @@ div#input-array {
 }
 
 div#result {
+  display: none;
   min-width: $contentWidth;
-  border-top: solid 2px $color1;
 
   #align-button {
     $borderRadius : 5px;

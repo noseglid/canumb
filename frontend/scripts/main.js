@@ -33,15 +33,13 @@ require([
   function setResult()
   {
     var align = $('#align-button input').is(':checked');
-    $('#readme').fadeOut(0, function() {
-      $('#result').html(_.template(resultTpl, {
-        bin : currentResult.bin[align ? 'group8' : 'standard'],
-        oct : currentResult.oct['standard'],
-        dec : currentResult.dec['standard'],
-        hex : currentResult.hex['standard'],
-        checked : align ? 'checked="checked"' : ''
-      })).fadeIn(fadeTime);
-    });
+    $('#result').html(_.template(resultTpl, {
+      bin : currentResult.bin[align ? 'group8' : 'standard'],
+      oct : currentResult.oct['standard'],
+      dec : currentResult.dec['standard'],
+      hex : currentResult.hex['standard'],
+      checked : align ? 'checked="checked"' : ''
+    })).fadeIn(fadeTime);
   }
 
   function unsetResult()
@@ -49,7 +47,6 @@ require([
     $('#loader').css('visibility', 'hidden');
     $('#result').fadeOut(fadeTime, function() {
       $('#result').text('');
-      $('#readme').fadeIn(fadeTime);
     });
   }
 
@@ -103,18 +100,6 @@ require([
       var checkbox = $('#align-button input');
       checkbox.prop('checked', !checkbox.prop('checked'));
       setResult();
-    });
-
-    $.ajax('https://api.github.com/repos/noseglid/canumb/readme', {
-      'headers' : {
-        'Accept' : 'application/vnd.github.v3.html+json'
-      },
-      'success' : function(data, textStatus, jqXHR) {
-        $('#readme').html(data).fadeIn(fadeTime);
-      },
-      'error' : function(data, textStatus, jqXHR) {
-        $('#readme').text('Could not fetch readme at this time...');
-      }
     });
   });
 });

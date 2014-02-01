@@ -3,27 +3,39 @@ var _ = require('underscore');
 var bin     = require('./bin.js');
 var dec     = require('./dec.js');
 var numhelp = require('./numhelp.js');
+var errors = require('../errors.js');
+
+function validate(number)
+{
+  if (number.length < 1 || number.match(/[^01234567]/)) {
+    throw new errors.InvalidArgument('Invalid octal number: ' + number);
+  }
+}
 
 function oct2bin(number)
 {
-  return _.map(number.split(''), function(value, key, list) {
+  validate(number);
+  return numhelp.unpad(_.map(number.split(''), function(value) {
     return numhelp.lookup('oct', 'bin', value);
-  }).join('');
+  }).join(''));
 }
 
 function oct2oct(number)
 {
-  return number;
+  validate(number);
+  return numhelp.unpad(number);
 }
 
 function oct2dec(number)
 {
-  return dec.from.any(8, number);
+  validate(number);
+  return numhelp.unpad(dec.from.any(8, number));
 }
 
 function oct2hex(number)
 {
-  return bin.to.hex(oct2bin(number));
+  validate(number);
+  return numhelp.unpad(bin.to.hex(oct2bin(number)));
 }
 
 exports.to = {

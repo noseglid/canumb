@@ -12,10 +12,10 @@ var port = Number(process.env.PORT || 5000);
 
 function convert(from, number)
 {
-  var binaryRep      = from.to.bin(number).replace(/^0*/, '');
-  var decimalRep     = from.to.dec(number).replace(/^0*/, '');
-  var octalRep       = from.to.oct(number).replace(/^0*/, '');
-  var hexadecimalRep = from.to.hex(number).replace(/^0*/, '');
+  var binaryRep      = from.to.bin(number);
+  var decimalRep     = from.to.dec(number);
+  var octalRep       = from.to.oct(number);
+  var hexadecimalRep = from.to.hex(number);
   return {
     'bin' : {
       'standard' : binaryRep,
@@ -66,7 +66,7 @@ function api(request, response, next)
 
 var server = restify.createServer({
   'name'    : 'canumb server',
-  'version' : '1.0.0'
+  'version' : '0.0.1'
 });
 
 server.pre(restify.pre.userAgentConnection());

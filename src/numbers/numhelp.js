@@ -77,10 +77,31 @@ function lookup(input, output, key) {
   return table[input][output][key];
 }
 
+/**
+ * Pads the number with leading zeroes until the
+ * desired width have been reached. For instance,
+ * if called `pad(8, '12')`, the result would be '00000012'
+ * since the length of that string is 8.
+ *
+ * @param width The width to pad up to.
+ * @param number The number to pad.
+ */
 function pad(width, number)
 {
   return Array(1 + width - number.length).join('0') + number;
 }
 
+/**
+ * Removes leading zeroes, except if the number is '0',
+ * in which case it keeps that one.
+ *
+ * @param number The number from which to strip leading zeroes.
+ */
+function unpad(number)
+{
+  return number.match(/^0*$/) ? '0' : number.replace(/^0*/, '');
+}
+
 exports.lookup = lookup;
 exports.pad    = pad;
+exports.unpad  = unpad;

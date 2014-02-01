@@ -2,6 +2,14 @@ var _ = require('underscore');
 
 var numhelp = require('./numhelp.js');
 var dec     = require('./dec.js');
+var errors  = require('../errors.js');
+
+function validate(number)
+{
+  if (number.length < 1 || number.match(/[^01]/)) {
+    throw new errors.InvalidArgument('Invalid binary number: ' + number);
+  }
+}
 
 function groupBinary(count, number)
 {
@@ -13,26 +21,30 @@ function groupBinary(count, number)
 
 function bin2bin(number)
 {
-  return number;
+  validate(number);
+  return numhelp.unpad(number);
 }
 
 function bin2oct(number)
 {
-  return _.map(groupBinary(3, number), function(value, key, list) {
+  validate(number);
+  return numhelp.unpad(_.map(groupBinary(3, number), function(value) {
     return numhelp.lookup('bin', 'oct', value);
-  }).join('');
+  }).join(''));
 }
 
 function bin2dec(number)
 {
-  return dec.from.any(2, number);
+  validate(number);
+  return numhelp.unpad(dec.from.any(2, number));
 }
 
 function bin2hex(number)
 {
-  return _.map(groupBinary(4, number), function(value, key, list) {
+  validate(number);
+  return numhelp.unpad(_.map(groupBinary(4, number), function(value) {
     return numhelp.lookup('bin', 'hex', value);
-  }).join('');
+  }).join(''));
 }
 
 function groupFormat(count, number)

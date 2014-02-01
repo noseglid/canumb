@@ -103,6 +103,29 @@ div#input-array {
   }
 }
 
+div#readme {
+  padding: 0px 40px;
+
+  img {
+    display: block;
+    margin: 20px auto;
+  }
+
+  p {
+    margin: 0px 10px;
+  }
+
+  a {
+    color: $color1;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+}
+
 div#result {
   display: none;
   min-width: $contentWidth;

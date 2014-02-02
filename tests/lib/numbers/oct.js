@@ -1,6 +1,6 @@
 var _   = require('underscore');
-var oct = require('../../src/numbers/oct.js');
-var errors = require('../../src/errors.js');
+var oct = require('../../../src/lib/numbers/oct.js');
+var errors = require('../../../src/lib/errors.js');
 
 exports.errroneous = function(test) {
   _.each([oct.to.bin, oct.to.oct, oct.to.dec, oct.to.hex], function (fn) {

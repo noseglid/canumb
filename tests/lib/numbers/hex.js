@@ -1,6 +1,6 @@
 var _   = require('underscore');
-var hex = require('../../src/numbers/hex.js');
-var errors = require('../../src/errors.js');
+var hex = require('../../../src/lib/numbers/hex.js');
+var errors = require('../../../src/lib/errors.js');
 
 exports.errroneous = function(test) {
   _.each([hex.to.bin, hex.to.oct, hex.to.dec, hex.to.hex], function (fn) {

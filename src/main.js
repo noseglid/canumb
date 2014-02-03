@@ -3,6 +3,8 @@ var restify = require('restify');
 
 var errors     = require('./lib/errors.js');
 var convertapi = require('./api/convert.js');
+var decodeapi  = require('./api/decode.js');
+var encodeapi  = require('./api/encode.js');
 
 /* Allows port to be set through environment, e.g. Heroku does this. */
 var port = Number(process.env.PORT || 5000);
@@ -13,8 +15,11 @@ var server = restify.createServer({
 });
 
 server.pre(restify.pre.userAgentConnection());
+server.use(restify.bodyParser({ mapParams : false }));
 
 server[convertapi.method]('/convert/:' + convertapi.params.join('/:'), convertapi.entry);
+server[decodeapi.method]('/decode/:' + decodeapi.params.join('/:'), decodeapi.entry);
+server[encodeapi.method]('/encode/:' + encodeapi.params.join('/:'), encodeapi.entry);
 
 server.get(/^\/?.*/, restify.serveStatic({
   'default'   : 'index.html',

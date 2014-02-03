@@ -1,6 +1,7 @@
 var fs      = require('fs');
 var restify = require('restify');
 
+var errors     = require('./lib/errors.js');
 var convertapi = require('./api/convert.js');
 
 /* Allows port to be set through environment, e.g. Heroku does this. */
@@ -13,7 +14,7 @@ var server = restify.createServer({
 
 server.pre(restify.pre.userAgentConnection());
 
-server.get('/convert/:' + convertapi.params.join('/:'), convertapi.entry);
+server[convertapi.method]('/convert/:' + convertapi.params.join('/:'), convertapi.entry);
 
 server.get(/^\/?.*/, restify.serveStatic({
   'default'   : 'index.html',
@@ -25,5 +26,14 @@ server.listen(port, function() {
 })
 
 server.on('uncaughtException', function(request, response, route, error) {
+  if (error instanceof errors.Error) {
+    /* Send API response based on the error */
+    response.send(new restify.RestError(error));
+    return;
+  }
+
+  /* This will crash the server. Might not be what we want for production */
   throw error;
 });
+
+module.exports = server; /* So that it can be shut down if it is included */

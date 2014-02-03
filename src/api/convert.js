@@ -32,31 +32,25 @@ function convert(from, number)
 
 function api(request, response, next)
 {
-  try {
-    var result = {};
-    switch(request.params.format) {
-    case 'bin': result = convert(bin, request.params.number);               break;
-    case 'oct': result = convert(oct, request.params.number);               break;
-    case 'dec': result = convert(dec, request.params.number);               break;
-    case 'hex': result = convert(hex, request.params.number.toLowerCase()); break;
+  var result = {};
+  switch(request.params.format) {
+  case 'bin': result = convert(bin, request.params.number);               break;
+  case 'oct': result = convert(oct, request.params.number);               break;
+  case 'dec': result = convert(dec, request.params.number);               break;
+  case 'hex': result = convert(hex, request.params.number.toLowerCase()); break;
 
-    default:
-      throw new errors.InvalidArgument("Format not supported: \'" + request.params.format + '\'');
-      break;
+  default:
+    throw new errors.InvalidArgument(
+      "Format not supported: '" + request.params.format + "'"
+    );
+    break;
 
-    };
+  };
 
-    response.send(result);
-    return next();
-
-  } catch (error) {
-    if (!(error instanceof errors.Error)) {
-      throw error;
-    }
-
-    return next(new restify.RestError(error));
-  }
+  response.send(result);
+  return next();
 }
 
+exports.method = 'get';
 exports.params = [ 'format', 'number' ];
-exports.entry = api;
+exports.entry  = api;

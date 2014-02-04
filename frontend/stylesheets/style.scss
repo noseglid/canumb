@@ -166,6 +166,7 @@ div#result {
     border-spacing: 0px 3px;
     border-collapse: separate;
     width: 100% - 2 * $margin;
+    table-layout: fixed;
   }
 
   td {
@@ -187,5 +188,6 @@ div#result {
     border-radius: 0px $borderRadius $borderRadius 0px;
     width: 100% - $headingWidth;
     font-family: Consolas, Monaco, Lucida Console, monospace;
+    word-wrap: break-word;
   }
 }

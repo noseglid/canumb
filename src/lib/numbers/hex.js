@@ -32,7 +32,32 @@ function hex2dec(number)
 {
   number = number.toLowerCase();
   validate(number);
-  return numhelp.unpad(dec.from.any(16, number));
+
+  var add = function(x, y) {
+    var c = 0, r = [];
+    var x = x.split('').map(Number);
+    var y = y.split('').map(Number);
+
+    while (x.length || y.length) {
+      var s = (x.pop() || 0) + (y.pop() || 0) + c;
+      r.unshift((s < 10) ? s : s - 10);
+      c = (s < 10) ? 0 : 1;
+    }
+    if (c)
+      r.unshift(c);
+    return r.join('');
+  }
+
+  var decimal = '0';
+  _.each(number.split(''), function(c, index) {
+    var n = parseInt(c, 16);
+    for (var t = 8; t; t >>= 1) {
+      decimal = add(decimal, decimal);
+      if (n & t) decimal = add(decimal, '1');
+    }
+  });
+
+  return decimal;
 }
 
 function hex2hex(number)

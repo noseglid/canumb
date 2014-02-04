@@ -1,7 +1,7 @@
 var _ = require('underscore');
 
 var errors  = require('../errors.js');
-var bin     = require('./bin.js');
+var hex     = require('./hex.js');
 var numhelp = require('./numhelp.js');
 
 function validate(number)
@@ -11,33 +11,16 @@ function validate(number)
   }
 }
 
-/* TODO: Support arbitrary length numbers */
-function any2dec(base, number)
-{
-  return '' + _.reduce(number.split(''), function(memo, value, index, list) {
-    return memo + parseInt(value, base) * Math.pow(base, --this.it);
-  }, 0, { it : number.length });
-}
-
-/* TODO: Support arbitrary length numbers */
 function dec2bin(number)
 {
   validate(number);
-  var r = parseInt(number, 10);
-  if (isNaN(r))
-    throw new errors.InvalidArgument('Invalid input number \'' + number + '\'');
-
-  var ret = [ r % 2 ];
-  while (0 !== (r = Math.floor(r / 2)))
-    ret.push(r % 2);
-
-  return numhelp.unpad(ret.reverse().join(''));
+  return numhelp.unpad(hex.to.bin(dec2hex(number)));
 }
 
 function dec2oct(number)
 {
   validate(number);
-  return numhelp.unpad(bin.to.oct(dec2bin(number)));
+  return numhelp.unpad(hex.to.oct(dec2hex(number)));
 }
 
 function dec2dec(number)
@@ -49,12 +32,47 @@ function dec2dec(number)
 function dec2hex(number)
 {
   validate(number);
-  return numhelp.unpad(bin.to.hex(dec2bin(number)));
-}
 
-exports.from = {
-  any : any2dec
-};
+  var array = number.split('').map(Number).reverse();
+
+  var mult = function(scalar, x) {
+    if (0 === scalar) return [];
+
+    var result = [];
+    var power  = x;
+    while (true) {
+      if (scalar & 1) {
+        result = add(result, power);
+      }
+      if (0 === (scalar = (scalar >> 1))) break;
+      power = add(power, power);
+    }
+
+    return result;
+  };
+
+
+  var add = function(x, y) {
+    var ret = [], c = 0;
+    x = x.slice(0); /* Copy to allow same value for x and y */
+    y = y.slice(0); /* Copy to allow same value for x and y */
+    while (0 < x.length || 0 < y.length || c) {
+      var o = (x.shift() || 0) + (y.shift() || 0) + c;
+      ret.push(o % 16);
+      c = Math.floor(o / 16);
+    }
+
+    return ret;
+  };
+
+  var result = [ 0 ], power = [ 1 ];
+  _.each(array, function(digit) {
+    if (digit > 0) result = add(result, mult(digit, power));
+    power = mult(10, power);
+  });
+
+  return result.reverse().map(function(digit) { return digit.toString(16); }).join('');
+}
 
 exports.to = {
   bin : dec2bin,

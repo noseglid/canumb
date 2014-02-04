@@ -23,6 +23,7 @@ exports.toBinBasic = function(test) {
   test.equals(bin.to.bin('11100101'), '11100101');
   test.equals(bin.to.bin('0001'),     '1');
   test.equals(bin.to.bin('00100101'), '100101');
+  test.equals(bin.to.bin(new Array(68 + 1).join('1')), new Array(68 + 1).join('1'));
   test.done();
 };
 
@@ -36,6 +37,7 @@ exports.toOctBasic = function(test) {
   test.equals(bin.to.oct('00111111'),     '77');
   test.equals(bin.to.oct('01000000'),     '100');
   test.equals(bin.to.oct('110110110110'), '6666');
+  test.equals(bin.to.oct(new Array(72 + 1).join('1')), '777777777777777777777777');
   test.done();
 };
 
@@ -50,7 +52,8 @@ exports.toDecBasic = function(test) {
   test.equals(bin.to.dec('0001'),         '1');
   test.equals(bin.to.dec('01100011'),     '99');
   test.equals(bin.to.dec('01100100'),     '100');
-  test.equals(bin.to.dec('110110110110'), '3510')
+  test.equals(bin.to.dec('110110110110'), '3510');
+  test.equals(bin.to.dec(new Array(68 + 1).join('1')), '295147905179352825855');
   test.done();
 };
 
@@ -67,5 +70,6 @@ exports.toHexBasic = function(test) {
   test.equals(bin.to.hex('11111111'),     'ff');
   test.equals(bin.to.hex('100000000'),    '100');
   test.equals(bin.to.hex('110110110110'), 'db6');
+  test.equals(bin.to.hex(new Array(72 + 1).join('1')), 'ffffffffffffffffff');
   test.done();
 };

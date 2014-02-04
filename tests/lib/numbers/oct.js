@@ -22,6 +22,7 @@ exports.toBinBasic = function(test) {
   test.equals(oct.to.bin('100'),  '1000000')
   test.equals(oct.to.bin('02'),   '10')
   test.equals(oct.to.bin('0001'), '1')
+  test.equals(oct.to.bin(new Array(24 + 1).join('7')), new Array(3 * 24 + 1).join('1'));
   test.done();
 };
 
@@ -35,6 +36,7 @@ exports.toOctBasic = function(test) {
   test.equals(oct.to.oct('16253'),        '16253');
   test.equals(oct.to.oct('01000000'),     '1000000');
   test.equals(oct.to.oct('170110210130'), '170110210130');
+  test.equals(oct.to.oct(new Array(24 + 1).join('7')), new Array(24 + 1).join('7'));
   test.done();
 };
 
@@ -49,6 +51,8 @@ exports.toDecBasic = function(test) {
   test.equals(oct.to.dec('143'),  '99');
   test.equals(oct.to.dec('144'),  '100');
   test.equals(oct.to.dec('6666'), '3510')
+  test.equals(oct.to.dec(new Array(24 + 1).join('7')), '4722366482869645213695');
+  test.equals(oct.to.dec(new Array(28 + 1).join('7')), '19342813113834066795298815');
   test.done();
 };
 
@@ -66,5 +70,6 @@ exports.toHexBasic = function(test) {
   test.equals(oct.to.hex('777'),  '1ff');
   test.equals(oct.to.hex('400'),  '100');
   test.equals(oct.to.hex('6666'), 'db6');
+  test.equals(oct.to.hex(new Array(24 + 1).join('7')), new Array(18 + 1).join('f'));
   test.done();
 };

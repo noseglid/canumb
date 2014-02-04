@@ -1,7 +1,7 @@
 var _ = require('underscore');
 
 var bin     = require('./bin.js');
-var dec     = require('./dec.js');
+var hex     = require('./hex.js');
 var numhelp = require('./numhelp.js');
 var errors = require('../errors.js');
 
@@ -29,7 +29,7 @@ function oct2oct(number)
 function oct2dec(number)
 {
   validate(number);
-  return numhelp.unpad(dec.from.any(8, number));
+  return numhelp.unpad(hex.to.dec(oct2hex(number)));
 }
 
 function oct2hex(number)

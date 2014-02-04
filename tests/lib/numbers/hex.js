@@ -23,6 +23,7 @@ exports.toBinBasic = function(test) {
   test.equals(hex.to.bin('1f'),   '11111')
   test.equals(hex.to.bin('0001'), '1')
   test.equals(hex.to.bin('000a'), '1010')
+  test.equals(hex.to.bin('ffffffffffffffffff'), new Array(72 + 1).join('1'));
   test.done();
 };
 
@@ -56,6 +57,7 @@ exports.toOctBasic = function(test) {
   test.equals(hex.to.oct('40'),       '100');
   test.equals(hex.to.oct('000309'),   '1411');
   test.equals(hex.to.oct('01000000'), '100000000');
+  test.equals(hex.to.oct(new Array(18 + 1).join('f')), new Array(24 + 1).join('7'));
   test.done();
 };
 
@@ -65,12 +67,15 @@ exports.toDecBasic = function(test) {
   test.equals(hex.to.dec('1'),    '1');
   test.equals(hex.to.dec('7'),    '7');
   test.equals(hex.to.dec('9'),    '9');
-  test.equals(hex.to.dec('a'),   '10');
+  test.equals(hex.to.dec('a'),    '10');
   test.equals(hex.to.dec('0002'), '2');
   test.equals(hex.to.dec('0001'), '1');
   test.equals(hex.to.dec('63'),   '99');
   test.equals(hex.to.dec('64'),   '100');
+  test.equals(hex.to.dec('ff'),   '255');
   test.equals(hex.to.dec('6666'), '26214')
+  test.equals(hex.to.dec('12345678909876543'), '20988295476698113347');
+  test.equals(hex.to.dec('ffffffffffffffffff'), '4722366482869645213695');
   test.done();
 };
 
@@ -89,5 +94,6 @@ exports.toHexBasic = function(test) {
   test.equals(hex.to.hex('0010'), '10');
   test.equals(hex.to.hex('400'),  '400');
   test.equals(hex.to.hex('6666'), '6666');
+  test.equals(hex.to.hex('ffffffffffffffffff'), 'ffffffffffffffffff');
   test.done();
 };

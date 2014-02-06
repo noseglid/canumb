@@ -8,24 +8,24 @@
           <span>align</span>
         </label>
       </div>
-      Binary:
+      <p>Binary:</p>
     </td>
-    <td class="result-value"><%-bin%></td>
+    <td class="result-value"><p><%-bin%></p></td>
   </tr>
 
   <tr>
-    <td class="result-heading">Octal:</td>
-    <td class="result-value"><%-oct%></td>
+    <td class="result-heading"><p>Octal:</p></td>
+    <td class="result-value"><p><%-oct%></p></td>
   </tr>
 
   <tr>
-    <td class="result-heading">Decimal:</td>
-    <td class="result-value"><%-dec%></td>
+    <td class="result-heading"><p>Decimal:</p></td>
+    <td class="result-value"><p><%-dec%></p></td>
   </tr>
 
   <tr>
-    <td class="result-heading">Hexadecimal:</td>
-    <td class="result-value"><%-hex%></td>
+    <td class="result-heading"><p>Hexadecimal:</p></td>
+    <td class="result-value"><p><%-hex%></p></td>
   </tr>
 
 </table>

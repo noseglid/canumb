@@ -179,9 +179,13 @@ div#result {
   $borderRadius: 8px;
   td.result-heading {
     border-radius: $borderRadius 0px 0px $borderRadius;
-    width: $headingWidth;
+    width: 9em;
     text-align: right;
     font-weight: bold;
+  }
+
+  td.result-heading p, td.result-value p {
+      line-height: 1.5em;
   }
 
   td.result-value {

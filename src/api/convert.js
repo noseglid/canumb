@@ -32,7 +32,12 @@ function convert(from, number)
 
 function api(request, response, next)
 {
+  if (1000 < request.params.number.length) {
+    throw new errors.TooLarge("Number can't be more than 1000 digits.");
+  }
+
   var result = {};
+
   switch(request.params.format) {
   case 'bin': result = convert(bin, request.params.number);               break;
   case 'oct': result = convert(oct, request.params.number);               break;

@@ -17,9 +17,16 @@ function MissingArgument(message)
   Error.call(this, message, 400, 'MissingArgument');
 }
 
+function TooLarge(message)
+{
+  Error.call(this, message, 413, 'RequestEntityTooLarge');
+}
+
 util.inherits(InvalidArgument, Error);
 util.inherits(MissingArgument, Error);
+util.inherits(TooLarge, Error);
 
 module.exports.Error           = Error;
 module.exports.InvalidArgument = InvalidArgument;
 module.exports.MissingArgument = MissingArgument;
+module.exports.TooLarge        = TooLarge;

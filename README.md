@@ -6,7 +6,7 @@ Aims to be a simple conversion tool between various bases. Currently
 2 (binary), 8 (octal), 10 (decimal) and 16 (hexadecimal) is supported.
 
 Canumb supports [arbitrary precision][ArbitraryPrecision] -
-you may convert a number of any size.
+you may convert a number of any size - well the algorithm is slow so less than 1000 digits. But that's still very large.
 Very useful for those long network protocol bit-streams.
 
 Only unsigned numbers at this point, feel free to help out improve support.

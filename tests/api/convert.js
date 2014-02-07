@@ -7,7 +7,7 @@ var _   = require('underscore');
  */
 
 exports.testBinary = function(test) {
-  api.request(['convert', 'bin', '1111'], 'GET', function(actual, code) {
+  api.request(['convert', 'bin'], 'POST', { 'number' : '1111' }, function(actual, code) {
     test.equals(code, 200);
     test.equals(actual.bin.standard, '1111');
     test.equals(actual.oct.standard, '17');
@@ -19,13 +19,13 @@ exports.testBinary = function(test) {
 
 exports.testInvalidBinary = function(test) {
   var done = _.after(2, test.done);
-  api.request(['convert', 'bin', '2'], 'GET', function(actual, code) {
+  api.request(['convert', 'bin'], 'POST', { 'number' : '2' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
     done();
   });
 
-  api.request(['convert', 'bin', '113'], 'GET', function(actual, code) {
+  api.request(['convert', 'bin'], 'POST', { 'number' : '113' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
     done();
@@ -33,7 +33,7 @@ exports.testInvalidBinary = function(test) {
 }
 
 exports.testOctal = function(test) {
-  api.request(['convert', 'oct', '77'], 'GET', function(actual, code) {
+  api.request(['convert', 'oct'], 'POST', { 'number' : '77' }, function(actual, code) {
     test.equals(code, 200);
     test.equals(actual.bin.standard, '111111');
     test.equals(actual.oct.standard, '77');
@@ -45,13 +45,13 @@ exports.testOctal = function(test) {
 
 exports.testInvalidOctal = function(test) {
   var done = _.after(2, test.done);
-  api.request(['convert', 'oct', '8'], 'GET', function(actual, code) {
+  api.request(['convert', 'oct'], 'POST', { 'number' : '8' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
     done();
   });
 
-  api.request(['convert', 'oct', '08'], 'GET', function(actual, code) {
+  api.request(['convert', 'oct'], 'POST', { 'number' : '08' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
     done();
@@ -59,7 +59,7 @@ exports.testInvalidOctal = function(test) {
 }
 
 exports.testDecimal = function(test) {
-  api.request(['convert', 'dec', '99'], 'GET', function(actual, code) {
+  api.request(['convert', 'dec'], 'POST', { 'number' : '99' }, function(actual, code) {
     test.equals(code, 200);
     test.equals(actual.bin.standard, '1100011');
     test.equals(actual.oct.standard, '143');
@@ -71,13 +71,13 @@ exports.testDecimal = function(test) {
 
 exports.testInvalidDecimal = function(test) {
   var done = _.after(2, test.done);
-  api.request(['convert', 'dec', 'a'], 'GET', function(actual, code) {
+  api.request(['convert', 'dec'], 'POST', { 'number' : 'a' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
     done();
   });
 
-  api.request(['convert', 'oct', '1q'], 'GET', function(actual, code) {
+  api.request(['convert', 'oct'], 'POST', { 'number' : '1q' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
     done();
@@ -85,7 +85,7 @@ exports.testInvalidDecimal = function(test) {
 }
 
 exports.testHexadecimal = function(test) {
-  api.request(['convert', 'hex', 'ff'], 'GET', function(actual, code) {
+  api.request(['convert', 'hex'], 'POST', { 'number' : 'ff' }, function(actual, code) {
     test.equals(code, 200);
     test.equals(actual.bin.standard, '11111111');
     test.equals(actual.oct.standard, '377');
@@ -97,13 +97,13 @@ exports.testHexadecimal = function(test) {
 
 exports.testInvalidHexadecimal = function(test) {
   var done = _.after(2, test.done);
-  api.request(['convert', 'dec', 'g'], 'GET', function(actual, code) {
+  api.request(['convert', 'dec'], 'POST', { 'number' : 'g' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
     done();
   });
 
-  api.request(['convert', 'oct', '1h'], 'GET', function(actual, code) {
+  api.request(['convert', 'oct'], 'POST', { 'number' : '1h' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
     done();

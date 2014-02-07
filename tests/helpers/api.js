@@ -5,6 +5,12 @@ function request(rest, method, data, done)
 {
   done = done || data;
 
+  var ctype = 'text/plain';
+  if (typeof data === 'object') {
+    data = JSON.stringify(data);
+    ctype = 'application/json';
+  }
+
   var options = {
     'hostname' : 'localhost',
     'port'     : 5000, /* Default port of canumb */
@@ -12,7 +18,7 @@ function request(rest, method, data, done)
     'method'   : method.toUpperCase(),
     'headers'  : {
       'Connection'     : 'close',
-      'Content-Type'   : 'text/plain',
+      'Content-Type'   : ctype,
     }
   };
 

@@ -32,21 +32,25 @@ function convert(from, number)
 
 function api(request, response, next)
 {
-  if (1000 < request.params.number.length) {
+  if (!request.body.number) {
+    throw new errors.MissingArgument('No number supplied.');
+  }
+
+  if (1000 < request.body.number.length) {
     throw new errors.TooLarge("Number can't be more than 1000 digits.");
   }
 
   var result = {};
 
-  switch(request.params.format) {
-  case 'bin': result = convert(bin, request.params.number);               break;
-  case 'oct': result = convert(oct, request.params.number);               break;
-  case 'dec': result = convert(dec, request.params.number);               break;
-  case 'hex': result = convert(hex, request.params.number.toLowerCase()); break;
+  switch(request.params.base) {
+  case 'bin': result = convert(bin, request.body.number);               break;
+  case 'oct': result = convert(oct, request.body.number);               break;
+  case 'dec': result = convert(dec, request.body.number);               break;
+  case 'hex': result = convert(hex, request.body.number.toLowerCase()); break;
 
   default:
     throw new errors.InvalidArgument(
-      "Format not supported: '" + request.params.format + "'"
+      "Base not supported: '" + request.params.base + "'"
     );
     break;
 
@@ -56,6 +60,6 @@ function api(request, response, next)
   return next();
 }
 
-exports.method = 'get';
-exports.params = [ 'format', 'number' ];
+exports.method = 'post';
+exports.params = [ 'base' ];
 exports.entry  = api;

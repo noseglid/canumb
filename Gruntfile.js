@@ -12,6 +12,7 @@ module.exports = function(grunt) {
               "bower_components/jQuery/dist/jquery.min.js",
               "bower_components/jQuery/dist/jquery.min.map",
               "bower_components/backbone/backbone-min.js",
+              "bower_components/backbone/backbone-min.map",
               "bower_components/underscore/underscore-min.js",
               "bower_components/underscore/underscore-min.map",
               "bower_components/growl/javascripts/jquery.growl.js"
@@ -37,6 +38,20 @@ module.exports = function(grunt) {
             "flatten" : true,
             "src"     : ["frontend/scripts/*.js"],
             "dest"    : "public/scripts/",
+            "filter"  : "isFile"
+          },
+          {
+            "expand"  : true,
+            "flatten" : true,
+            "src"     : ["frontend/scripts/views/*.js"],
+            "dest"    : "public/scripts/views/",
+            "filter"  : "isFile"
+          },
+          {
+            "expand"  : true,
+            "flatten" : true,
+            "src"     : ["frontend/scripts/models/*.js"],
+            "dest"    : "public/scripts/models/",
             "filter"  : "isFile"
           },
           {

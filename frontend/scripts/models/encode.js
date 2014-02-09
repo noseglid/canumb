@@ -6,11 +6,10 @@ define([
   return Backbone.Model.extend({
 
     defaults : {
-      'syncFinished' : 0,
       'data'         : '',
       'algorithm'    : 'base64',
       'encoded'      : null,
-      'error'        : null,
+      'error'        : null
     },
 
     initialize : function() {
@@ -38,14 +37,14 @@ define([
       this.set('encoded', val);
       this.set('error', null);
 
-      this.set('syncFinished', this.get('syncFinished') + 1)
+      this.trigger('syncFinished');
     },
 
     error : function(model, xhr, options) {
       this.set('error', JSON.parse(xhr.responseText));
       this.set('encoded', null);
 
-      this.set('syncFinished', this.get('syncFinished') + 1)
+      this.trigger('syncFinished');
     }
 
   });

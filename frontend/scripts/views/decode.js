@@ -27,8 +27,8 @@ define([
         'placeholder' : 'I eat coded data for breakfast.'
       }));
       this.listenTo(this.model, 'change:decoded', this.render);
-      this.listenTo(this.model, 'change:error', this.error);
-      this.listenTo(this.model, 'change:syncFinished', this.syncFinished);
+      this.listenTo(this.model, 'change:error',   this.error);
+      this.listenTo(this.model, 'syncFinished',   this.syncFinished);
     },
 
     events : {

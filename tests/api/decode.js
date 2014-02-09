@@ -4,8 +4,10 @@ var api = require('../helpers/api.js');
 exports.testBase64Decode = function(test) {
   var tests = [
     { 'data' : 'YQ==',            'expected' : 'a' },
+    { 'data' : 'Y\nQ\n=\n=',      'expected' : 'a' },
     { 'data' : 'w6U=',            'expected' : 'å' },
     { 'data' : 'IA==',            'expected' : ' ' },
+    { 'data' : 'I A \r=  =',      'expected' : ' ' },
     { 'data' : 'YSBtYWdpY2FsIGxhbmQgb2YgZmFpcmllcyBhbmQgZ29ibGlucw==', 'expected' : 'a magical land of fairies and goblins' }
   ];
 

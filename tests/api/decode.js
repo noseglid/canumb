@@ -20,6 +20,14 @@ exports.testBase64Decode = function(test) {
   });
 }
 
+exports.testInvalidBase64Decode = function(test) {
+  api.request(['decode', 'base64'], 'POST', { 'data' : '*' }, function(actual, code) {
+    test.equals(code, 400);
+    test.equals(actual.code, 'InvalidArgument');
+    test.done();
+  });
+}
+
 exports.testUriDecode = function(test) {
   var tests = [
     { 'data' : 'Chuck%20Norris', 'expected' : 'Chuck Norris' },

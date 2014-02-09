@@ -7,6 +7,13 @@ function base64(data)
     throw new errors.MissingArgument('No data provided.');
   }
 
+  data = data.replace(/\s/g, ''); // White space does not matter in base64
+
+  if (data.match(/[^A-Za-z0-9\+\/=]/)) {
+    /* Invalid base64 encoded data */
+    throw new errors.InvalidArgument('Not valid base64 data.');
+  }
+
   var buffer = new Buffer(data, 'base64');
   return {
     'ascii' : buffer.toString('ascii'),

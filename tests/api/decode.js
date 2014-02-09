@@ -33,9 +33,17 @@ exports.testUriDecode = function(test) {
   var testdonecb = _.after(tests.length, test.done);
 
   _.each(tests, function(dp) {
-    api.request(['decode', 'uri'], 'POST', dp.data, function(actual) {
+    api.request(['decode', 'uri'], 'POST',  { 'data' : dp.data }, function(actual) {
       test.equals(actual.utf8, dp.expected);
       testdonecb();
     });
+  });
+}
+
+exports.testInvalidUriDecode = function(test) {
+  api.request(['decode', 'uri'], 'POST', { 'data' : '%3' }, function(actual, code) {
+    test.equals(code, 400);
+    test.equals(actual.code, 'InvalidArgument');
+    test.done();
   });
 }

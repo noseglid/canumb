@@ -17,9 +17,13 @@ function base64(data)
 
 function uri(data)
 {
-  return {
-    'utf8' : decodeURIComponent(data)
-  };
+  try {
+    return {
+      'utf8' : decodeURIComponent(data)
+    };
+  } catch (e) {
+    throw new errors.InvalidArgument("Unable to decode uri: " + data);
+  }
 }
 
 function api(request, response, next)

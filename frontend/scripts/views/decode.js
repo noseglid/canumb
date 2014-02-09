@@ -71,7 +71,7 @@ define([
 
       this.$('textarea').addClass('loading');
       this.timer = setTimeout(function() {
-        self.model.set('data', this.$('textarea').val());
+        self.model.set('data', self.$('textarea').val());
       }, queryDelay);
     },
 

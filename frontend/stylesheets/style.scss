@@ -18,6 +18,10 @@ body {
   font-size: 18px;
 }
 
+p {
+  margin: 5px;
+}
+
 #{$all-text-inputs}, select, textarea {
   @include linear-gradient(to bottom, $color2, $color4);
   box-shadow: 0px 0px 2px 2px $color4;
@@ -30,7 +34,7 @@ body {
 }
 
 #{$all-text-inputs-focus}, select:focus, textarea:focus {
-  border: solid 1px $color8;
+  border: solid 2px $color8;
 }
 
 .button {

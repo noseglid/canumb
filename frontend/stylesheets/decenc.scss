@@ -9,7 +9,7 @@
   $textAreaSize: 200px;
   textarea {
     @include linear-gradient(to bottom, #fff, #fff);
-    width: 84%;
+    width: 82%;
     height: $textAreaSize;
     padding: 10px;
     resize: none;
@@ -54,6 +54,7 @@
     @include linear-gradient(to bottom, $color2, $color4);
 
     p {
+      white-space: pre;
       word-wrap: break-word;
       margin: 0px;
     }

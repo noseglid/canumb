@@ -13,7 +13,7 @@ exports.testBase64Decode = function(test) {
   var testdonecb = _.after(tests.length, test.done);
 
   _.each(tests, function(dp) {
-    api.request(['decode', 'base64'], 'POST', dp.data, function(actual) {
+    api.request(['decode', 'base64'], 'POST', { 'data' : dp.data }, function(actual) {
       test.equals(actual.utf8, dp.expected);
       testdonecb();
     });

@@ -16,7 +16,7 @@ exports.testBase64Encode = function(test) {
   var testdonecb = _.after(tests.length, test.done);
 
   _.each(tests, function(dp) {
-    api.request(['encode', 'base64'], 'POST', dp.data, function(actual) {
+    api.request(['encode', 'base64'], 'POST', { 'data' : dp.data }, function(actual) {
       test.equals(actual.base64, dp.expected);
       testdonecb();
     });
@@ -38,7 +38,7 @@ exports.testUriEncode = function(test) {
   var testdonecb = _.after(tests.length, test.done);
 
   _.each(tests, function(dp) {
-    api.request(['encode', 'uri'], 'POST', dp.data, function(actual) {
+    api.request(['encode', 'uri'], 'POST', { 'data' : dp.data }, function(actual) {
       test.equals(actual.uri, dp.expected);
       testdonecb();
     });

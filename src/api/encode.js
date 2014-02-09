@@ -43,7 +43,7 @@ function api(request, response, next)
     break;
   };
 
-  response.send(handler(request.body));
+  response.send(handler(request.body.data));
   return next();
 }
 

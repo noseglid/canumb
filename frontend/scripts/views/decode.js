@@ -28,6 +28,7 @@ define([
       }));
       this.listenTo(this.model, 'change:decoded', this.render);
       this.listenTo(this.model, 'change:error', this.error);
+      this.listenTo(this.model, 'change:syncFinished', this.syncFinished);
     },
 
     events : {
@@ -36,8 +37,6 @@ define([
     },
 
     render : function() {
-      this.$('textarea').removeClass('loading');
-
       if (!this.model.get('decoded')) {
         this.$('#decode-result').fadeOut(fadeTime);
         return;
@@ -49,8 +48,6 @@ define([
     },
 
     error : function(e) {
-      this.$('textarea').removeClass('loading');
-
       var err = this.model.get('error');
       if (!err) {
         return;
@@ -62,14 +59,25 @@ define([
       });
     },
 
+    syncFinished : function() {
+      this.$('textarea').removeClass('loading');
+    },
+
     updateData : function() {
+      this.$('textarea').removeClass('loading');
+
       if (this.timer) {
         clearTimeout(this.timer);
       }
 
-      var self = this;
+      if (this.model.get('data') === this.$('textarea').val()) {
+        /* Somehow we ended up with the same data. Do nothing. */
+        return;
+      }
 
       this.$('textarea').addClass('loading');
+
+      var self = this;
       this.timer = setTimeout(function() {
         self.model.set('data', self.$('textarea').val());
       }, queryDelay);

@@ -25,6 +25,7 @@ define([
 
       this.listenTo(this.model, 'change:converted', this.render);
       this.listenTo(this.model, 'change:error',     this.error);
+      this.listenTo(this.model, 'syncFinished',     this.syncFinished);
       this.$el.html(_.template(template));
     },
 
@@ -35,7 +36,6 @@ define([
     },
 
     render : function() {
-      $('#loader').css('visibility', 'hidden');
       var converted = this.model.get('converted');
 
       if (!converted) {
@@ -55,9 +55,32 @@ define([
       })).fadeIn(fadeTime);
     },
 
+    error : function() {
+      var err = this.model.get('error');
+      if (!err) {
+        return;
+      }
+
+      $.growl.error({
+        'title'   : err.code,
+        'message' : err.message
+      });
+    },
+
+    syncFinished : function() {
+      $('#loader').css('visibility', 'hidden');
+    },
+
     updateNumber : function() {
+      $('#loader').css('visibility', 'hidden');
+
       if (this.numberTimer) {
         clearTimeout(this.numberTimer);
+      }
+
+      if (this.model.get('number') === this.$('#number').val()) {
+        /* Same number as before, but not synced. Everything is up to par */
+        return;
       }
 
       $('#loader').css('visibility', 'visible');
@@ -77,18 +100,5 @@ define([
       this.model.set('base', this.$('#base').val());
     },
 
-    error : function() {
-      $('#loader').css('visibility', 'hidden');
-
-      var err = this.model.get('error');
-      if (!err) {
-        return;
-      }
-
-      $.growl.error({
-        'title'   : err.code,
-        'message' : err.message
-      });
-    }
   });
 });

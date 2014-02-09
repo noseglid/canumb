@@ -5,10 +5,10 @@ define([
 ) {
   return Backbone.Model.extend({
     defaults : {
-      'number'    : '',
-      'base'      : 'dec',
-      'converted' : null,
-      'error'     : null
+      'number'       : '',
+      'base'         : 'dec',
+      'converted'    : null,
+      'error'        : null
     },
 
     initialize : function() {
@@ -32,11 +32,13 @@ define([
     },
 
     update : function(model, response, options) {
+      this.trigger('syncFinished');
       this.set('converted', response);
       this.set('error', null);
     },
 
     error : function(model, xhr, options) {
+      this.trigger('syncFinished');
       this.set('error', JSON.parse(xhr.responseText));
 
       /* That conversion didn't work, must set converted to match

@@ -3,15 +3,14 @@ define([
   'underscore',
   'growl',
   'backbone',
-  'models/convert',
-  "text!templates/convert.tpl",
-  "text!templates/convert-result.tpl"
+
+  "text!/templates/convert.tpl",
+  "text!/templates/convert-result.tpl"
 ], function(
   $,
   _,
   growl,
   Backbone,
-  model,
   template,
   resultTemplate
 ) {
@@ -40,14 +39,14 @@ define([
       var converted = this.model.get('converted');
 
       if (!converted) {
-        $('#result').fadeOut(fadeTime, function() {
-          $('#result').text('');
+        $('#convert-result').fadeOut(fadeTime, function() {
+          $('#convert-result').text('');
         });
         return;
       }
 
       var align = this.$('#align-button input').is(':checked');
-      this.$('#result').html(_.template(resultTemplate, {
+      this.$('#convert-result').html(_.template(resultTemplate, {
         bin : converted.bin[align ? 'group8' : 'standard'],
         oct : converted.oct['standard'],
         dec : converted.dec['standard'],
@@ -70,7 +69,11 @@ define([
     },
 
     updateBase : function() {
-      $('#loader').css('visibility', 'visible');
+      if (0 < self.$('#number').val().length) {
+        /* Only show loader if we will actually load something */
+        $('#loader').css('visibility', 'visible');
+      }
+
       this.model.set('base', this.$('#base').val());
     },
 

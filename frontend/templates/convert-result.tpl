@@ -1,29 +1,29 @@
 <table>
 
   <tr>
-    <td class="result-heading">
+    <td>
       <div id="align-button">
         <input type="checkbox" id="align-binary" value="0" <%-checked%> />
         <label for="align-binary">align</label>
       </div>
       <p>binary:</p>
     </td>
-    <td class="result-value"><p><%-bin%></p></td>
+    <td><p><%-bin%></p></td>
   </tr>
 
   <tr>
-    <td class="result-heading"><p>octal:</p></td>
-    <td class="result-value"><p><%-oct%></p></td>
+    <td><p>octal:</p></td>
+    <td><p><%-oct%></p></td>
   </tr>
 
   <tr>
-    <td class="result-heading"><p>decimal:</p></td>
-    <td class="result-value"><p><%-dec%></p></td>
+    <td><p>decimal:</p></td>
+    <td><p><%-dec%></p></td>
   </tr>
 
   <tr>
-    <td class="result-heading"><p>hexadecimal:</p></td>
-    <td class="result-value"><p><%-hex%></p></td>
+    <td><p>hexadecimal:</p></td>
+    <td><p><%-hex%></p></td>
   </tr>
 
 </table>

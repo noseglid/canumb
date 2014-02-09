@@ -1,15 +1,11 @@
 requirejs.config({
-  "baseUrl" : "/",
+  "baseUrl" : "/scripts",
   "paths" : {
-    "text"           : "scripts/libs/text",
-    "underscore"     : "scripts/libs/underscore-min",
-    "backbone"       : "scripts/libs/backbone-min",
-    "jquery"         : "scripts/libs/jquery.min",
-    "growl"          : "scripts/libs/jquery.growl",
-
-    "analytics"      : "scripts/analytics",
-    "views/convert"  : "scripts/views/convert",
-    "models/convert" : "scripts/models/convert"
+    "text"           : "libs/text",
+    "underscore"     : "libs/underscore-min",
+    "backbone"       : "libs/backbone-min",
+    "jquery"         : "libs/jquery.min",
+    "growl"          : "libs/jquery.growl",
   },
 
   "shim" : {
@@ -32,17 +28,30 @@ require([
 
   "views/convert",
   "models/convert",
+  "views/decode",
+  "models/decode"
 ], function(
   $,
   analytics,
 
   ConvertView,
-  ConvertModel
+  ConvertModel,
+  DecodeView,
+  DecodeModel
 ) {
+
   $(function() {
+
     new ConvertView({
       model : new ConvertModel(),
-      el : $('#tab-content-convert'),
+      el    : $('#tab-content-convert')
     });
+
+    new DecodeView({
+      model : new DecodeModel(),
+      el : $('#tab-content-decode')
+    });
+
   });
+
 });

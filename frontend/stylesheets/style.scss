@@ -1,27 +1,12 @@
 @import "bourbon";
 
-$color1 : #c0c0c0;
-$color2 : #ffffff;
-$color3 : #336699;
-$color4 : #dddddd;
-$color5 : #aaaaaa;
-$color6 : #a0a0a0;
-$color7 : #d0d0d0;
-$color8 : #0088cc;
+@import "decode";
+@import "convert";
+@import "colors";
 
-$shade1  : #101010;
-$shade2  : #303030;
-$shade3  : #505050;
-$shade4  : #707070;
-$shade5  : #101010;
-$shade6  : #909090;
-$shade7  : #b0b0b0;
-$shade8  : #d0d0d0;
-$shade9  : #f0f0f0;
-
-$contentWidth : 900px;
-$bannerHeight : 150px;
-$inputHeight  : 32px;
+$contentWidth    : 900px;
+$bannerHeight    : 150px;
+$inputLineHeight : 32px;
 
 body {
   padding: 0px;
@@ -30,6 +15,51 @@ body {
   background-color: $color3;
   font-family: $helvetica;
   font-size: 18px;
+}
+
+#{$all-text-inputs}, select, textarea {
+  @include linear-gradient(to bottom, $color2, $color4);
+  box-shadow: 0px 0px 2px 2px $color4;
+  border: solid 2px $color5;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: $inputLineHeight / 2;
+  height: $inputLineHeight;
+  vertical-align: middle;
+}
+
+#{$all-text-inputs-focus}, select:focus, textarea:focus {
+  border: solid 1px $color8;
+}
+
+.button {
+  padding: 3px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: center;
+
+  position: relative;
+  top: 2px;
+
+  @include transition(all 0.2s ease-in-out);
+
+  background-color: rgba(200, 200, 200, 0.2);
+  color: white;
+
+  &:hover {
+    background-color: rgba(200, 200, 200, 0.5);
+    color:white;
+    top: 0px;
+  }
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"]:checked + .button {
+    background: $color8;
 }
 
 div#banner {
@@ -54,121 +84,6 @@ div#banner {
   }
 }
 
-#{$all-text-inputs}, select {
-  @include linear-gradient(to bottom, $color2, $color4);
-  box-shadow: 0px 0px 2px 2px $color4;
-  border: solid 2px $color5;
-  border-radius: 5px;
-  font-weight: bold;
-  font-size: $inputHeight / 2;
-  height: $inputHeight;
-  vertical-align: middle;
-}
-
-div#input-array {
-  padding: 20px 1%;
-  border-bottom: solid 2px $color1;
-
-  span#loader {
-    visibility: hidden;
-    height: $inputHeight;
-  }
-
-  img {
-    width: 16px;
-    height: 16px;
-    @include inline-block;
-    vertical-align: middle;
-    text-align: center;
-  }
-
-  #number {
-    width: 70%;
-    padding: 0px 1%;
-    margin: 5px 1%;
-
-    @include placeholder {
-      text-align: center;
-    }
-  }
-
-  select#type {
-    width : 20%;
-    padding: 0px 1%;
-    margin: 5px 1%;
-  }
-}
-
-div#result {
-  display: none;
-
-  #align-button {
-    $borderRadius : 5px;
-    padding: 0px;
-    float: left;
-
-    input {
-      display: none;
-    }
-
-    label {
-      border-radius: $borderRadius;
-      border: solid 1px $shade7;
-      font-size: 15px;
-      font-weight: normal;
-      background-color: rgba(255, 255, 255, 0.5);
-      display: block;
-      padding: 3px 10px;
-      @include transition(all 0.2s ease-in-out);
-    }
-
-    label:hover {
-      background-color: rgba(200, 200, 200, 0.2);
-    }
-
-    input:checked + label {
-      background-color: $color8;
-      color: white;
-    }
-  }
-
-  table {
-    $margin : 2%;
-
-    margin: 20px $margin 0px $margin;
-    border-spacing: 0px 3px;
-    border-collapse: separate;
-    width: 100% - 2 * $margin;
-    table-layout: fixed;
-  }
-
-  td {
-    @include linear-gradient(to bottom, $color2, $color4);
-    color: black;
-    padding: 10px 10px;
-  }
-
-  $headingWidth : 15%;
-  $borderRadius: 8px;
-  td.result-heading {
-    border-radius: $borderRadius 0px 0px $borderRadius;
-    width: 9em;
-    text-align: right;
-    font-weight: bold;
-  }
-
-  td.result-heading p, td.result-value p {
-      line-height: 1.5em;
-  }
-
-  td.result-value {
-    border-radius: 0px $borderRadius $borderRadius 0px;
-    width: 100% - $headingWidth;
-    font-family: Consolas, Monaco, Lucida Console, monospace;
-    word-wrap: break-word;
-  }
-}
-
 .tabs {
   margin: 0px auto;
   min-width: $contentWidth;
@@ -179,35 +94,15 @@ div#result {
 
   li {
     float: left;
+
+    &>label {
+      margin: 0px 10px;
+      padding: 5px 25px;
+      font-size: 24px;
+    }
   }
 
-  label.tab-label {
-    top: 1px;
-    margin: 0px 10px;
-    display: block;
-    padding: 5px 25px;
-    border-radius: 5px;
-    font-size: 24px;
-    background: rgba(200, 200, 200, 0.2);
-    position: relative;
-    @include transition(all 0.2s ease-in-out);
-  }
-
-  input[type="radio"] {
-    display: none;
-  }
-
-  label:hover {
-    background: rgba(200, 200, 200, 0.5);
-    top: 0px;
-  }
-
-  [id^=tab]:checked + label {
-    background: $color8;
-    color: white;
-  }
-
-  [id^=tab]:checked ~ [id^=tab-content] {
+  input[type="radio"]:checked ~ div.tab-content {
     display: block;
   }
 
@@ -217,6 +112,5 @@ div#result {
     left: 0px;
     margin: 10px 0px;
     position: absolute;
-    box-sizing: border-box;
   }
 }

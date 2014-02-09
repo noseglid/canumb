@@ -1,0 +1,106 @@
+@import "colors";
+@import "fonts";
+
+div#convert-input {
+  padding: 20px 1%;
+  border-bottom: solid 2px $color1;
+
+  #loader {
+    visibility: hidden;
+  }
+
+  img {
+    width: 16px;
+    height: 16px;
+    @include inline-block;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  #number {
+    width: 73%;
+    padding: 0px 1%;
+    margin: 5px 1%;
+
+    @include placeholder {
+      text-align: center;
+    }
+  }
+
+  #base {
+    float: right;
+    width : 20%;
+    padding: 0px 1%;
+    margin: 5px 1%;
+  }
+}
+
+div#convert-result {
+  display: none;
+
+  #align-button {
+    $borderRadius : 5px;
+    padding: 0px;
+    float: left;
+
+    input {
+      display: none;
+    }
+
+    label {
+      border-radius: $borderRadius;
+      border: solid 1px $shade7;
+      font-size: 15px;
+      font-weight: normal;
+      background-color: rgba(255, 255, 255, 0.5);
+      display: block;
+      padding: 3px 10px;
+      @include transition(all 0.2s ease-in-out);
+    }
+
+    label:hover {
+      background-color: rgba(200, 200, 200, 0.2);
+    }
+
+    input:checked + label {
+      background-color: $color8;
+      color: white;
+    }
+  }
+
+  table {
+    $margin : 2%;
+
+    margin: 20px $margin 0px $margin;
+    border-spacing: 0px 3px;
+    border-collapse: separate;
+    width: 100% - 2 * $margin;
+    table-layout: fixed;
+  }
+
+  $headingWidth : 9em;
+  $borderRadius : 8px;
+
+  td {
+    @include linear-gradient(to bottom, $color2, $color4);
+    color: black;
+    padding: 10px 10px;
+  }
+
+  td p {
+    line-height: 1.5em;
+  }
+
+  td:first-child {
+    border-radius: $borderRadius 0px 0px $borderRadius;
+    width: 9em;
+    text-align: right;
+    font-weight: bold;
+  }
+
+  td:nth-child(2) {
+    border-radius: 0px $borderRadius $borderRadius 0px;
+    font-family: $monoFont;
+    word-wrap: break-word;
+  }
+}

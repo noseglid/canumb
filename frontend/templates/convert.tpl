@@ -1,4 +1,4 @@
-<div id="input-array">
+<div id="convert-input">
   <span id="loader"><img src="images/ajax-loader.gif" /></span>
   <input type="text" id="number" placeholder="Type a number, any number..." />
   <select id="base">
@@ -9,5 +9,4 @@
   </select>
 </div>
 
-<div id="result"></div>
-</div>
+<div id="convert-result"></div>

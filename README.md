@@ -1,22 +1,51 @@
 [![Build Status](https://travis-ci.org/noseglid/canumb.png?branch=master)](https://travis-ci.org/noseglid/canumb)
 
-# Canumb - The number cruncher
+# Canumb - it's a name
 
-Aims to be a simple conversion tool between various bases. Currently
-2 (binary), 8 (octal), 10 (decimal) and 16 (hexadecimal) is supported.
+Canumb aims to crunch data on various forms and turn them into something meaningful.
+A various of formats are currently supported, such different number base conversions
+(decimal to hexadecimal, binary to hexadecimal, octal to decimal, etc),
+various encoded format (base64 encoder decoder, uri encoder decoder).
+It's build in way to allow for extension when more input types are required.
 
-Canumb supports [arbitrary precision][ArbitraryPrecision] -
-you may convert a number of any size - well the algorithm is slow so less than 1000 digits. But that's still very large.
+## Features
+
+### Base conversion
+
+The following conversions are available ([TL;DR][TLDR]: all conversions between base 2 (binary), 8 (octal), 10 (decimal) and 16 (hexadecimal)):
+
+  * Binary to Octal
+  * Binary to Decimal
+  * Binary to Hexadecimal
+  * Octal to Binary
+  * Octal to Decimal
+  * Octal to Hexadecimal
+  * Decimal to Binary
+  * Decimal to Octal
+  * Decimal to Hexadecimal
+  * Hexadecimal to Binary
+  * Hexadecimal to Octal
+  * Hexadecimal to Decimal
+
+
+Canumb supports [arbitrary precision][ArbitraryPrecision],
+you may convert a number of any size. Well, the algorithm is slow so
+less than 1000 digits. But that's still very large numbers.
 Very useful for those long network protocol bit-streams.
 
 Only unsigned numbers at this point, feel free to help out improve support.
 
+### Encoding and Decoding
+
+Supported encodings:
+
+ * [base64][EncodingBase64]
+ * [uri][EncodingUri] (Also knows as percent-encoding)
+
+## See it in action
 It includes a hefty web frontend which makes usage easy. Single-page
 applications seems to be the latest buzz right now, and so this follows
 that vision. It is [hosted at heroku for your leisure][CanumbAtHeroku].
-
-## See it in action
-A deployment of canumb is [available at heroku][CanumbAtHeroku].
 
 ## Contribute
 Just make a pull request and your contribution will be considered (and assuming it's useful, merged) as soon as possible. This'll get your name on the contributors list aswell.
@@ -26,3 +55,6 @@ Just make a pull request and your contribution will be considered (and assuming 
 
 [CanumbAtHeroku]: https://canumb.herokuapp.com
 [ArbitraryPrecision]: http://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic
+[EncodingBase64]: http://en.wikipedia.org/wiki/Base64
+[EncodingUri]: http://en.wikipedia.org/wiki/Percent-encoding
+[TLDR]: http://en.wikipedia.org/wiki/Wikipedia:Too_long;_didn't_read

@@ -1,0 +1,60 @@
+@import "colors";
+@import "fonts";
+
+#decode-input {
+  margin: 10px auto;
+  padding: 20px;
+
+  $textAreaSize: 200px;
+  textarea {
+    @include linear-gradient(to bottom, #fff, #fff);
+    width: 84%;
+    height: $textAreaSize;
+    padding: 10px;
+    resize: none;
+
+    &.loading {
+      background-image: url('/images/ajax-loader-black-on-white.gif');
+      background-repeat: no-repeat;
+      background-position: right 20px bottom 20px;
+    }
+
+    @include placeholder {
+      vertical-align: middle;
+      padding-top: ($textAreaSize - 32) / 2;
+      text-align: center;
+    }
+  }
+
+  div.button-container {
+    width: 6em;
+    margin: 0px;
+    padding: 0px;
+    float: right;
+  }
+
+  label.button {
+    display: block;
+    margin: 5px 0px;
+    float: right;
+    clear: right;
+    width: 6em;
+  }
+
+  #decode-result {
+    margin: 30px 0px;
+    padding: 20px;
+    border: solid 1px #000;
+    display: none;
+    color: black;
+    font-family: $monoFont;
+    border-radius: 15px;
+    @include linear-gradient(to bottom, $color2, $color4);
+
+    p {
+      word-wrap: break-word;
+      margin: 0px;
+    }
+  }
+
+}

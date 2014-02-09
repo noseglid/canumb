@@ -1,8 +1,9 @@
 @import "bourbon";
 
-@import "decode";
-@import "convert";
 @import "colors";
+
+@import "convert";
+@import "decenc";
 
 $contentWidth    : 900px;
 $bannerHeight    : 150px;

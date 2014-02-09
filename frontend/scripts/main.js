@@ -29,7 +29,9 @@ require([
   "views/convert",
   "models/convert",
   "views/decode",
-  "models/decode"
+  "models/decode",
+  "views/encode",
+  "models/encode"
 ], function(
   $,
   analytics,
@@ -37,7 +39,9 @@ require([
   ConvertView,
   ConvertModel,
   DecodeView,
-  DecodeModel
+  DecodeModel,
+  EncodeView,
+  EncodeModel
 ) {
 
   $(function() {
@@ -50,6 +54,11 @@ require([
     new DecodeView({
       model : new DecodeModel(),
       el : $('#tab-content-decode')
+    });
+
+    new EncodeView({
+      model : new EncodeModel(),
+      el : $('#tab-content-encode')
     });
 
   });

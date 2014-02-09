@@ -1,7 +1,8 @@
 @import "colors";
 @import "fonts";
 
-#decode-input {
+#tab-content-decode div,
+#tab-content-encode div {
   margin: 10px auto;
   padding: 20px;
 
@@ -41,7 +42,8 @@
     width: 6em;
   }
 
-  #decode-result {
+  #decode-result,
+  #encode-result {
     margin: 30px 0px;
     padding: 20px;
     border: solid 1px #000;

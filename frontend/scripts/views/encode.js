@@ -23,28 +23,28 @@ define([
       this.timer = 0;
 
       this.$el.html(_.template(template, {
-        'type'        : 'decode',
-        'placeholder' : 'I eat coded data for breakfast.'
+        'type'        : 'encode',
+        'placeholder' : 'Must. Have. Data.'
       }));
-      this.listenTo(this.model, 'change:decoded', this.render);
+      this.listenTo(this.model, 'change:encoded', this.render);
       this.listenTo(this.model, 'change:error', this.error);
     },
 
     events : {
       'input textarea'                        : 'updateData',
-      'change input[name="decode-algorithm"]' : 'updateAlgorithm'
+      'change input[name="encode-algorithm"]' : 'updateAlgorithm'
     },
 
     render : function() {
       this.$('textarea').removeClass('loading');
 
-      if (!this.model.get('decoded')) {
-        this.$('#decode-result').fadeOut(fadeTime);
+      if (!this.model.get('encoded')) {
+        this.$('#encode-result').fadeOut(fadeTime);
         return;
       }
 
-      this,$('#decode-result').html(_.template(resultTemplate, {
-        'data' : this.model.get('decoded').utf8
+      this,$('#encode-result').html(_.template(resultTemplate, {
+        'data' : this.model.get('encoded')
       })).fadeIn(fadeTime);
     },
 
@@ -71,7 +71,7 @@ define([
 
       this.$('textarea').addClass('loading');
       this.timer = setTimeout(function() {
-        self.model.set('data', this.$('textarea').val());
+        self.model.set('data', self.$('textarea').val());
       }, queryDelay);
     },
 
@@ -80,7 +80,7 @@ define([
         this.$('textarea').addClass('loading');
       }
 
-      var val = this.$('input[name="decode-algorithm"]:checked').val();
+      var val = this.$('input[name="encode-algorithm"]:checked').val();
       this.model.set('algorithm', val);
     }
 

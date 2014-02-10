@@ -3,16 +3,18 @@
 
 #tab-content-decode div,
 #tab-content-encode div {
-  margin: 10px auto;
-  padding: 20px;
+  margin: 10px 20px;
+  padding: 0px;
 
   $textAreaSize: 200px;
   textarea {
     @include linear-gradient(to bottom, #fff, #fff);
-    width: 82%;
+    width: 100%;
     height: $textAreaSize;
     padding: 10px;
     resize: none;
+    clear: left;
+    @include box-sizing(border-box);
 
     &.loading {
       background-image: url('/images/ajax-loader-black-on-white.gif');
@@ -28,18 +30,17 @@
   }
 
   div.button-container {
-    width: 6em;
     margin: 0px;
     padding: 0px;
-    float: right;
+    float: left;
   }
 
   label.button {
     display: block;
-    margin: 5px 0px;
-    float: right;
-    clear: right;
+    margin: 5px 5px 8px 0px;
+    float: left;
     width: 6em;
+    top: 0px;
   }
 
   #decode-result,
@@ -50,7 +51,7 @@
     display: none;
     color: black;
     font-family: $monoFont;
-    border-radius: 15px;
+    border-radius: 5px;
     @include linear-gradient(to bottom, $color2, $color4);
 
     p {

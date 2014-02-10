@@ -1,6 +1,4 @@
 <div>
-  <textarea placeholder="<%-placeholder%>"></textarea>
-
   <div class="button-container">
     <input type="radio"
            checked="checked"
@@ -15,6 +13,8 @@
            value="uri" />
     <label for="<%-type%>-algorithm-uri" class="button">uri</label>
   </div>
+
+  <textarea placeholder="<%-placeholder%>"></textarea>
 
   <div id="<%-type%>-result"></div>
 </div>

@@ -59,12 +59,14 @@ p {
   }
 }
 
-input[type="radio"] {
+input[type="radio"],
+input[type="checkbox"] {
   display: none;
 }
 
-input[type="radio"]:checked + .button {
-    background: $color8;
+input[type="radio"]:checked + .button,
+input[type="checkbox"]:checked + .button {
+    background-color: $color8 !important; /* important to allow override colors */
 }
 
 div#banner {

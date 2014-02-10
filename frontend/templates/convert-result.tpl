@@ -2,10 +2,8 @@
 
   <tr>
     <td>
-      <div id="align-button">
-        <input type="checkbox" id="align-binary" value="0" <%-checked%> />
-        <label for="align-binary">align</label>
-      </div>
+      <input type="checkbox" id="align-binary" value="0" <%-checked%> />
+      <label for="align-binary" class="button">align</label>
       <p>binary:</p>
     </td>
     <td><p><%-bin%></p></td>

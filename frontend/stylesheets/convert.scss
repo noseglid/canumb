@@ -38,33 +38,13 @@ div#convert-input {
 div#convert-result {
   display: none;
 
-  #align-button {
-    $borderRadius : 5px;
-    padding: 0px;
+  label {
+    top: 0px;
     float: left;
-
-    input {
-      display: none;
-    }
-
-    label {
-      border-radius: $borderRadius;
-      border: solid 1px $shade7;
-      font-size: 15px;
-      font-weight: normal;
-      background-color: rgba(255, 255, 255, 0.5);
-      display: block;
-      padding: 3px 10px;
-      @include transition(all 0.2s ease-in-out);
-    }
-
-    label:hover {
-      background-color: rgba(200, 200, 200, 0.2);
-    }
-
-    input:checked + label {
-      background-color: $color8;
-      color: white;
+    color: black;
+    background-color: rgba(150, 150, 150, 0.5);
+    &:hover {
+      background-color: rgba(150, 150, 150, 0.8);
     }
   }
 
@@ -96,6 +76,7 @@ div#convert-result {
     width: 9em;
     text-align: right;
     font-weight: bold;
+    vertical-align: top;
   }
 
   td:nth-child(2) {

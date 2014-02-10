@@ -22,6 +22,7 @@ define([
 
     initialize : function() {
       this.numberTimer = 0;
+      this.align = false;
 
       this.listenTo(this.model, 'change:converted', this.render);
       this.listenTo(this.model, 'change:error',     this.error);
@@ -32,7 +33,10 @@ define([
     events : {
       'input #number'        : 'updateNumber',
       'change #base'         : 'updateBase',
-      'change #align-binary' : 'render'
+      'change #align-binary' : function() {
+        this.align = !this.align;
+        this.render();
+      }
     },
 
     render : function() {
@@ -45,13 +49,12 @@ define([
         return;
       }
 
-      var align = this.$('#align-button input').is(':checked');
       this.$('#convert-result').html(_.template(resultTemplate, {
-        bin : converted.bin[align ? 'group8' : 'standard'],
+        bin : converted.bin[this.align ? 'group8' : 'standard'],
         oct : converted.oct['standard'],
         dec : converted.dec['standard'],
         hex : converted.hex['standard'],
-        checked : align ? 'checked="checked"' : ''
+        checked : this.align ? 'checked="checked"' : ''
       })).fadeIn(fadeTime);
     },
 

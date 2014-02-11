@@ -48,6 +48,10 @@ div#convert-result {
     }
   }
 
+  input[type="checkbox"]:checked + label {
+    background-color: $color8;
+  }
+
   table {
     $margin : 2%;
 

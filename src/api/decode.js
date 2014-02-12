@@ -56,6 +56,38 @@ function api(request, response, next)
   return next();
 }
 
-exports.api    = 'decode';
-exports.params = [ 'algorithm' ];
+exports.api         = 'decode';
+
+exports.rest = [
+  {
+    'name'        : 'algorithm',
+    'description' : 'The algorithm with which supplied data should be decoded.',
+    'valid'       : [ 'base64', 'uri' ]
+  }
+];
+
+exports.doc = {};
+
+exports.doc.input = [
+  {
+    'name'        : 'data',
+    'type'        : 'string',
+    'description' : 'The data to decode.'
+  }
+];
+
+exports.doc.description = 'Decodes base64 and uri (percent)';
+
+exports.doc.errors = [
+  {
+    'type' : errors.InvalidArgument,
+    'description' : 'Thrown if the algorithm is invalid, or the supplied ' +
+                    'data can not be decoded with the chosen algorithm.'
+  },
+  {
+    'type' : errors.MissingArgument,
+    'description' : 'Thrown if no data to encode is supplied.'
+  }
+];
+
 exports.entry  = api;

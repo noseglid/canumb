@@ -4,6 +4,8 @@ var dec    = require('../lib/numbers/dec.js');
 var hex    = require('../lib/numbers/hex.js');
 var errors = require('../lib/errors.js');
 
+var digitMax = 1000;
+
 function convert(from, number)
 {
   var binaryRep      = from.to.bin(number);
@@ -36,7 +38,7 @@ function api(request, response, next)
     throw new errors.MissingArgument('No number supplied.');
   }
 
-  if (1000 < request.body.number.length) {
+  if (digitMax < request.body.number.length) {
     throw new errors.TooLarge("Number can't be more than 1000 digits.");
   }
 
@@ -60,6 +62,49 @@ function api(request, response, next)
   return next();
 }
 
-exports.api    = 'convert';
-exports.params = [ 'base' ];
+exports.api  = 'convert';
+
+exports.rest = [
+  {
+    'name'        : 'base',
+    'description' : 'The base which the input data is in',
+    'valid'       : [ 'bin', 'oct', 'dec', 'hex' ]
+  }
+];
+
+exports.doc = {};
+
+exports.doc.input = [
+  {
+    'name'        : 'number',
+    'type'        : 'string',
+    'description' : 'The number which should be converted. ' +
+                    'Note that it should be supplied as a string ' +
+                    'so large numbers may be provided.'
+  }
+];
+
+exports.doc.description =
+  'Convert numbers between various bases. Supported bases are 2 (binary), ' +
+  '8 (octal), 10 (decimal), 16 (hexadecimal). The conversion is performed ' +
+  'with arbitrary precision, meaning it can take a number of any size and ' +
+  'persist absolute accuracy in its conversions. This approach is, however ' +
+  'very slow. To not choke the server an upper limit of 1000 digits must ' +
+  'be enforced. But you\'d rather have accuracy than speed, right?';
+
+exports.doc.errors = [
+  {
+    'type'        : errors.MissingArgument,
+    'description' : 'Thrown if no number is supplied'
+  },
+  {
+    'type'        : errors.TooLarge,
+    'description' : 'Thrown if the number is more than ' + digitMax + ' digits'
+  },
+  {
+    'type'        : errors.InvalidArgument,
+    'description' : 'Thrown if an unknown base is supplied'
+  }
+]
+
 exports.entry  = api;

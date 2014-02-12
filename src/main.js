@@ -24,21 +24,71 @@ fs.readdir(apidir, function(err, files) {
   if (err)
     throw new errors.Error("Could not find APIs. " + err);
 
-  _.each(files, function(file) {
-    if (!file.match('^[a-z]+\.js$'))
-      return;
-
-    var api = require(apidir + file);
-    var path = util.format('/%s/:', api.api) + api.params.join('/:');
-    console.log("registering api '%s' to path '%s'", api.api, path);
-    server.post(path, api.entry);
+  files = _.filter(files, function(file) {
+    return file.match('^[a-z]+\.js$');
   });
+
+  var apiList = _.map(files, function(file) {
+    return require(apidir + file);
+  });
+
+  setupAPI(apiList);
 });
 
-server.get(/^\/?.*/, restify.serveStatic({
-  'default'   : 'index.html',
-  'directory' : './public'
-}));
+function setupAPI(apiList) {
+
+  /* Register the generic documentation */
+  server.get('/doc', _.bind(serveDocumentation, {}, apiList));
+
+  _.each(apiList, function(api) {
+    var list = _.map(api.rest, function(p) { return p.name });
+    var path = util.format('/%s/:', api.api) + list.join('/:');
+    console.log("registering api '%s' to path '%s'", api.api, path);
+
+    /* Register specific API */
+    server.post(path, api.entry);
+
+    /* Register documentation for API */
+    server.get('/doc/' + api.api, _.bind(serveAPIDocumentation, {}, api));
+  });
+
+  server.get(/^\/?.*/, restify.serveStatic({
+    'default'   : 'index.html',
+    'directory' : './public'
+  }));
+}
+
+function serveDocumentation(apiList, request, response, next) {
+  response.send(_.map(apiList, function(api) {
+    return {
+      'api'         : api.api,
+      'description' : api.description
+    }
+  }));
+
+  return next();
+}
+
+function serveAPIDocumentation(api, request, response, next) {
+  var errorStruct = _.map(api.doc.errors, function(err) {
+    return {
+      'name'        : err.type.name,
+      'description' : err.description,
+      'httpcode'    : new err.type().statusCode,
+      'resterror'   : new err.type().restCode
+    };
+  })
+
+  response.send({
+    'api'         : api.api,
+    'rest'        : api.rest,
+    'input'       : api.doc.input,
+    'description' : api.doc.description,
+    'errors'      : errorStruct
+  });
+
+  return next();
+}
 
 server.listen(port, function() {
   console.log('%s listening at %s', server.name, server.url);

@@ -47,6 +47,38 @@ function api(request, response, next)
   return next();
 }
 
-exports.api    = 'encode';
-exports.params = [ 'algorithm' ];
+exports.api  = 'encode';
+
+exports.rest = [
+  {
+    'name'        : 'algorithm',
+    'description' : 'The algorithm with which supplied data should be encoded.',
+    'valid'       : [ 'base64', 'uri' ]
+  }
+];
+
+exports.doc = {};
+
+exports.doc.input  = [
+  {
+    'name'        : 'data',
+    'type'        : 'string',
+    'description' : 'The data to encode. May be any valid JSON string, ' +
+                    'so unicode if necessary..'
+  }
+]
+
+exports.doc.description = 'Encodes base64 and uri (percent)';
+
+exports.doc.errors = [
+  {
+    'type' : errors.InvalidArgument,
+    'description' : 'Thrown if the algorithm is invalid'
+  },
+  {
+    'type' : errors.MissingArgument,
+    'description' : 'Thrown if no data to encode is supplied.'
+  }
+];
+
 exports.entry  = api;

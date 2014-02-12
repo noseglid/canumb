@@ -60,6 +60,6 @@ function api(request, response, next)
   return next();
 }
 
-exports.method = 'post';
+exports.api    = 'convert';
 exports.params = [ 'base' ];
 exports.entry  = api;

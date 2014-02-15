@@ -62,7 +62,9 @@ function api(request, response, next)
   return next();
 }
 
-exports.api  = 'convert';
+exports.api = 'convert';
+
+exports.method = 'post';
 
 exports.rest = [
   {

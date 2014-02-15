@@ -56,7 +56,9 @@ function api(request, response, next)
   return next();
 }
 
-exports.api         = 'decode';
+exports.api = 'decode';
+
+exports.method = 'post';
 
 exports.rest = [
   {

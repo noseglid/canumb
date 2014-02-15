@@ -49,6 +49,8 @@ function api(request, response, next)
 
 exports.api  = 'encode';
 
+exports.method  = 'post';
+
 exports.rest = [
   {
     'name'        : 'algorithm',

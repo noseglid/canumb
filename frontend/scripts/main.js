@@ -31,7 +31,9 @@ require([
   "views/decode",
   "models/decode",
   "views/encode",
-  "models/encode"
+  "models/encode",
+  "views/version",
+  "models/version"
 ], function(
   $,
   analytics,
@@ -41,7 +43,9 @@ require([
   DecodeView,
   DecodeModel,
   EncodeView,
-  EncodeModel
+  EncodeModel,
+  VersionView,
+  VersionModel
 ) {
 
   $(function() {
@@ -59,6 +63,11 @@ require([
     new EncodeView({
       model : new EncodeModel(),
       el : $('#tab-content-encode')
+    });
+
+    new VersionView({
+      model : new VersionModel(),
+      el : $('#version')
     });
 
   });

@@ -12,9 +12,12 @@ var apidir = __dirname + '/api/';
 /* Allows port to be set through environment, e.g. Heroku does this. */
 var port = Number(process.env.PORT || 5000);
 
+/* Fetch the version from the package.json file */
+var version = require('../package.json').version;
+
 var server = restify.createServer({
   'name'    : 'canumb server',
-  'version' : '0.0.1'
+  'version' : version
 });
 
 server.pre(restify.pre.userAgentConnection());
@@ -42,19 +45,23 @@ function setupAPI(apiList) {
 
   _.each(apiList, function(api) {
     var list = _.map(api.rest, function(p) { return p.name });
-    var path = util.format('/%s/:', api.api) + list.join('/:');
-    console.log("registering api '%s' to path '%s'", api.api, path);
+    var path = util.format('/%s', api.api);
+    if (0 < list.length) path += '/:' + list.join('/:');
+    console.log("'%s' api '%s', path '%s'", api.method, api.api, path);
 
     /* Register specific API */
-    server.post(path, api.entry);
+    server[api.method](path, api.entry);
 
     /* Register documentation for API */
     server.get('/doc/' + api.api, _.bind(serveAPIDocumentation, {}, api));
   });
 
-  server.get(/^\/?.*/, restify.serveStatic({
+  var regex = /^\/?.*/;
+  var pub   = './public';
+  console.log("'get' public pages from '%s', path '%s'", pub, regex);
+  server.get(regex, restify.serveStatic({
     'default'   : 'index.html',
-    'directory' : './public'
+    'directory' : pub
   }));
 }
 
@@ -62,7 +69,7 @@ function serveDocumentation(apiList, request, response, next) {
   response.send(_.map(apiList, function(api) {
     return {
       'api'         : api.api,
-      'description' : api.description
+      'description' : api.doc.description
     }
   }));
 
@@ -81,6 +88,7 @@ function serveAPIDocumentation(api, request, response, next) {
 
   response.send({
     'api'         : api.api,
+    'method'      : api.method,
     'rest'        : api.rest,
     'input'       : api.doc.input,
     'description' : api.doc.description,
@@ -91,7 +99,7 @@ function serveAPIDocumentation(api, request, response, next) {
 }
 
 server.listen(port, function() {
-  console.log('%s listening at %s', server.name, server.url);
+  console.log('%s (%s) listening at %s', server.name, version, server.url);
 })
 
 server.on('uncaughtException', function(request, response, route, error) {

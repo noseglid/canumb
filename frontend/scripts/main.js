@@ -3,7 +3,7 @@ requirejs.config({
   "paths" : {
     "text"           : "libs/text",
     "underscore"     : "libs/underscore-min",
-    "backbone"       : "libs/backbone-min",
+    "backbone"       : "libs/backbone",
     "jquery"         : "libs/jquery.min",
     "growl"          : "libs/jquery.growl",
   },

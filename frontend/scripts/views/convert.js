@@ -31,9 +31,9 @@ define([
     },
 
     events : {
-      'input #number'        : 'updateNumber',
-      'change #base'         : 'updateBase',
-      'change #align-binary' : function() {
+      'input #number'             : 'updateNumber',
+      'change input[name="base"]' : 'updateBase',
+      'change #align-binary'      : function() {
         this.align = !this.align;
         this.render();
       }
@@ -71,11 +71,11 @@ define([
     },
 
     syncFinished : function() {
-      $('#loader').css('visibility', 'hidden');
+      this.$('#number').removeClass('loading');
     },
 
     updateNumber : function() {
-      $('#loader').css('visibility', 'hidden');
+      this.$('#number').removeClass('loading');
 
       if (this.numberTimer) {
         clearTimeout(this.numberTimer);
@@ -86,7 +86,7 @@ define([
         return;
       }
 
-      $('#loader').css('visibility', 'visible');
+      this.$('#number').addClass('loading');
 
       var self = this;
       this.numberTimer = setTimeout(function() {
@@ -97,10 +97,10 @@ define([
     updateBase : function() {
       if (0 < self.$('#number').val().length) {
         /* Only show loader if we will actually load something */
-        $('#loader').css('visibility', 'visible');
+        this.$('#number').addClass('loading');
       }
 
-      this.model.set('base', this.$('#base').val());
+      this.model.set('base', this.$('input[name="base"]:checked').val());
     },
 
   });

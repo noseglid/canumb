@@ -8,7 +8,6 @@
 
   $textAreaSize: 200px;
   textarea {
-    @include linear-gradient(to bottom, #fff, #fff);
     width: 100%;
     height: $textAreaSize;
     padding: 10px;

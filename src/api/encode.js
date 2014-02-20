@@ -1,39 +1,30 @@
+var _      = require('underscore');
+var base85 = require('base85');
+
 var errors = require('../lib/errors.js');
-
-function base64(data)
-{
-  if (!data) {
-    /* No data provided. This is an error no matter what */
-    throw new errors.MissingArgument('No data provided.');
-  }
-
-  return {
-    'base64' : new Buffer(data).toString('base64')
-  }
-}
-
-function uri(data)
-{
-  if (!data) {
-    /* No data provided. This is an error no matter what */
-    throw new errors.MissingArgument('No data provided.');
-  }
-
-  return {
-    'uri' : encodeURIComponent(data)
-  };
-}
 
 function api(request, response, next)
 {
-  var handler;
+  if ('application/json' !== request.headers['content-type']) {
+    throw new errors.InvalidArgument("Data must be sent with 'application/json' content type.");
+  }
+
+  if (typeof request.body !== 'object' || !request.body.data) {
+    throw new errors.MissingArgument('No data provided.');
+  }
+
+  var resp = {};
   switch(request.params.algorithm) {
   case 'base64':
-    handler = base64;
+    resp.base64 = new Buffer(request.body.data).toString('base64');
     break;
 
   case 'uri':
-    handler = uri;
+    resp.uri = encodeURIComponent(request.body.data);
+    break;
+
+  case 'base85':
+    resp.base85 = base85.encode(request.body.data);
     break;
 
   default:
@@ -43,7 +34,7 @@ function api(request, response, next)
     break;
   };
 
-  response.send(handler(request.body.data));
+  response.send(resp);
   return next();
 }
 
@@ -55,7 +46,7 @@ exports.rest = [
   {
     'name'        : 'algorithm',
     'description' : 'The algorithm with which supplied data should be encoded.',
-    'valid'       : [ 'base64', 'uri' ]
+    'valid'       : [ 'base64', 'uri', 'base85' ]
   }
 ];
 
@@ -66,11 +57,11 @@ exports.doc.input  = [
     'name'        : 'data',
     'type'        : 'string',
     'description' : 'The data to encode. May be any valid JSON string, ' +
-                    'so unicode if necessary..'
+                    'so unicode if necessary.'
   }
 ]
 
-exports.doc.description = 'Encodes base64 and uri (percent)';
+exports.doc.description = 'Encodes data using a specified algorithm.';
 
 exports.doc.errors = [
   {

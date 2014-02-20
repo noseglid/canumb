@@ -1,12 +1,8 @@
 var errors = require('../lib/errors.js');
+var base85 = require('base85');
 
 function base64(data)
 {
-  if (!data) {
-    /* No data provided. This is an error no matter what */
-    throw new errors.MissingArgument('No data provided.');
-  }
-
   data = data.replace(/\s/g, ''); // White space does not matter in base64
 
   if (data.match(/[^A-Za-z0-9\+\/=]/)) {
@@ -25,16 +21,42 @@ function base64(data)
 function uri(data)
 {
   try {
-    return {
-      'utf8' : decodeURIComponent(data)
-    };
+    return { 'utf8' : decodeURIComponent(data) };
   } catch (e) {
     throw new errors.InvalidArgument("Unable to decode uri: " + data);
   }
 }
 
+function fnbase85(data)
+{
+  if (data[0]               !== '<' ||
+      data[1]               !== '~' ||
+      data[data.length - 2] !== '~' ||
+      data[data.length - 1] !== '>') {
+    throw new errors.InvalidArgument("Base85 data must be preceeded by enclosed by '<~' and '~>'.");
+  }
+
+  var re =
+    /[^!"#$%&'()*+,\-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\]\^_`abcdefghijklmnopqrstu]/;
+  if (re.test(data.slice(2, -2))) {
+    throw new errors.InvalidArgument('Invalid characters in base85 data.');
+  }
+
+  var decoded = base85.decode(data);
+  if (false === decoded) {
+    throw new errors.InvalidArgument('Failed to decode base85 data.');
+  }
+
+  return { 'utf8' : decoded.toString('utf8') };
+}
+
+
 function api(request, response, next)
 {
+  if (typeof request.body !== 'object' || !request.body.data) {
+    throw new errors.MissingArgument('No data provided.');
+  }
+
   var handler;
   switch(request.params.algorithm) {
   case 'base64':
@@ -43,6 +65,10 @@ function api(request, response, next)
 
   case 'uri':
     handler = uri;
+    break;
+
+  case 'base85':
+    handler = fnbase85;
     break;
 
   default:

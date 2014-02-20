@@ -44,3 +44,20 @@ exports.testUriEncode = function(test) {
     });
   });
 }
+
+exports.testBase85Encode = function(test) {
+  var tests = [
+    { 'data' : 'Hello, world!', 'expected' : '<~87cURD_*#TDfTZ)+T~>' },
+    { 'data' : 'ay dios mio', 'expected' : '<~@<iu+BlA&8D/!n~>' }
+  ];
+
+  test.expect(tests.length);
+  var testdonecb = _.after(tests.length, test.done);
+
+  _.each(tests, function(dp) {
+    api.request(['encode', 'base85'], 'POST', { 'data' : dp.data }, function(actual) {
+      test.equals(actual.base85, dp.expected);
+      testdonecb();
+    });
+  });
+}

@@ -15,6 +15,7 @@
   "dependencies" : {
     "restify"            : "2.6.x",
     "underscore"         : "1.5.x",
+    "base85"             : "0.1.x",
     "grunt"              : "0.4.x",
     "grunt-cli"          : "0.1.x",
     "grunt-contrib-copy" : "0.5.x",

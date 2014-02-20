@@ -12,6 +12,12 @@
            id="<%-type%>-algorithm-uri"
            value="uri" />
     <label for="<%-type%>-algorithm-uri" class="button">uri</label>
+
+    <input type="radio"
+           name="<%-type%>-algorithm"
+           id="<%-type%>-algorithm-base85"
+           value="base85" />
+    <label for="<%-type%>-algorithm-base85" class="button">base85</label>
   </div>
 
   <textarea placeholder="<%-placeholder%>"></textarea>

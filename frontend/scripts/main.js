@@ -54,11 +54,12 @@ require([
   VersionModel
 ) {
 
-  ga('create', 'UA-47615700-1', 'canumb.herokuapp.com');
+  ga('create', 'UA-47615700-1', 'auto');
 
   var BackboneOriginalSync = Backbone.sync;
   Backbone.sync = function(method, model, options) {
-    ga('send', 'pageview');
+    var url = typeof model.url === 'function' ? model.url() : model.url;
+    ga('send', 'pageview', { page : url });
     BackboneOriginalSync(method, model, options);
   };
 

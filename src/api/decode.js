@@ -29,15 +29,18 @@ function uri(data)
 
 function fnbase85(data)
 {
+  /* Ignore leading and trailing white spaces for easier verification */
+  data = data.trim();
+
   if (data[0]               !== '<' ||
       data[1]               !== '~' ||
       data[data.length - 2] !== '~' ||
       data[data.length - 1] !== '>') {
-    throw new errors.InvalidArgument("Base85 data must be preceeded by enclosed by '<~' and '~>'.");
+    throw new errors.InvalidArgument("Base85 data must be enclosed by '<~' and '~>'.");
   }
 
   var re =
-    /[^!"#$%&'()*+,\-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\]\^_`abcdefghijklmnopqrstu]/;
+    /[^\n !"#$%&'()*+,\-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\]\^_`abcdefghijklmnopqrstu]/;
   if (re.test(data.slice(2, -2))) {
     throw new errors.InvalidArgument('Invalid characters in base85 data.');
   }
@@ -90,7 +93,7 @@ exports.rest = [
   {
     'name'        : 'algorithm',
     'description' : 'The algorithm with which supplied data should be decoded.',
-    'valid'       : [ 'base64', 'uri' ]
+    'valid'       : [ 'base64', 'uri', 'base85' ]
   }
 ];
 
@@ -104,7 +107,7 @@ exports.doc.input = [
   }
 ];
 
-exports.doc.description = 'Decodes base64 and uri (percent)';
+exports.doc.description = 'Decodes data from various formats.';
 
 exports.doc.errors = [
   {

@@ -13,7 +13,7 @@ function request(rest, method, data, done)
 
   var options = {
     'hostname' : 'localhost',
-    'port'     : 5000, /* Default port of canumb */
+    'port'     : process.env.PORT,
     'path'     : '/' + rest.join('/'),
     'method'   : method.toUpperCase(),
     'headers'  : {

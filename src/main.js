@@ -6,6 +6,9 @@ var _ = require('underscore');
 
 var errors = require('./lib/errors.js');
 
+/* If environment for New Relic is set, fire it up */
+process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME && require('newrelic');
+
 /* The directory where the APIs are available */
 var apidir = __dirname + '/api/';
 

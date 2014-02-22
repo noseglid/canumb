@@ -1,31 +1,31 @@
 {
-  "name" : "canumb",
-  "version" : "0.0.1",
-  "description" : "Number conversion as a service",
-  "main" : "main.js",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/noseglid/canumb.git"
+  "name": "canumb",
+  "version": "0.1.0",
+  "description": "Number conversion as a service",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noseglid/canumb.git"
   },
-  "scripts" : {
-    "postinstall" : "./node_modules/.bin/bower install && ./node_modules/.bin/grunt",
-    "test" : "node tests/main.js",
-    "start" : "node src/main.js"
+  "scripts": {
+    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/grunt",
+    "test": "node tests/main.js",
+    "start": "node src/main.js"
   },
-  "dependencies" : {
-    "restify"            : "2.6.x",
-    "underscore"         : "1.5.x",
-    "base85"             : "0.1.x",
-    "grunt"              : "0.4.x",
-    "grunt-cli"          : "0.1.x",
-    "grunt-contrib-copy" : "0.5.x",
-    "grunt-exec"         : "0.4.x",
-    "bower"              : "1.2.x",
-    "node-sass"          : "0.8.x",
-    "node-bourbon"       : "1.0.x",
-    "nodeunit"           : "0.8.x"
+  "dependencies": {
+    "restify": "2.6.x",
+    "underscore": "1.5.x",
+    "base85": "0.1.x",
+    "grunt": "0.4.x",
+    "grunt-cli": "0.1.x",
+    "grunt-contrib-copy": "0.5.x",
+    "grunt-exec": "0.4.x",
+    "bower": "1.2.x",
+    "node-sass": "0.8.x",
+    "node-bourbon": "1.0.x",
+    "nodeunit": "0.8.x"
   },
-  "keywords" : [
+  "keywords": [
     "number",
     "conversion",
     "hex",
@@ -37,16 +37,16 @@
     "double",
     "float"
   ],
-  "author" : "Alexander Olsson <noseglid@gmail.com>",
-  "contributors" : [],
-  "license" : "MIT",
-  "homepage" : "https://github.com/noseglid/canumb",
-  "bugs" : {
-    "url" : "https://github.com/noseglid/canumb/issues",
-    "email" : "noseglid@gmail.com"
+  "author": "Alexander Olsson <noseglid@gmail.com>",
+  "contributors": [],
+  "license": "MIT",
+  "homepage": "https://github.com/noseglid/canumb",
+  "bugs": {
+    "url": "https://github.com/noseglid/canumb/issues",
+    "email": "noseglid@gmail.com"
   },
-  "engines" : {
-    "node" : "0.10.x"
+  "engines": {
+    "node": "0.10.x"
   },
-  "private" : true
+  "private": true
 }

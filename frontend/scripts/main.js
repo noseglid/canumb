@@ -6,6 +6,7 @@ requirejs.config({
     "backbone"       : "libs/backbone",
     "jquery"         : "libs/jquery.min",
     "growl"          : "libs/jquery.growl",
+    "google-analytics" : "//www.google-analytics.com/analytics"
   },
 
   "shim" : {
@@ -18,13 +19,17 @@ requirejs.config({
     "backbone" : {
       "deps" : [ "jquery", "underscore" ],
       "exports" : "Backbone"
+    },
+    "google-analytics" : {
+      "exports" : "ga"
     }
   }
 });
 
 require([
   "jquery",
-  "analytics",
+  "backbone",
+  "google-analytics",
 
   "views/convert",
   "models/convert",
@@ -36,7 +41,8 @@ require([
   "models/version"
 ], function(
   $,
-  analytics,
+  Backbone,
+  ga,
 
   ConvertView,
   ConvertModel,
@@ -48,26 +54,34 @@ require([
   VersionModel
 ) {
 
+  ga('create', 'UA-47615700-1', 'canumb.herokuapp.com');
+
+  var BackboneOriginalSync = Backbone.sync;
+  Backbone.sync = function(method, model, options) {
+    ga('send', 'pageview');
+    BackboneOriginalSync(method, model, options);
+  };
+
   $(function() {
 
     new ConvertView({
       model : new ConvertModel(),
-      el    : $('#tab-content-convert')
+      el    : $('#tab-content-convert'),
     });
 
     new DecodeView({
       model : new DecodeModel(),
-      el : $('#tab-content-decode')
+      el    : $('#tab-content-decode')
     });
 
     new EncodeView({
       model : new EncodeModel(),
-      el : $('#tab-content-encode')
+      el    : $('#tab-content-encode')
     });
 
     new VersionView({
       model : new VersionModel(),
-      el : $('#version')
+      el    : $('#version')
     });
 
   });

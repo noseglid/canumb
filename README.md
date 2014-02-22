@@ -6,8 +6,8 @@ Canumb aims to crunch data on various forms and turn them into something meaning
 A variety of inputs are currently supported, such different number base conversions
 (decimal to hexadecimal, binary to hexadecimal, octal to decimal, etc),
 various encoded format (base64 encoder decoder, uri encoder decoder).
-It's build in way to allow for extension when the future demands other input formats
-to be crunched..
+It's built in way to allow for extension when the future demands other input formats
+to be crunched.
 
 ## See it in action
 It includes a hefty web frontend which makes usage easy. [Single-page
@@ -49,6 +49,7 @@ Supported encodings:
 
  * [base64][EncodingBase64]
  * [uri][EncodingUri] (Also knows as percent-encoding)
+ * [base85][EncodingBase85]
 
 ## Contribute
 Just make a pull request and your contribution will be considered (and assuming it's useful, merged) as soon as possible. This'll get your name on the contributors list aswell.
@@ -62,3 +63,4 @@ Just make a pull request and your contribution will be considered (and assuming 
 [EncodingUri]: http://en.wikipedia.org/wiki/Percent-encoding
 [TLDR]: http://en.wikipedia.org/wiki/Wikipedia:Too_long;_didn't_read
 [SinglePageApp]: http://singlepageappbook.com/
+[EncodingBase85]: http://en.wikipedia.org/wiki/Ascii85

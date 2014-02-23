@@ -62,6 +62,11 @@
     font-family: $monoFont;
   }
 
+  span.valid {
+    font-weight: 500;
+    font-style: italic;
+  }
+
   span.description {
     display: block;
     margin-left: 10px;

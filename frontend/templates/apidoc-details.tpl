@@ -14,6 +14,7 @@
 <% _.each(rest, function(param) { %>
   <div>
     <pre class="name"><%- param.name %></pre>
+    <span class="valid">{ <%- param.valid.join(', ') %> }</span>
     <span class="description"><%- param.description %></span>
   </div>
 <% }); %>

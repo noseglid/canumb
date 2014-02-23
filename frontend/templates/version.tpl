@@ -1,1 +1,1 @@
-<p><%= version %></p>
+<p>v<%= version %></p>

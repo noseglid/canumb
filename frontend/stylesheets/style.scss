@@ -1,9 +1,13 @@
 @import "bourbon";
 
-@import "colors";
+@import "jquery.growl.css";
+@import "vex.css";
+@import "vex-theme-flat-attack.css";
 
+@import "colors";
 @import "convert";
 @import "decenc";
+@import "apidoc";
 
 $contentWidth    : 900px;
 $bannerHeight    : 150px;
@@ -88,6 +92,14 @@ div#banner {
   div#version {
     position: absolute;
     top: 0px;
+    right: 0px;
+    margin: 5px;
+    font-size: 14px;
+  }
+
+  div#apidoc {
+    position: absolute;
+    top: 2em;
     right: 0px;
     margin: 5px;
     font-size: 14px;

@@ -1,0 +1,74 @@
+@import "colors";
+
+@import "fonts";
+
+.apidoc {
+  width: 95% !important;
+  overflow: scroll;
+  max-height: 100%;
+  line-height: 1.3em;
+  font-size: 16px;
+  color: black;
+
+  h3 {
+    margin: 5px 0px;
+  }
+
+  div {
+    margin: 10px 0px;
+  }
+
+  p {
+    margin: 15px 0px;
+  }
+
+  p.description {
+    margin-left: 20px;
+  }
+
+  .details {
+    display: none;
+    padding: 10px 30px;
+    background-color: $shade9;
+  }
+
+  .vex-close:before {
+    margin: 0px !important;
+    background-color: $color8 !important;
+  }
+
+  pre {
+    display: inline-block;
+    margin: 0px;
+    line-height: 1em;
+  }
+
+  pre.type {
+    font-size: 14px;
+    color: $shade6;
+  }
+
+  pre.name,
+  pre.httpcode,
+  pre.httpmethod {
+    margin-left: 5px;
+  }
+
+  pre.error {
+    color: rgba(255, 0, 0, 0.5);
+  }
+
+  span.pre {
+    font-family: $monoFont;
+  }
+
+  span.description {
+    display: block;
+    margin-left: 10px;
+  }
+
+  span.none {
+    margin-left: 5px;
+    font-style: italic;
+  }
+}

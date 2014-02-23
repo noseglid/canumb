@@ -14,7 +14,9 @@ module.exports = function(grunt) {
               "bower_components/backbone/backbone.js",
               "bower_components/underscore/underscore-min.js",
               "bower_components/underscore/underscore-min.map",
-              "bower_components/growl/javascripts/jquery.growl.js"
+              "bower_components/growl/javascripts/jquery.growl.js",
+              "bower_components/vex/js/vex.dialog.min.js",
+              "bower_components/vex/js/vex.min.js"
             ],
             "dest"   : "public/scripts/libs/",
             "filter" : "isFile"
@@ -23,7 +25,9 @@ module.exports = function(grunt) {
             "expand" : true,
             "flatten" : true,
             "src"    : [
-              "bower_components/growl/stylesheets/jquery.growl.css"
+              "bower_components/growl/stylesheets/jquery.growl.css",
+              "bower_components/vex/css/vex-theme-flat-attack.css",
+              "bower_components/vex/css/vex.css"
             ],
             "dest"   : "public/stylesheets/",
             "filter" : "isFile"
@@ -80,7 +84,14 @@ module.exports = function(grunt) {
 
     'exec' : {
       'sass' : {
-        'cmd' : './node_modules/.bin/node-sass --include-path ./node_modules/node-bourbon/assets/stylesheets/ ./frontend/stylesheets/style.scss ./public/stylesheets/style.css'
+        'cmd' : [
+          './node_modules/.bin/node-sass',
+          '--include-path ./node_modules/node-bourbon/assets/stylesheets/',
+          '--include-path ./bower_components/vex/css/',
+          '--include-path ./bower_components/growl/stylesheets/',
+          './frontend/stylesheets/style.scss',
+          './public/stylesheets/style.css'
+        ].join(' ')
       }
     }
   });

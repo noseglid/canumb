@@ -16,7 +16,7 @@ exports.doc = {};
 
 exports.doc.input = [];
 
-exports.doc.description = 'Returns meta information, such as version. This is a GET API.'
+exports.doc.description = 'Returns meta information, such as version.'
 
 exports.doc.errors = [ ]
 

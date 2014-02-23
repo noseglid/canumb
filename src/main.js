@@ -72,12 +72,17 @@ function setupAPI(apiList) {
 }
 
 function serveDocumentation(apiList, request, response, next) {
-  response.send(_.map(apiList, function(api) {
+  var apiList = _.map(apiList, function(api) {
     return {
       'api'         : api.api,
       'description' : api.doc.description
     }
-  }));
+  });
+
+  response.send({
+    'version' : version,
+    'apis'    : apiList
+  });
 
   return next();
 }

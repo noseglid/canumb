@@ -6,7 +6,9 @@ requirejs.config({
     "backbone"       : "libs/backbone",
     "jquery"         : "libs/jquery.min",
     "growl"          : "libs/jquery.growl",
-    "google-analytics" : "//www.google-analytics.com/analytics"
+    "google-analytics" : "//www.google-analytics.com/analytics",
+    "vex"            : "libs/vex.min",
+    "vexDialog"      : "libs/vex.dialog.min"
   },
 
   "shim" : {
@@ -22,6 +24,12 @@ requirejs.config({
     },
     "google-analytics" : {
       "exports" : "ga"
+    },
+    "vex" : {
+      "deps" : [ "jquery" ]
+    },
+    "vexDialog" : {
+      "deps" : [ "vex", "jquery" ]
     }
   }
 });
@@ -29,6 +37,7 @@ requirejs.config({
 require([
   "jquery",
   "backbone",
+  "router",
   "google-analytics",
 
   "views/convert",
@@ -42,6 +51,7 @@ require([
 ], function(
   $,
   Backbone,
+  Router,
   ga,
 
   ConvertView,
@@ -53,8 +63,8 @@ require([
   VersionView,
   VersionModel
 ) {
-
   ga('create', 'UA-47615700-1', 'auto');
+  ga('send', 'pageview');
 
   var BackboneOriginalSync = Backbone.sync;
   Backbone.sync = function(method, model, options) {
@@ -63,7 +73,13 @@ require([
     BackboneOriginalSync(method, model, options);
   };
 
+  var router = new Router();
+  Backbone.history.start();
+
   $(function() {
+    $('#apidoc').click(function() {
+      window.location.hash = 'apidoc';
+    });
 
     new ConvertView({
       model : new ConvertModel(),

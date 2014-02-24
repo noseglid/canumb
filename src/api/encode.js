@@ -66,7 +66,7 @@ exports.doc.description = 'Encodes data using a specified algorithm.';
 exports.doc.errors = [
   {
     'type' : errors.InvalidArgument,
-    'description' : 'Thrown if the algorithm is invalid'
+    'description' : 'Thrown if the algorithm is invalid.'
   },
   {
     'type' : errors.MissingArgument,

@@ -1,9 +1,11 @@
 <div>
   <h1>canumb API doc, v<%- version %></h1>
   <p>
-    This is the documentation for the canumb REST interface. It's a REST API even though
-    there really is no state to speak of. It benefits, however, from API consumer libraries
-    tending to work well with the REST approach (e.g. <span class="pre">Backbone</span>).
+    This is the documentation for the canumb
+    <code><a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a></code>
+    interface. It's a REST API even though there really is no state to speak
+    of. It benefits, however, from API consumer libraries tending to work well
+    with the REST approach (e.g. <code><a href="http://www.backbonejs.org">Backbone</a></code>).
   </p>
   <p>
     Each API listed below should be called using URLs on the form:

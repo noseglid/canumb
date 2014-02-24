@@ -107,7 +107,7 @@ exports.doc.input = [
   }
 ];
 
-exports.doc.description = 'Decodes data from various formats.';
+exports.doc.description = 'Decodes data using a specified algorithm.';
 
 exports.doc.errors = [
   {

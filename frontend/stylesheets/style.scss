@@ -27,6 +27,11 @@ p {
   margin: 5px;
 }
 
+a, a:hover, a:active, a:visited {
+  color: $shade7;
+  text-decoration: underline;
+}
+
 #{$all-text-inputs}, select, textarea {
   box-shadow: 0px 0px 2px 2px $color4;
   border: solid 2px $color5;

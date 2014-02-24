@@ -82,7 +82,7 @@ exports.doc.input = [
     'type'        : 'string',
     'description' : 'The number which should be converted. ' +
                     'Note that it should be supplied as a string ' +
-                    'so large numbers may be provided.'
+                    'so precision is not lost with large numbers.'
   }
 ];
 
@@ -90,22 +90,22 @@ exports.doc.description =
   'Convert numbers between various bases. Supported bases are 2 (binary), ' +
   '8 (octal), 10 (decimal), 16 (hexadecimal). The conversion is performed ' +
   'with arbitrary precision, meaning it can take a number of any size and ' +
-  'persist absolute accuracy in its conversions. This approach is, however ' +
-  'very slow. To not choke the server an upper limit of 1000 digits must ' +
-  'be enforced. But you\'d rather have accuracy than speed, right?';
+  'persist absolute accuracy in its conversions. This approach, however, ' +
+  'is very slow. But you\'d rather have accuracy than speed, right? To not ' +
+  'choke the server an upper limit of 1000 digits is enforced.';
 
 exports.doc.errors = [
   {
     'type'        : errors.MissingArgument,
-    'description' : 'Thrown if no number is supplied'
+    'description' : 'Thrown if no number is supplied.'
   },
   {
     'type'        : errors.TooLarge,
-    'description' : 'Thrown if the number is more than ' + digitMax + ' digits'
+    'description' : 'Thrown if the number is more than ' + digitMax + ' digits.'
   },
   {
     'type'        : errors.InvalidArgument,
-    'description' : 'Thrown if an unknown base is supplied'
+    'description' : 'Thrown if an unknown base is supplied.'
   }
 ]
 

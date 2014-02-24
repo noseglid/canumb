@@ -93,11 +93,16 @@ module.exports = function(grunt) {
           './public/stylesheets/style.css'
         ].join(' ')
       }
+    },
+
+    'curl' : {
+      './public/scripts/libs/analytics.js' : 'http://www.google-analytics.com/analytics.js'
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-curl');
 
-  grunt.registerTask('default', [ 'copy', 'exec' ]);
+  grunt.registerTask('default', [ 'copy', 'exec', 'curl' ]);
 };

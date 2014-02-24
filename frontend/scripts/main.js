@@ -6,7 +6,7 @@ requirejs.config({
     "backbone"       : "libs/backbone",
     "jquery"         : "libs/jquery.min",
     "growl"          : "libs/jquery.growl",
-    "google-analytics" : "//www.google-analytics.com/analytics",
+    "google-analytics" : [ "//www.google-analytics.com/analytics", "libs/analytics" ],
     "vex"            : "libs/vex.min",
     "vexDialog"      : "libs/vex.dialog.min"
   },

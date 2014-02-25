@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/noseglid/canumb.png?branch=master)](https://travis-ci.org/noseglid/canumb)
+[![Dependency Status](https://gemnasium.com/noseglid/canumb.png)](https://gemnasium.com/noseglid/canumb)
 
 # Canumb - it's a name
 

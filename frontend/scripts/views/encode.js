@@ -23,8 +23,7 @@ define([
       this.timer = 0;
 
       this.$el.html(_.template(template, {
-        'type'        : 'encode',
-        'placeholder' : 'Must. Have. Data.'
+        'type'        : 'encode'
       }));
       this.listenTo(this.model, 'change:encoded', this.render);
       this.listenTo(this.model, 'change:error',   this.error);

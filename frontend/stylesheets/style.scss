@@ -6,7 +6,7 @@
 
 @import "colors";
 @import "convert";
-@import "decenc";
+@import "data-inout";
 @import "apidoc";
 
 $contentWidth    : 900px;
@@ -51,6 +51,7 @@ a, a:hover, a:active, a:visited {
   cursor: pointer;
   border-radius: $buttonRadius;
   font-size: 16px;
+  margin: 2px;
 
   @include transition(all 0.2s ease-in-out);
 

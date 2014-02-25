@@ -1,8 +1,7 @@
 @import "colors";
 @import "fonts";
 
-#tab-content-decode div,
-#tab-content-encode div {
+.data-inout {
   margin: 10px 20px;
   padding: 0px;
 
@@ -10,6 +9,7 @@
   textarea {
     width: 100%;
     height: $textAreaSize;
+    margin: 10px 0px;
     padding: 10px;
     resize: none;
     clear: left;
@@ -36,14 +36,14 @@
 
   label.button {
     display: block;
-    margin: 5px 5px 8px 0px;
+    margin: inherit inherit 8px inherit;
     float: left;
     width: 6em;
     top: 0px;
+    text-align: center;
   }
 
-  #decode-result,
-  #encode-result {
+  .data-inout-result {
     margin: 30px 0px;
     padding: 20px;
     border: solid 1px #000;

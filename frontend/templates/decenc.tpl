@@ -1,4 +1,4 @@
-<div>
+<div class="data-inout">
   <div class="button-container">
     <input type="radio"
            checked="checked"
@@ -20,7 +20,7 @@
     <label for="<%-type%>-algorithm-base85" class="button">base85</label>
   </div>
 
-  <textarea placeholder="<%-placeholder%>"></textarea>
+  <textarea></textarea>
 
-  <div id="<%-type%>-result"></div>
+  <div class="data-inout-result" id="<%-type%>-result"></div>
 </div>

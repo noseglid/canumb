@@ -46,6 +46,8 @@ require([
   "models/decode",
   "views/encode",
   "models/encode",
+  "views/hash",
+  "models/hash",
   "views/version",
   "models/version"
 ], function(
@@ -60,6 +62,8 @@ require([
   DecodeModel,
   EncodeView,
   EncodeModel,
+  HashView,
+  HashModel,
   VersionView,
   VersionModel
 ) {
@@ -94,6 +98,11 @@ require([
     new EncodeView({
       model : new EncodeModel(),
       el    : $('#tab-content-encode')
+    });
+
+    new HashView({
+      model : new HashModel(),
+      el    : $('#tab-content-hash')
     });
 
     new VersionView({

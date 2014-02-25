@@ -4,8 +4,8 @@ define([
   'growl',
   'backbone',
 
-  "text!/templates/decenc.tpl",
-  "text!/templates/decenc-result.tpl"
+  "text!/templates/hash.tpl",
+  "text!/templates/hash-result.tpl"
 ], function(
   $,
   _,
@@ -24,27 +24,33 @@ define([
     initialize : function() {
       this.timer = 0;
 
-      this.$el.html(_.template(template, {
-        'type'        : 'decode'
-      }));
-      this.listenTo(this.model, 'change:decoded', this.render);
-      this.listenTo(this.model, 'change:error',   this.error);
-      this.listenTo(this.model, 'syncFinished',   this.syncFinished);
+      var self = this;
+      $.get('/doc/hash', function(data) {
+        self.$el.html(_.template(template, {
+          'algorithms' : _.find(data.rest, function(r) {
+            return (r.name === 'algorithm');
+          }).valid
+        }));
+      }, 'json');
+
+      this.listenTo(this.model, 'change:hashed', this.render);
+      this.listenTo(this.model, 'change:error',  this.error);
+      this.listenTo(this.model, 'syncFinished',  this.syncFinished);
     },
 
     events : {
-      'input textarea'                        : 'updateData',
-      'change input[name="decode-algorithm"]' : 'updateAlgorithm'
+      'input textarea'                 : 'updateData',
+      'change input[name="algorithm"]' : 'updateAlgorithm'
     },
 
     render : function() {
-      if (!this.model.get('decoded')) {
-        this.$('#decode-result').fadeOut(fadeTime);
+      if (!this.model.get('hashed')) {
+        this.$('#result').fadeOut(fadeTime);
         return;
       }
 
-      this,$('#decode-result').html(_.template(resultTemplate, {
-        'data' : this.model.get('decoded').utf8
+      this.$('#result').html(_.template(resultTemplate, {
+        'data' : this.model.get('hashed').hex
       })).fadeIn(fadeTime);
     },
 
@@ -80,7 +86,17 @@ define([
 
       var self = this;
       this.timer = setTimeout(function() {
-        self.model.set('data', self.$('textarea').val());
+        var data = self.$('textarea').val();
+        if (/^\s+|\s+$/.test(data)) {
+          $.growl.warning({
+            'title'    : 'Whitespaces',
+            'message'  : 'You have leading or trailing white spaces in your data.',
+            'duration' : 1000,
+            'size'     : 'small'
+          });
+        }
+
+        self.model.set('data', data);
       }, queryDelay);
     },
 
@@ -89,7 +105,7 @@ define([
         this.$('textarea').addClass('loading');
       }
 
-      var val = this.$('input[name="decode-algorithm"]:checked').val();
+      var val = this.$('input[name="algorithm"]:checked').val();
       this.model.set('algorithm', val);
     }
 

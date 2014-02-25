@@ -5,10 +5,14 @@ function request(rest, method, data, done)
 {
   done = done || data;
 
-  var ctype = 'text/plain';
-  if (typeof data === 'object') {
+  ctype = 'application/json';
+  switch(typeof data) {
+  case 'object':
     data = JSON.stringify(data);
-    ctype = 'application/json';
+    break;
+  case 'string':
+  ctype = 'text/plain';
+    break;
   }
 
   var options = {
@@ -22,10 +26,8 @@ function request(rest, method, data, done)
     }
   };
 
-  var hasEntityBody = data && _.contains(['POST', 'PUT'], method.toUpperCase());
-
-  if (hasEntityBody) {
-    options.headers['Content-Length'] = Buffer.byteLength(data, 'utf8');
+  if (_.contains(['POST', 'PUT'], method.toUpperCase())) {
+    options.headers['Content-Length'] = data ? Buffer.byteLength(data, 'utf8') : 0;
   }
 
   var req = http.request(options, function(res) {
@@ -47,7 +49,7 @@ function request(rest, method, data, done)
     done();
   });
 
-  if (hasEntityBody) {
+  if (data && _.contains(['POST', 'PUT'], method.toUpperCase())) {
     req.write(data);
   }
 

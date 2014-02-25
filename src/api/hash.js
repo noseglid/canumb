@@ -4,6 +4,20 @@ var base85 = require('base85');
 
 var errors = require('../lib/errors.js');
 
+var hashes = [
+  'sha1',
+  'sha224',
+  'sha256',
+  'sha384',
+  'sha512',
+  'mdc2',
+  'md4',
+  'md5',
+  'ripemd',
+  'ripemd160',
+  'whirlpool'
+];
+
 function api(request, response, next)
 {
   if ('application/json' !== request.headers['content-type']) {
@@ -14,30 +28,17 @@ function api(request, response, next)
     throw new errors.MissingArgument('No data provided.');
   }
 
-  var hasher;
-  switch(request.params.algorithm) {
-  case 'sha1':
-  case 'sha256':
-  case 'sha512':
-  case 'md4':
-  case 'md5':
-    hasher = crypto.createHash(request.params.algorithm);
-    break;
+  if (-1 === hashes.indexOf(request.params.algorithm)) {
+    throw new errors.InvalidArgument("Unsupported algorithm: '" + request.params.algorithm);
+  }
 
-  default:
-    throw new errors.InvalidArgument(
-      "Unsupported algorithm: '" + request.params.algorithm
-    );
-    break;
-  };
-
+  var hasher = crypto.createHash(request.params.algorithm);
   hasher.update(request.body.data);
-
-  var hash = hasher.digest();
+  var hashBuffer = hasher.digest();
 
   response.send({
-    'hex' : hash.toString('hex'),
-    'base64' : hash.toString('base64')
+    'hex'    : hashBuffer.toString('hex'),
+    'base64' : hashBuffer.toString('base64')
   });
   return next();
 }
@@ -50,7 +51,7 @@ exports.rest = [
   {
     'name'        : 'algorithm',
     'description' : 'The algorithm with which supplied data should be hashed.',
-    'valid'       : [ 'sha1', 'sha256', 'sha512', 'md4', 'md5' ]
+    'valid'       : hashes
   }
 ];
 

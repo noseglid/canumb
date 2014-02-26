@@ -39,11 +39,21 @@ define([
 
     error : function(model, xhr, options) {
       this.trigger('syncFinished');
-      this.set('error', JSON.parse(xhr.responseText));
 
       /* That conversion didn't work, must set converted to match
          the number, where 'null' currently is the best guess */
       this.set('converted', null);
+      this.set('error', null); // Set to null to trigger a change
+
+      if ('error' === xhr.statusText) {
+        /* No response from server */
+        this.set('error', {
+          'code' : 'ServerUnavailable',
+          'message' : 'Unable to contact the server.'
+        });
+      } else {
+        this.set('error', JSON.parse(xhr.responseText));
+      }
     }
   });
 });

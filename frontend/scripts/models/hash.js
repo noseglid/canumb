@@ -40,11 +40,19 @@ define([
     },
 
     error : function(model, xhr, options) {
-      this.set('error', JSON.parse(xhr.responseText));
-      this.set('hashed', null);
-
       this.trigger('syncFinished');
-    }
+      this.set('hashed', null);
+      this.set('error', null); // Set to null to trigger a change
 
+      if ('error' === xhr.statusText) {
+        /* No response from server */
+        this.set('error', {
+          'code' : 'ServerUnavailable',
+          'message' : 'Unable to contact the server.'
+        });
+      } else {
+        this.set('error', JSON.parse(xhr.responseText));
+      }
+    }
   });
 });

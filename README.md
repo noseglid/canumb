@@ -52,6 +52,25 @@ Supported encodings:
  * [uri][EncodingUri] (Also knows as percent-encoding)
  * [base85][EncodingBase85]
 
+
+### Hashing
+
+Canumb can hash data using a wide array of algorithms:
+
+  * [sha1][SHA1]
+  * [sha224][SHA2]
+  * [sha256][SHA2]
+  * [sha384][SHA2]
+  * [sha512][SHA2]
+  * [mdc2][MDC2]
+  * [md4][MD4]
+  * [md5][MD5]
+  * [ripemd][RIPEMD]
+  * [ripemd160][RIPEMD]
+  * [whirlpool][Whirlpool]
+
+**Note**: If you're using this, or its accompanying api to hash any password for you site/application, you're insane. All texts into this API is clear-text (albeit maybe HTTPS if the server is set up for this). Don't do that. Don't be that guy.
+
 ## Contribute
 Just make a pull request and your contribution will be considered (and assuming it's useful, merged) as soon as possible. This'll get your name on the contributors list aswell.
 
@@ -65,3 +84,10 @@ Just make a pull request and your contribution will be considered (and assuming 
 [TLDR]: http://en.wikipedia.org/wiki/Wikipedia:Too_long;_didn't_read
 [SinglePageApp]: http://singlepageappbook.com/
 [EncodingBase85]: http://en.wikipedia.org/wiki/Ascii85
+[SHA1]: http://en.wikipedia.org/wiki/Sha1
+[SHA2]: http://en.wikipedia.org/wiki/SHA-2
+[MDC2]: http://en.wikipedia.org/wiki/MDC2
+[MD4]: http://en.wikipedia.org/wiki/Md4
+[MD5]: http://en.wikipedia.org/wiki/Md5
+[RIPEMD]: http://en.wikipedia.org/wiki/RIPEMD
+[Whirlpool]: http://en.wikipedia.org/wiki/Whirlpool_(cryptography)

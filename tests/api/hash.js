@@ -95,7 +95,7 @@ exports.testInvalidHash = function(test) {
   var tests = [
     { 'data' : 'hashme', 'algo' : 'md2',  'error' : 'InvalidArgument' },
     { 'data' :  false,   'algo' : 'sha1', 'error' : 'MissingArgument' },
-    { 'data' :  false,   'algo' : '2313', 'error' : 'MissingArgument' }
+    { 'data' :  false,   'algo' : '2313', 'error' : 'InvalidArgument' }
   ];
 
   test.expect(2 * tests.length);

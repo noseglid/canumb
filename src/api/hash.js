@@ -1,6 +1,7 @@
 var crypto = require('crypto');
 var _      = require('underscore');
 var base85 = require('base85');
+var fs      = require('fs');
 
 var errors = require('../lib/errors.js');
 
@@ -20,27 +21,50 @@ var hashes = [
 
 function api(request, response, next)
 {
-  if ('application/json' !== request.headers['content-type']) {
-    throw new errors.InvalidArgument("Data must be sent with 'application/json' content type.");
-  }
-
-  if (typeof request.body !== 'object' || request.body.data === undefined) {
-    throw new errors.MissingArgument('No data provided.');
-  }
-
   if (-1 === hashes.indexOf(request.params.algorithm)) {
     throw new errors.InvalidArgument("Unsupported algorithm: '" + request.params.algorithm);
   }
 
-  var hasher = crypto.createHash(request.params.algorithm);
-  hasher.update(request.body.data);
-  var hashBuffer = hasher.digest();
+  var dataProvider;
+  if (/^application\/json$/.test(request.headers['content-type'])) {
+    if (typeof request.body !== 'object' || request.body.data === undefined) {
+      throw new errors.MissingArgument('No data provided.');
+    }
 
-  response.send({
-    'hex'    : hashBuffer.toString('hex'),
-    'base64' : hashBuffer.toString('base64')
+    dataProvider = function(datacb, donecb) {
+      datacb(request.body.data);
+      donecb();
+    };
+  }
+
+  if (/^multipart\/form-data/.test(request.headers['content-type'])) {
+    if (typeof request.files !== 'object' || request.files.data === undefined) {
+      throw new errors.MissingArgument('No data provided.');
+    }
+
+    dataProvider = function(datacb, donecb) {
+      var stream = fs.createReadStream(request.files.data.path);
+      stream.on('error', function(err) {
+        throw errors.InternalServerError(err.message);
+      });
+      stream.on('data', datacb)
+      stream.on('end', donecb);
+    };
+  }
+
+  if (!dataProvider) {
+    throw new errors.MissingArgument('Data must be sent with \'application/json\' or \'multipart/form-data\'');
+  }
+
+  var hasher = crypto.createHash(request.params.algorithm);
+  dataProvider(_.bind(hasher.update, hasher), function() {
+    var hashBuffer = hasher.digest();
+    response.send({
+      'hex'    : hashBuffer.toString('hex'),
+      'base64' : hashBuffer.toString('base64')
+    });
+    return next();
   });
-  return next();
 }
 
 exports.api = 'hash';

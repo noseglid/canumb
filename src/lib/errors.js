@@ -28,6 +28,11 @@ function TooLarge(message)
   TooLarge.super_.call(this, message, 413, 'RequestEntityTooLarge');
 }
 
+function InternalServerError(message)
+{
+  InternalServerError.super._call(this, 500, 'InternalServerError');
+}
+
 util.inherits(InvalidArgument, APIError);
 util.inherits(MissingArgument, APIError);
 util.inherits(TooLarge,        APIError);

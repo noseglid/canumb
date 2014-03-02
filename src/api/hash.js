@@ -26,7 +26,8 @@ function api(request, response, next)
   }
 
   var dataProvider;
-  if (/^application\/json$/.test(request.headers['content-type'])) {
+  if (/^application\/json$/.test(request.headers['content-type']) ||
+      /^application\/x-www-form-urlencoded$/.test(request.headers['content-type'])) {
     if (typeof request.body !== 'object' || request.body.data === undefined) {
       throw new errors.MissingArgument('No data provided.');
     }
@@ -38,18 +39,25 @@ function api(request, response, next)
   }
 
   if (/^multipart\/form-data/.test(request.headers['content-type'])) {
-    if (typeof request.files !== 'object' || request.files.data === undefined) {
+    if (typeof request.body === 'object' && request.body.data !== undefined) {
+      /* multipart, but not a file upload. The data is in request.body */
+      dataProvider = function(datacb, donecb) {
+        datacb(request.body.data);
+        donecb();
+      };
+    } else if (typeof request.files === 'object' && request.files.data !== undefined) {
+      /* multipart, and a file upload. The data is in a file on disk */
+      dataProvider = function(datacb, donecb) {
+        var stream = fs.createReadStream(request.files.data.path);
+        stream.on('error', function(err) {
+          throw errors.InternalServerError(err.message);
+        });
+        stream.on('data', datacb)
+        stream.on('end', donecb);
+      };
+    } else {
       throw new errors.MissingArgument('No data provided.');
     }
-
-    dataProvider = function(datacb, donecb) {
-      var stream = fs.createReadStream(request.files.data.path);
-      stream.on('error', function(err) {
-        throw errors.InternalServerError(err.message);
-      });
-      stream.on('data', datacb)
-      stream.on('end', donecb);
-    };
   }
 
   if (!dataProvider) {
@@ -85,8 +93,7 @@ exports.doc.input = [
   {
     'name'        : 'data',
     'type'        : 'string',
-    'description' : 'The data to hash. May be any valid JSON string, ' +
-                    'so, unicode for binary data.'
+    'description' : 'The data to hash. May be sent as a file.'
   }
 ]
 
@@ -100,6 +107,10 @@ exports.doc.errors = [
   {
     'type' : errors.MissingArgument,
     'description' : 'Thrown if no data to hash is supplied.'
+  },
+  {
+    'type' : errors.InternalServerError,
+    'description' : 'Thrown if an unknown error occurs when transferring data as a file.'
   }
 ];
 

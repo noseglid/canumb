@@ -30,15 +30,17 @@ function TooLarge(message)
 
 function InternalServerError(message)
 {
-  InternalServerError.super._call(this, 500, 'InternalServerError');
+  InternalServerError.super_.call(this, message, 500, 'InternalServerError');
 }
 
-util.inherits(InvalidArgument, APIError);
-util.inherits(MissingArgument, APIError);
-util.inherits(TooLarge,        APIError);
+util.inherits(InvalidArgument,     APIError);
+util.inherits(MissingArgument,     APIError);
+util.inherits(TooLarge,            APIError);
+util.inherits(InternalServerError, APIError);
 
-module.exports.Error           = Error;
-module.exports.APIError        = APIError;
-module.exports.InvalidArgument = InvalidArgument;
-module.exports.MissingArgument = MissingArgument;
-module.exports.TooLarge        = TooLarge;
+module.exports.Error               = Error;
+module.exports.APIError            = APIError;
+module.exports.InvalidArgument     = InvalidArgument;
+module.exports.MissingArgument     = MissingArgument;
+module.exports.TooLarge            = TooLarge;
+module.exports.InternalServerError = InternalServerError;

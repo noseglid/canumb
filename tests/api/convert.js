@@ -109,3 +109,19 @@ exports.testInvalidHexadecimal = function(test) {
     done();
   });
 }
+
+exports.testMultipart = function(test) {
+  api.multipartRequest(['convert', 'dec'], { 'number' : '12' }, function(actual, code) {
+    test.equals(code, 200);
+    test.equals(actual.bin.standard, '1100');
+    test.done();
+  });
+};
+
+exports.testWWWUrlEncoded = function(test) {
+  api.wwwFormRequest(['convert', 'dec'], { 'number' : '12' }, function(actual, code) {
+    test.equals(code, 200);
+    test.equals(actual.bin.standard, '1100');
+    test.done();
+  });
+};

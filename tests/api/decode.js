@@ -98,3 +98,19 @@ exports.testInvalidBase85Decode = function(test) {
     });
   });
 }
+
+exports.testMultipart = function(test) {
+  api.multipartRequest(['decode', 'uri'], { 'data' : 'hello' }, function(actual, code) {
+    test.equals(code, 200);
+    test.equals(actual.utf8, 'hello');
+    test.done();
+  });
+};
+
+exports.testWWWUrlEncoded = function(test) {
+  api.wwwFormRequest(['decode', 'uri'], { 'data' : 'hello%20you' }, function(actual, code) {
+    test.equals(code, 200);
+    test.equals(actual.utf8, 'hello you');
+    test.done();
+  });
+};

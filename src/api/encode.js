@@ -5,10 +5,6 @@ var errors = require('../lib/errors.js');
 
 function api(request, response, next)
 {
-  if ('application/json' !== request.headers['content-type']) {
-    throw new errors.InvalidArgument("Data must be sent with 'application/json' content type.");
-  }
-
   if (typeof request.body !== 'object' || !request.body.data) {
     throw new errors.MissingArgument('No data provided.');
   }
@@ -38,9 +34,9 @@ function api(request, response, next)
   return next();
 }
 
-exports.api  = 'encode';
+exports.api = 'encode';
 
-exports.method  = 'post';
+exports.method = 'post';
 
 exports.rest = [
   {
@@ -52,12 +48,11 @@ exports.rest = [
 
 exports.doc = {};
 
-exports.doc.input  = [
+exports.doc.input = [
   {
     'name'        : 'data',
     'type'        : 'string',
-    'description' : 'The data to encode. May be any valid JSON string, ' +
-                    'so unicode if necessary.'
+    'description' : 'The data to encode.'
   }
 ]
 
@@ -74,4 +69,4 @@ exports.doc.errors = [
   }
 ];
 
-exports.entry  = api;
+exports.entry = api;

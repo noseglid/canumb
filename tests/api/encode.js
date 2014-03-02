@@ -61,3 +61,19 @@ exports.testBase85Encode = function(test) {
     });
   });
 }
+
+exports.testMultipart = function(test) {
+  api.multipartRequest(['encode', 'uri'], { 'data' : 'hello' }, function(actual, code) {
+    test.equals(code, 200);
+    test.equals(actual.uri, 'hello');
+    test.done();
+  });
+};
+
+exports.testWWWUrlEncoded = function(test) {
+  api.wwwFormRequest(['encode', 'uri'], { 'data' : 'hello you' }, function(actual, code) {
+    test.equals(code, 200);
+    test.equals(actual.uri, 'hello%20you');
+    test.done();
+  });
+};

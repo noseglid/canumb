@@ -16,14 +16,19 @@
   <p>
     If the API is a <span class="pre">POST</span> API, non-route parameters
     should be included as <span class="pre">POST</span>-data.
-    This data should always be a JSON object, and transferred with
-    <span class="pre">Content-Type: application/json</span>.
-    The key of the object is specified in each
-    API documentation block along with its type. It's value is up to you (mostly...).
+    This data can be encoded and transferred with one of
+    <ul>
+      <li><span class="pre">application/json</span></li>
+      <li><span class="pre">application/x-www-form-urlencoded</span></li>
+      <li><span class="pre">multipart/form-data</span></li>
+    </ul>
+
+    The input data is describe in each API documentation below, and its value is up to you (mostly...).
   </p>
   <p>
     For instance, a sample HTTP request for converting the
-    decimal number 12 would look like this:
+    decimal number 12 using <span class="pre">application/json</span> transfer encoding
+    would look like this:
     <pre>
     POST /convert/dec HTTP/1.1
     Host: localhost:5000
@@ -32,7 +37,36 @@
 
     {"number":"12"}
     </pre>
+
+    Performing the above HTTP request using command-line <a href="http://curl.haxx.se/">cURL</a> can be done as:
+
+    <pre>
+    curl -H 'Content-Type: application/json' -d '{ "number" : "12" }' http://localhost:5000/convert/dec
+    </pre>
+
+    which used the <span class="pre">application/json</span> content type. An equivalent request
+    can be perfomed, using <span class="pre">multipart/form-data</span> instead:
+
+    <pre>
+    curl -Fnumber=12 http://localhost:5000/convert/dec
+    </pre>
+
+    and using <span class="pre">application/x-www-form-urlencoded</span>
+
+    <pre>
+    curl -d "number=12" http://localhost:5000/convert/dec
+    </pre>
   </p>
+  <p>
+  Some parameters can be sent <i>as files</i>. This basically means they can be sent using
+  <span class="pre">multipart</span> where a <span class="pre">Content-Disposition</span>
+  contains the <span class="pre">filename</span> param. Something like:
+  <pre>
+  Content-Disposition: form-data; name="paramname"; filename="somefile.ext"
+  </pre>
+  If this is an option, it is indicated at the param documentation.
+  </p>
+
   <p>
     The canumb API documentation may be fetched in JSON structure via the API itself.
     The list of available APIs are at <span class="pre">/doc</span> via

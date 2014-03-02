@@ -68,7 +68,7 @@ exports.testHash = function(test) {
   ];
 
   var n = _.reduce(tests, function(memo, test) {
-    return memo + _.size(test.expected.hex) + _.size(test.expected.base64);
+    return memo + 3 * _.size(test.expected.hex) + 3 * _.size(test.expected.base64);
   }, 0);
 
   test.expect(n);
@@ -80,10 +80,30 @@ exports.testHash = function(test) {
         test.equals(actual.hex, hash);
         testdonecb();
       });
+
+      api.wwwFormRequest(['hash', algorithm], { 'data' : dp.data }, function(actual, code) {
+        test.equals(actual.hex, hash);
+        testdonecb();
+      });
+
+      api.multipartRequest(['hash', algorithm], { 'data' : dp.data }, function(actual, code) {
+        test.equals(actual.hex, hash);
+        testdonecb();
+      });
     });
 
     _.each(dp.expected.base64, function(hash, algorithm) {
       api.request(['hash', algorithm], 'POST', { 'data' : dp.data }, function(actual, code) {
+        test.equals(actual.base64, hash);
+        testdonecb();
+      });
+
+      api.wwwFormRequest(['hash', algorithm], { 'data' : dp.data }, function(actual, code) {
+        test.equals(actual.base64, hash);
+        testdonecb();
+      });
+
+      api.multipartRequest(['hash', algorithm], { 'data' : dp.data }, function(actual, code) {
         test.equals(actual.base64, hash);
         testdonecb();
       });

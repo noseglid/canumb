@@ -26,8 +26,8 @@ function api(request, response, next)
   }
 
   var dataProvider;
-  if (/^application\/json$/.test(request.headers['content-type']) ||
-      /^application\/x-www-form-urlencoded$/.test(request.headers['content-type'])) {
+  if (/^application\/json/.test(request.headers['content-type']) ||
+      /^application\/x-www-form-urlencoded/.test(request.headers['content-type'])) {
     if (typeof request.body !== 'object' || request.body.data === undefined) {
       throw new errors.MissingArgument('No data provided.');
     }
@@ -53,7 +53,10 @@ function api(request, response, next)
           throw errors.InternalServerError(err.message);
         });
         stream.on('data', datacb)
-        stream.on('end', donecb);
+        stream.on('end', function() {
+          fs.unlink(request.files.data.path);
+          donecb();
+        });
       };
     } else {
       throw new errors.MissingArgument('No data provided.');

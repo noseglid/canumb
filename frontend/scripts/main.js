@@ -1,14 +1,15 @@
 requirejs.config({
   "baseUrl" : "/scripts",
   "paths" : {
-    "text"           : "libs/text",
-    "underscore"     : "libs/underscore-min",
-    "backbone"       : "libs/backbone",
-    "jquery"         : "libs/jquery.min",
-    "growl"          : "libs/jquery.growl",
-    "google-analytics" : [ "//www.google-analytics.com/analytics", "libs/analytics" ],
-    "vex"            : "libs/vex.min",
-    "vexDialog"      : "libs/vex.dialog.min"
+    "text"              : "libs/text",
+    "underscore"        : "libs/underscore-min",
+    "backbone"          : "libs/backbone",
+    "jquery"            : "libs/jquery.min",
+    "jquery-ui-widget"  : "libs/ui.widget.jquery",
+    "growl"             : "libs/jquery.growl",
+    "google-analytics"  : [ "//www.google-analytics.com/analytics", "libs/analytics" ],
+    "vex"               : "libs/vex.min",
+    "vexDialog"         : "libs/vex.dialog.min",
   },
 
   "shim" : {

@@ -34,6 +34,58 @@
     float: left;
   }
 
+  #upload-container {
+
+    input[type="file"] {
+      display: none;
+    }
+
+    div#upload-file {
+      display: block;
+      float: left
+    }
+
+    #upload-progress {
+      text-align: center;
+      display: block;
+      float: left;
+      margin: 2px 10px;
+      border-radius: 5px;
+      background-color: rgba(200, 200, 200, 0.5);
+      width: 130px;
+      height: 1.2em;
+
+      #upload-progress-bar {
+        border-radius: 5px;
+        height: 1.2em;
+        position: relative;
+        top: 0px;
+        left: 0px;
+        width: 0px;
+        background-color: rgba(0, 200, 0, 0.5);
+        margin: 0px;
+      }
+
+      #upload-progress-text {
+        border-radius: 5px;
+        position: relative;
+        top: -1.2em;
+        left: 0px;
+      }
+    }
+
+    #upload-nice-text {
+      margin: 2px 5px;
+      float: left;
+    }
+
+    img#upload-ajax-loader {
+      display: none;
+      float: left;
+      margin: 4px;
+    }
+  }
+
   label.button {
     display: block;
     margin: inherit inherit 8px inherit;

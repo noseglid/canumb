@@ -16,7 +16,6 @@ define([
   resultTemplate
 ) {
 
-  var fadeTime   = 100;
   var queryDelay = 300;
 
   return Backbone.View.extend({
@@ -29,29 +28,35 @@ define([
         self.$el.html(_.template(template, {
           'algorithms' : _.find(data.rest, function(r) {
             return (r.name === 'algorithm');
-          }).valid
+          }).valid,
+          'html5upload' : (window.FormData !== 'undefined'),
+          'checked' : self.model.get('algorithm')
         }));
       }, 'json');
 
-      this.listenTo(this.model, 'change:hashed', this.render);
-      this.listenTo(this.model, 'change:error',  this.error);
-      this.listenTo(this.model, 'syncFinished',  this.syncFinished);
+      this.listenTo(this.model, 'change:hashed',  this.render);
+      this.listenTo(this.model, 'change:data',    this.render);
+      this.listenTo(this.model, 'change:error',   this.error);
+      this.listenTo(this.model, 'syncFinished',   this.syncFinished);
+      this.listenTo(this.model, 'uploadProgress', this.uploadProgress);
+
+      /* Save once to get the hash of the empty string */
+      this.model.save();
     },
 
     events : {
-      'input textarea'                 : 'updateData',
-      'change input[name="algorithm"]' : 'updateAlgorithm'
+      'input textarea'                 : 'updateDataFromTextArea',
+      'change input[name="algorithm"]' : 'updateAlgorithm',
+      'click #upload-file'             : 'selectFile',
+      'change input[type="file"]'      : 'uploadFile'
     },
 
     render : function() {
-      if (!this.model.get('hashed')) {
-        this.$('#result').fadeOut(fadeTime);
-        return;
-      }
+      this.$('textarea').html(this.model.get('data'));
 
       this.$('#result').html(_.template(resultTemplate, {
         'data' : this.model.get('hashed').hex
-      })).fadeIn(fadeTime);
+      })).show();
     },
 
     error : function(e) {
@@ -68,9 +73,13 @@ define([
 
     syncFinished : function() {
       this.$('textarea').removeClass('loading');
+      this.$('#upload-ajax-loader').hide();
+      this.$('#upload-nice-text').text('');
+      (this.model.get('data') instanceof FormData) ?
+        this.resetTextArea() : this.resetFile();
     },
 
-    updateData : function() {
+    updateDataFromTextArea : function() {
       this.$('textarea').removeClass('loading');
 
       if (this.timer) {
@@ -86,28 +95,46 @@ define([
 
       var self = this;
       this.timer = setTimeout(function() {
-        var data = self.$('textarea').val();
-        if (/^\s+|\s+$/.test(data)) {
-          $.growl.warning({
-            'title'    : 'Whitespaces',
-            'message'  : 'You have leading or trailing white spaces in your data.',
-            'duration' : 1000,
-            'size'     : 'small'
-          });
-        }
-
-        self.model.set('data', data);
+        self.model.set('data', self.$('textarea').val());
       }, queryDelay);
     },
 
     updateAlgorithm : function() {
-      if (0 < this.$('textarea').val().length) {
-        this.$('textarea').addClass('loading');
-      }
+      (this.model.get('data') instanceof FormData) ?
+        this.$('#upload-ajax-loader').show() : this.$('textarea').addClass('loading');
 
       var val = this.$('input[name="algorithm"]:checked').val();
       this.model.set('algorithm', val);
-    }
+    },
 
+    selectFile : function() {
+      this.$('input[type="file"]').click();
+    },
+
+    uploadFile : function() {
+      this.$('#upload-ajax-loader').show();
+      var formData = new FormData(this.$('#upload-form')[0]);
+      this.model.set('data', false, { "silent" : true });
+      this.model.set('data', formData);
+    },
+
+    uploadProgress : function(e) {
+      var fraction = isNaN(e.loaded / e.total) ? 0 : e.loaded / e.total;
+      this.$('#upload-progress-text').text(Math.round(100 * fraction) + ' %');
+      var barWidth = parseInt($('#upload-progress').css('width')) * fraction;
+      this.$('#upload-progress-bar').css('width', barWidth + 'px');
+
+      this.$('#upload-nice-text').text(fraction < 1.0 ? 'uploading' : 'hashing');
+    },
+
+    resetFile : function() {
+      this.$('input[type="file"]').val('');
+      this.$('#upload-progress-text').text('0 %');
+      this.$('#upload-progress-bar').css('width', '0px');
+    },
+
+    resetTextArea : function() {
+      this.$('textarea').val('')
+    }
   });
 });

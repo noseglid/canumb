@@ -54,6 +54,11 @@ define([
     render : function() {
       this.$('textarea').html(this.model.get('data'));
 
+      if (null === this.model.get('hashed')) {
+        this.$('#result').hide();
+        return;
+      }
+
       this.$('#result').html(_.template(resultTemplate, {
         'data' : this.model.get('hashed').hex
       })).show();
@@ -121,8 +126,7 @@ define([
     uploadProgress : function(e) {
       var fraction = isNaN(e.loaded / e.total) ? 0 : e.loaded / e.total;
       this.$('#upload-progress-text').text(Math.round(100 * fraction) + ' %');
-      var barWidth = parseInt($('#upload-progress').css('width')) * fraction;
-      this.$('#upload-progress-bar').css('width', barWidth + 'px');
+      this.$('#upload-progress-bar').css('width', Math.round(100 * fraction) + '%');
 
       this.$('#upload-nice-text').text(fraction < 1.0 ? 'uploading' : 'hashing');
     },

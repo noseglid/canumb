@@ -1,0 +1,18 @@
+@import "colors";
+
+#tab-content-hash {
+
+  #textarea-container {
+    width: 70%;
+    display: inline-block;
+    padding: 0px 30px 0px 0px;
+    border-right: solid 1px $color8;
+  }
+
+  #upload-container {
+    width: 15%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px 20px;
+  }
+}

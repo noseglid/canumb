@@ -7,12 +7,13 @@
 @import "colors";
 @import "convert";
 @import "data-inout";
+@import "hash";
 @import "apidoc";
 
 $contentWidth    : 900px;
 $bannerHeight    : 150px;
 $inputLineHeight : 32px;
-$buttonRadius    : 8px;
+$buttonRadius    : 5px;
 
 body {
   padding: 0px;

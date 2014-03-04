@@ -20,12 +20,6 @@
       background-repeat: no-repeat;
       background-position: right 20px bottom 20px;
     }
-
-    @include placeholder {
-      vertical-align: middle;
-      padding-top: ($textAreaSize - 32) / 2;
-      text-align: center;
-    }
   }
 
   div.button-container {
@@ -41,18 +35,20 @@
     }
 
     div#upload-file {
+      width: 150px;
+      margin: 0px;
       display: block;
-      float: left
+      text-align: center;
+      padding: 2px 0px;
     }
 
     #upload-progress {
       text-align: center;
       display: block;
-      float: left;
-      margin: 2px 10px;
+      margin: 10px 0px;
       border-radius: 5px;
       background-color: rgba(200, 200, 200, 0.5);
-      width: 130px;
+      width: 150px;
       height: 1.2em;
 
       #upload-progress-bar {
@@ -74,15 +70,19 @@
       }
     }
 
-    #upload-nice-text {
-      margin: 2px 5px;
-      float: left;
-    }
+    #upload-status {
+      width: 150px;
+      text-align: center;
 
-    img#upload-ajax-loader {
-      display: none;
-      float: left;
-      margin: 4px;
+      #upload-nice-text {
+        display: inline;
+        margin: 2px 5px;
+      }
+
+      img#upload-ajax-loader {
+        display: inline;
+        margin: 4px;
+      }
     }
   }
 

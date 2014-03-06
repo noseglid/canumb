@@ -69,4 +69,10 @@ exports.doc.errors = [
   }
 ];
 
-exports.entry = api;
+exports.entry = [
+  require('restify').bodyParser({
+    'mapParams' : false,
+    'maxBodySize' : 1024 * 1024 * 2 /* Max 2 MB. Should be plenty. */
+  }),
+  api
+];

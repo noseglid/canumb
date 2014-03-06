@@ -13,7 +13,7 @@
     "start": "node src/main.js"
   },
   "dependencies": {
-    "restify": "2.6.x",
+    "restify": "2.7.x",
     "underscore": "1.6.x",
     "base85": "0.1.x",
     "grunt": "0.4.x",

@@ -45,37 +45,35 @@ function api(request, response, next)
         datacb(request.body.data);
         donecb();
       };
-    } else if (typeof request.files === 'object' && request.files.data !== undefined) {
-      /* multipart, and a file upload. The data is in a file on disk */
+    } else if (request.hasher) {
+      /* The hashing was performed during the upload by apiBodyHandler */
       dataProvider = function(datacb, donecb) {
-        var stream = fs.createReadStream(request.files.data.path);
-        stream.on('error', function(err) {
-          throw errors.InternalServerError(err.message);
-        });
-        stream.on('data', datacb)
-        stream.on('end', function() {
-          fs.unlink(request.files.data.path);
-          donecb();
-        });
+        donecb();
       };
     } else {
       throw new errors.MissingArgument('No data provided.');
     }
   }
 
-  if (!dataProvider) {
+  if (!dataProvider && !request.hasher) {
     throw new errors.MissingArgument('Data must be sent with \'application/json\' or \'multipart/form-data\'');
   }
 
-  var hasher = crypto.createHash(request.params.algorithm);
-  dataProvider(_.bind(hasher.update, hasher), function() {
-    var hashBuffer = hasher.digest();
+  var finished = function() {
+    var hashBuffer = request.hasher.digest();
     response.send({
       'hex'    : hashBuffer.toString('hex'),
       'base64' : hashBuffer.toString('base64')
     });
+    request.hasher = null;
     return next();
-  });
+  };
+
+  if (!request.hasher) {
+    request.hasher = crypto.createHash(request.params.algorithm);
+  }
+
+  dataProvider(_.bind(request.hasher.update, request.hasher), finished);
 }
 
 exports.api = 'hash';
@@ -117,4 +115,18 @@ exports.doc.errors = [
   }
 ];
 
-exports.entry = api;
+exports.entry = [
+  /* We want the body parser with custom handling of files */
+  require('restify').bodyParser({
+    'mapParams' : false,
+    'multipartFileHandler' : function(part, request) {
+      request.hasher = crypto.createHash(request.params.algorithm);
+      part.on('data', function(data) {
+        request.hasher.update(data);
+      });
+    }
+  }),
+
+  /* And of course the API */
+  api
+];

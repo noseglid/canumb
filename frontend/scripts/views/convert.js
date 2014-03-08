@@ -58,6 +58,11 @@ define([
       })).fadeIn(fadeTime);
     },
 
+    getNumber : function() {
+      return this.$('#number').val().replace(/\s/g, '');
+
+    },
+
     error : function() {
       var err = this.model.get('error');
       if (!err) {
@@ -81,7 +86,7 @@ define([
         clearTimeout(this.numberTimer);
       }
 
-      if (this.model.get('number') === this.$('#number').val()) {
+      if (this.model.get('number') === this.getNumber()) {
         /* Same number as before, but not synced. Everything is up to par */
         return;
       }
@@ -90,12 +95,12 @@ define([
 
       var self = this;
       this.numberTimer = setTimeout(function() {
-        self.model.set('number', self.$('#number').val());
+        self.model.set('number', self.getNumber());
       }, queryDelay);
     },
 
     updateBase : function() {
-      if (0 < self.$('#number').val().length) {
+      if (0 < this.getNumber().length) {
         /* Only show loader if we will actually load something */
         this.$('#number').addClass('loading');
       }

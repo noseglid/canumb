@@ -13,8 +13,8 @@ function validate(number)
 
 function groupBinary(count, number)
 {
-  var npad = count - (number.length % count);
-  var padded = numhelp.pad(number.length + npad, number);
+  var lengthWithPadding = Math.ceil(number.length / count) * count;
+  var padded = numhelp.pad(lengthWithPadding, number);
 
   return padded.match(new RegExp('.{' + count + '}', 'g'), padded);
 }
@@ -60,5 +60,5 @@ exports.to = {
 };
 
 exports.format = {
-  group : _.bind(groupFormat, {}),
+  group : groupFormat,
 };

@@ -1,6 +1,6 @@
 {
   "name": "canumb",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Number conversion as a service",
   "main": "main.js",
   "repository": {

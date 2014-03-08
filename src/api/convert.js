@@ -34,7 +34,7 @@ function convert(from, number)
 
 function api(request, response, next)
 {
-  if (!request.body.number) {
+  if (!request.body || !request.body.number) {
     throw new errors.MissingArgument('No number supplied.');
   }
 

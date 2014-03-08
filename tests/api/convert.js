@@ -18,7 +18,7 @@ exports.testBinary = function(test) {
 }
 
 exports.testInvalidBinary = function(test) {
-  var done = _.after(2, test.done);
+  var done = _.after(3, test.done);
   api.request(['convert', 'bin'], 'POST', { 'number' : '2' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
@@ -28,6 +28,12 @@ exports.testInvalidBinary = function(test) {
   api.request(['convert', 'bin'], 'POST', { 'number' : '113' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
+    done();
+  });
+
+  api.request(['convert', 'bin'], 'POST', '', function(actual, code) {
+    test.equals(code, 400);
+    test.equals(actual.code, 'MissingArgument');
     done();
   });
 }
@@ -44,7 +50,7 @@ exports.testOctal = function(test) {
 }
 
 exports.testInvalidOctal = function(test) {
-  var done = _.after(2, test.done);
+  var done = _.after(3, test.done);
   api.request(['convert', 'oct'], 'POST', { 'number' : '8' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
@@ -54,6 +60,12 @@ exports.testInvalidOctal = function(test) {
   api.request(['convert', 'oct'], 'POST', { 'number' : '08' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
+    done();
+  });
+
+  api.request(['convert', 'oct'], 'POST', '', function(actual, code) {
+    test.equals(code, 400);
+    test.equals(actual.code, 'MissingArgument');
     done();
   });
 }
@@ -70,16 +82,22 @@ exports.testDecimal = function(test) {
 }
 
 exports.testInvalidDecimal = function(test) {
-  var done = _.after(2, test.done);
+  var done = _.after(3, test.done);
   api.request(['convert', 'dec'], 'POST', { 'number' : 'a' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
     done();
   });
 
-  api.request(['convert', 'oct'], 'POST', { 'number' : '1q' }, function(actual, code) {
+  api.request(['convert', 'dec'], 'POST', { 'number' : '1q' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
+    done();
+  });
+
+  api.request(['convert', 'dec'], 'POST', '', function(actual, code) {
+    test.equals(code, 400);
+    test.equals(actual.code, 'MissingArgument');
     done();
   });
 }
@@ -96,16 +114,22 @@ exports.testHexadecimal = function(test) {
 }
 
 exports.testInvalidHexadecimal = function(test) {
-  var done = _.after(2, test.done);
-  api.request(['convert', 'dec'], 'POST', { 'number' : 'g' }, function(actual, code) {
+  var done = _.after(3, test.done);
+  api.request(['convert', 'hex'], 'POST', { 'number' : 'g' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
     done();
   });
 
-  api.request(['convert', 'oct'], 'POST', { 'number' : '1h' }, function(actual, code) {
+  api.request(['convert', 'hex'], 'POST', { 'number' : '1h' }, function(actual, code) {
     test.equals(code, 400);
     test.equals(actual.code, 'InvalidArgument');
+    done();
+  });
+
+  api.request(['convert', 'hex'], 'POST', '', function(actual, code) {
+    test.equals(code, 400);
+    test.equals(actual.code, 'MissingArgument');
     done();
   });
 }

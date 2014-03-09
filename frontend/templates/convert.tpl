@@ -11,7 +11,7 @@
   <input type="radio" id="input-base-hex" name="base" value="hex" />
   <label for="input-base-hex" class="button">hex</label>
 
-  <input type="text" id="number" placeholder="Type a number, any number..." />
+  <input type="text" id="number" placeholder="&lt;insert unsigned, integer number&gt;" />
 </div>
 
 <div id="convert-result"></div>

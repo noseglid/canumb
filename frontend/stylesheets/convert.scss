@@ -11,10 +11,6 @@ div#convert-input {
     width: 100%;
     padding: 5px 10px;
 
-    @include placeholder {
-      text-align: center;
-    }
-
     &.loading {
       background-image: url('/images/ajax-loader-black-on-white.gif');
       background-repeat: no-repeat;

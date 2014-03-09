@@ -82,8 +82,8 @@ require([
   Backbone.history.start();
 
   $(function() {
-    $('#apidoc').click(function() {
-      window.location.hash = 'apidoc';
+    $('input[name="tabs"]').click(function() {
+      window.location.hash = $(this).attr('id').split('-')[1];
     });
 
     new ConvertView({

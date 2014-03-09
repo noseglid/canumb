@@ -22,10 +22,12 @@ define([
   return Backbone.View.extend({
 
     initialize : function() {
+      this.prehash = Backbone.history.fragment;
     },
 
     events : {
-      'click .api-title' : 'getDetails'
+      'click .api-title' : 'getDetails',
+      'click #apidoc' : 'showDoc'
     },
 
     render : function() {
@@ -49,9 +51,17 @@ define([
         'contentClassName' : 'apidoc',
         'afterClose'       : function() {
           self.model.unset(self.model.get('id'));
-          window.location.hash = '';
+          window.location.hash = ( '#apidoc' === self.prehash || undefined === self.prehash) ?
+            'numbers' : self.prehash;
         },
       });
+    },
+
+    showDoc : function() {
+      this.prehash = Backbone.history.fragment;
+
+      /* Router will take care of calling 'render' */
+      window.location.hash = 'apidoc';
     },
 
     getDetails : function(ev) {

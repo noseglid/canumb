@@ -21,11 +21,19 @@ define([
     },
 
     routes : {
-      "apidoc" : "apidoc"
+      "apidoc"  : "apidoc",
+      "convert" : "tab",
+      "encode"  : "tab",
+      "decode"  : "tab",
+      "hash"    : "tab"
     },
 
     apidoc : function() {
       this.apidocView.render();
-    }
+    },
+
+    tab : function() {
+      $('#tab-' + Backbone.history.fragment).prop('checked', true);
+    },
   });
 });

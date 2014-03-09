@@ -78,7 +78,7 @@ Just make a pull request and your contribution will be considered (and assuming 
 ### Contributors
 * `Alexander Olsson <noseglid at gmail.com>`
 
-[CanumbAtHeroku]: https://www.canumb.org
+[CanumbAtHeroku]: http://www.canumb.org
 [ArbitraryPrecision]: http://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic
 [EncodingBase64]: http://en.wikipedia.org/wiki/Base64
 [EncodingUri]: http://en.wikipedia.org/wiki/Percent-encoding

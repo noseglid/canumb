@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/noseglid/canumb.png?branch=master)](https://travis-ci.org/noseglid/canumb)
 [![Dependency Status](https://gemnasium.com/noseglid/canumb.png)](https://gemnasium.com/noseglid/canumb)
 
-# Canumb - it's a name
+# Canumb - tools for developers
 
 Canumb aims to crunch data on various forms and turn them into something meaningful.
 A variety of inputs are currently supported, such different number base conversions
@@ -11,9 +11,9 @@ It's built in way to allow for extension when the future demands other input for
 to be crunched.
 
 ## See it in action
-It includes a hefty web frontend which makes usage easy. [Single-page
-applications][SinglePageApp] seems to be the latest buzz right now, and so this follows
-that vision. It is [hosted at heroku for your leisure][CanumbAtHeroku].
+Canumb is [hosted online for you to try out][CanumbAtHeroku]. You're free to
+use this as much as you want, either through the frontend or integrating
+in the API.
 
 ## Features
 
@@ -39,10 +39,11 @@ you may convert a number of any size. Well, the algorithm is slow so
 less than 1000 digits. But that's still very large numbers.
 Very useful for those long network protocol bit-streams.
 
-The binary output may also be aligned (both the service and the frontend supports this),
-so you can group them for easier digestion. Typically 8 bits (1 byte) per group.
+The binary output may also be aligned (both the API and the frontend supports this),
+so you can group them for easier digestion. Typically 8 bits (1 byte) per group is
+useful as binary protocols often are octet-aligned.
 
-Only unsigned numbers at this point, feel free to help out improve support.
+Only unsigned integer numbers at this point, feel free to help out improve support.
 
 ### Encoding and Decoding
 
@@ -77,7 +78,7 @@ Just make a pull request and your contribution will be considered (and assuming 
 ### Contributors
 * `Alexander Olsson <noseglid at gmail.com>`
 
-[CanumbAtHeroku]: https://canumb.herokuapp.com
+[CanumbAtHeroku]: https://www.canumb.org
 [ArbitraryPrecision]: http://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic
 [EncodingBase64]: http://en.wikipedia.org/wiki/Base64
 [EncodingUri]: http://en.wikipedia.org/wiki/Percent-encoding

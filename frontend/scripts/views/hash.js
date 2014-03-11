@@ -35,7 +35,6 @@ define([
       }, 'json');
 
       this.listenTo(this.model, 'change:hashed',  this.render);
-      this.listenTo(this.model, 'change:data',    this.render);
       this.listenTo(this.model, 'change:error',   this.error);
       this.listenTo(this.model, 'syncFinished',   this.syncFinished);
       this.listenTo(this.model, 'uploadProgress', this.uploadProgress);
@@ -60,7 +59,8 @@ define([
       }
 
       this.$('#result').html(_.template(resultTemplate, {
-        'data' : this.model.get('hashed').hex
+        'data' : this.model.get('hashed').hex,
+        'src' : $('#source-textarea').prop('checked') ? 'input' : 'upload'
       })).show();
     },
 
@@ -86,6 +86,7 @@ define([
 
     updateDataFromTextArea : function() {
       this.$('textarea').removeClass('loading');
+      this.$('#source-textarea').prop('checked', true);
 
       if (this.timer) {
         clearTimeout(this.timer);
@@ -117,6 +118,7 @@ define([
     },
 
     uploadFile : function() {
+      this.$('#source-upload').prop('checked', true);
       this.$('#upload-ajax-loader').show();
       var formData = new FormData(this.$('#upload-form')[0]);
       this.model.set('data', false, { "silent" : true });

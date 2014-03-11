@@ -12,12 +12,9 @@
 
   </div>
 
-  <div id="textarea-container">
-    <textarea class="input" placeholder="<empty>"></textarea>
-  </div>
-
   <% if (html5upload) { %>
-  <div id="upload-container">
+  <input type="radio" name="radio-source" id="source-upload" />
+  <div id="upload-container" class="possible-source">
     <form enctype="multipart/form-data" id="upload-form">
       <input type="file" name="data" />
     </form>
@@ -34,6 +31,10 @@
   </div>
   <% } %>
 
+  <input type="radio" checked="checked" name="radio-source" id="source-textarea" />
+  <div id="textarea-container" class="possible-source">
+    <textarea class="input" placeholder="<empty>"></textarea>
+  </div>
 
   <div class="data-inout-result" id="result"></div>
 </div>

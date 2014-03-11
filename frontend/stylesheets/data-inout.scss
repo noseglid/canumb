@@ -36,18 +36,18 @@
 
     div#upload-file {
       width: 150px;
-      margin: 0px;
       display: block;
       text-align: center;
       padding: 2px 0px;
+      margin-top: 30px;
+      margin-bottom: 10px;
     }
 
     #upload-progress {
       text-align: center;
       display: block;
-      margin: 10px 0px;
       border-radius: 5px;
-      background-color: rgba(200, 200, 200, 0.5);
+      background-color: rgba($color5, 0.5);
       width: 150px;
       height: 1.2em;
 
@@ -58,8 +58,7 @@
         top: 0px;
         left: 0px;
         width: 0px;
-        background-color: rgba(0, 200, 0, 0.5);
-        margin: 0px;
+        background-color: rgba($color9, 0.8);
       }
 
       #upload-progress-text {
@@ -71,17 +70,19 @@
     }
 
     #upload-status {
+      margin-top: 5px;
       width: 150px;
       text-align: center;
 
       #upload-nice-text {
         display: inline;
-        margin: 2px 5px;
+        margin-top: 5px;
+        margin-right: 5px;
       }
 
       img#upload-ajax-loader {
-        display: inline;
-        margin: 4px;
+        vertical-align: middle;
+        display: none;
       }
     }
   }
@@ -103,12 +104,16 @@
     color: black;
     font-family: $monoFont;
     border-radius: 5px;
+    clear: both;
     @include linear-gradient(to bottom, $color2, $color4);
 
     p {
-      white-space: pre;
+      white-space: pre-wrap;
       word-wrap: break-word;
-      margin: 0px;
+    }
+
+    img {
+      float: left;
     }
   }
 

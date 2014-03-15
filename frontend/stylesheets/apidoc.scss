@@ -6,6 +6,7 @@
   width: 95% !important;
   overflow: auto;
   max-height: 100%;
+  min-width: 900px;
   font-size: 16px;
   color: black;
 
@@ -36,12 +37,18 @@
     background-color: $color8 !important;
   }
 
-  pre {
-    margin: 0px;
+  pre.example {
+    padding: 15px 10px;
+    background-color: $shade9;
+    border: solid 1px black;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
   }
 
   pre.type {
     display: inline-block;
+    margin: 0px;
     font-size: 14px;
     color: $shade6;
   }
@@ -50,7 +57,7 @@
   pre.httpcode,
   pre.httpmethod {
     display: inline-block;
-    margin-left: 5px;
+    margin: 0px;
   }
 
   pre.error {

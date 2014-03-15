@@ -2,7 +2,7 @@
 
 <div>
   <h3>HTTP Method</h3>
-  <pre class="httpmethod"><%- method %></pre>
+  <pre class="httpmethod"><%- method.toUpperCase() %></pre>
 </div>
 
 <div>

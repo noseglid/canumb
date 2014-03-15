@@ -29,41 +29,31 @@
     For instance, a sample HTTP request for converting the
     decimal number 12 using <span class="pre">application/json</span> transfer encoding
     would look like this:
-    <pre>
-    POST /convert/dec HTTP/1.1
-    Host: localhost:5000
-    Content-Type: application/json
-    Content-Length: 15
+    <pre class="example">POST /convert/dec HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+Content-Length: 15
 
-    {"number":"12"}
-    </pre>
+{"number":"12"}</pre>
 
     Performing the above HTTP request using command-line <a href="http://curl.haxx.se/">cURL</a> can be done as:
 
-    <pre>
-    curl -H 'Content-Type: application/json' -d '{ "number" : "12" }' http://localhost:5000/convert/dec
-    </pre>
+    <pre class="example">curl -H 'Content-Type: application/json' -d '{ "number" : "12" }' http://localhost:5000/convert/dec</pre>
 
     which used the <span class="pre">application/json</span> content type. An equivalent request
     can be perfomed, using <span class="pre">multipart/form-data</span> instead:
 
-    <pre>
-    curl -Fnumber=12 http://localhost:5000/convert/dec
-    </pre>
+    <pre class="example">curl -Fnumber=12 http://localhost:5000/convert/dec</pre>
 
     and using <span class="pre">application/x-www-form-urlencoded</span>
 
-    <pre>
-    curl -d "number=12" http://localhost:5000/convert/dec
-    </pre>
+    <pre class="example">curl -d "number=12" http://localhost:5000/convert/dec</pre>
   </p>
   <p>
   Some parameters can be sent <i>as files</i>. This basically means they can be sent using
   <span class="pre">multipart</span> where a <span class="pre">Content-Disposition</span>
   contains the <span class="pre">filename</span> param. Something like:
-  <pre>
-  Content-Disposition: form-data; name="paramname"; filename="somefile.ext"
-  </pre>
+  <pre class="example">Content-Disposition: form-data; name="paramname"; filename="somefile.ext"</pre>
   If this is an option, it is indicated at the param documentation.
   </p>
 

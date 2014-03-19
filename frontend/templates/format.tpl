@@ -11,5 +11,13 @@
     <textarea></textarea>
   </div>
 
-  <div id="result-search"></div>
+  <div id="result">
+    <div id="result-menu">
+      <input type="checkbox" />
+      <img src="/images/plus-large.png" class="expand" />
+      <img src="/images/minus-large.png" class="shrink" />
+    </div>
+
+    <div id="result-browse"></div>
+  </div>
 </div>

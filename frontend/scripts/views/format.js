@@ -26,19 +26,28 @@ define([
 
     events : {
       'input textarea' : 'updateData',
+      'click img.expand' : 'toggleExpand',
+      'click img.shrink' : 'toggleExpand'
+    },
+
+    toggleExpand : function() {
+      var el = this.$('input[type="checkbox"]');
+      el.prop('checked', !el.prop('checked'));
     },
 
     render : function() {
       this.$('textarea').css('border-color', 'white');
 
       if (null === this.model.get('parsed')) {
-        this.$('#result-search').fadeOut(fadeTime);
+        this.$('#result').fadeOut(fadeTime);
         return;
       }
 
-      this.$('#result-search').html(_.template(jsonTemplate, {
+      this.$('#result-browse').html(_.template(jsonTemplate, {
         root : this.model.get('parsed')
-      })).fadeIn(fadeTime);
+      }));
+
+      this.$('#result').fadeIn(fadeTime);
     },
 
     updateData : function() {
@@ -47,7 +56,7 @@ define([
 
     error : function() {
       this.$('textarea').css('border-color', 'red');
-      this.$('#result-search').fadeOut(fadeTime);
+      this.$('#result').fadeOut(fadeTime);
     }
   });
 });

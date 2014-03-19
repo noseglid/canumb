@@ -1,6 +1,30 @@
 #tab-content-format {
 
-  #result-search {
+  #result {
+    display: none;
+    @include linear-gradient(to bottom, $color2, $color4);
+    border: solid 1px #000;
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;
+
+    input[type="checkbox"]:checked ~ img.shrink {
+      display: inline;
+    }
+
+    input[type="checkbox"]:not(:checked) ~ img.expand {
+      display: inline;
+    }
+
+    img.expand,
+    img.shrink {
+      display: none;
+      cursor: pointer;
+    }
+
+  }
+
+  #result-browse {
     $clrObject    : #439400;
     $clrObjectKey : #555555;
     $clrArray     : #0b61a4;
@@ -11,14 +35,8 @@
 
     overflow: auto;
     clear: both;
-    display: none;
     font-size: 14px;
 
-    @include linear-gradient(to bottom, $color2, $color4);
-    border: solid 1px #000;
-    border-radius: 5px;
-    background-color: white;
-    padding: 20px;
     font-family: $monoFont;
 
     table {

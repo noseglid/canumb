@@ -12,7 +12,6 @@
     margin: 10px 0px;
     padding: 10px;
     resize: none;
-    clear: left;
     @include box-sizing(border-box);
 
     &.loading {
@@ -20,6 +19,10 @@
       background-repeat: no-repeat;
       background-position: right 20px bottom 20px;
     }
+  }
+
+  div.textarea-container {
+    clear: left;
   }
 
   div.button-container {

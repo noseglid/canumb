@@ -20,7 +20,9 @@
     <label for="<%-type%>-algorithm-base85" class="button">base85</label>
   </div>
 
-  <textarea></textarea>
+  <div class="textarea-container">
+    <textarea></textarea>
+  </div>
 
   <div class="data-inout-result" id="<%-type%>-result"></div>
 </div>

@@ -49,6 +49,8 @@ require([
   "models/encode",
   "views/hash",
   "models/hash",
+  "views/format",
+  "models/format",
   "views/version",
   "models/version"
 ], function(
@@ -65,6 +67,8 @@ require([
   EncodeModel,
   HashView,
   HashModel,
+  FormatView,
+  FormatModel,
   VersionView,
   VersionModel
 ) {
@@ -104,6 +108,11 @@ require([
     new HashView({
       model : new HashModel(),
       el    : $('#tab-content-hash')
+    });
+
+    new FormatView({
+      model : new FormatModel(),
+      el    : $('#tab-content-format')
     });
 
     new VersionView({

@@ -25,7 +25,8 @@ define([
       "convert" : "tab",
       "encode"  : "tab",
       "decode"  : "tab",
-      "hash"    : "tab"
+      "hash"    : "tab",
+      "format"  : "tab"
     },
 
     apidoc : function() {

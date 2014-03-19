@@ -1,0 +1,121 @@
+#tab-content-format {
+
+  #result-search {
+    $clrObject    : #439400;
+    $clrObjectKey : #555555;
+    $clrArray     : #0b61a4;
+    $clrArrayKey  : #555555;
+    $clrString    : #64aa2b;
+    $clrNumber    : #ff7640;
+    $clrBoolean   : #66a3d2;
+
+    overflow: auto;
+    clear: both;
+    display: none;
+    font-size: 14px;
+
+    @include linear-gradient(to bottom, $color2, $color4);
+    border: solid 1px #000;
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;
+    font-family: $monoFont;
+
+    table {
+      margin: 5px;
+      border-spacing: 0px;
+
+      td {
+        white-space: nowrap;
+        padding: 2px 4px;
+        vertical-align: top;
+      }
+
+      td:first-child {
+        text-align: right;
+      }
+
+      td:only-child {
+        border-right: 0;
+      }
+    }
+
+    input[type="checkbox"]:not(:checked) ~ .object-content,
+    input[type="checkbox"]:not(:checked) ~ .array-content {
+      visible: none;
+      position: absolute;
+      bottom: -9999px;
+      opacity: 0;
+    }
+
+    /* The topmost element should have some niceties */
+    &>.object, &>.array, &>.string, &>.number, &>.boolean {
+      background-color: white;
+      max-width: 95%;
+      border: solid 1px black;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .string {
+      color: $clrString;
+    }
+
+    .number {
+      color: $clrNumber;
+    }
+
+    .boolean {
+      color: $clrBoolean;
+    }
+
+    .object,
+    .array {
+
+      &>label {
+        $padding : 5px;
+        padding: $padding $padding $padding ($padding + 20px);
+        margin-bottom: 5px;
+        cursor: pointer;
+
+        /* By default, show the plus ... */
+        background: url('/images/plus.png') no-repeat scroll top (1 + $padding) left $padding;
+        border-radius: 10px;
+
+        &:hover {
+          background-color: $shade9;
+        }
+      }
+
+      input[type="checkbox"]:checked ~ label {
+        /* ... but if the checkbox is checked, show a minus */
+        background-image: url('/images/minus.png');
+      }
+
+      .count {
+        color: #a62f00;
+      }
+    }
+
+    .object {
+      color: $clrObject;
+
+      .object-key {
+        color: $clrObjectKey;
+      }
+    }
+
+    .array {
+      color: $clrArray;
+
+      .array-key {
+        color: $clrArrayKey;
+      }
+    }
+
+    .object-content,
+    .array-content {
+      @include transition(opacity 0.35s);
+    }
+  }
+}

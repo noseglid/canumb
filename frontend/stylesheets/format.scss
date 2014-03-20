@@ -33,15 +33,14 @@
     $clrNumber    : #ff7640;
     $clrBoolean   : #66a3d2;
 
-    overflow: auto;
     clear: both;
     font-size: 14px;
 
     font-family: $monoFont;
+    overflow: auto;
 
     table {
-      margin: 5px;
-      border-spacing: 0px;
+      margin: 5px 20px;
 
       td {
         white-space: nowrap;
@@ -69,7 +68,6 @@
     /* The topmost element should have some niceties */
     &>.object, &>.array, &>.string, &>.number, &>.boolean {
       background-color: white;
-      max-width: 95%;
       border: solid 1px black;
       border-radius: 10px;
       padding: 10px;
@@ -89,15 +87,15 @@
 
     .object,
     .array {
+      overflow: auto;
 
       &>label {
         $padding : 5px;
-        padding: $padding $padding $padding ($padding + 20px);
-        margin-bottom: 5px;
+        padding: 0px $padding 0px ($padding + 20px);
         cursor: pointer;
 
         /* By default, show the plus ... */
-        background: url('/images/plus.png') no-repeat scroll top (1 + $padding) left $padding;
+        background: url('/images/plus.png') no-repeat scroll top 1px left $padding;
         border-radius: 10px;
 
         &:hover {
@@ -134,6 +132,12 @@
     .object-content,
     .array-content {
       @include transition(opacity 0.35s);
+      overflow: auto;
+    }
+
+    .empty {
+      color: $shade7;
+      font-style: italic;
     }
   }
 }

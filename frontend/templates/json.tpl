@@ -13,9 +13,14 @@ function recurse(obj, index) {
     </label>
 
     <table class="<%-type%>-content">
+    <% if (0 === _.size(obj)) { %>
+    <tr>
+      <td colspan="2" class="empty">&lt;empty&gt;</td>
+    </tr>
+    <% } %>
     <% _.each(obj, function(val, key) { %>
     <tr>
-      <td class="<%-type%>-key"><%-key%></td>
+      <td class="<%-type%>-key"><%-key%>:</td>
       <td class="<%-type%>-value"><% index = recurse(val, index); %></td>
     </tr>
   <% }); %>

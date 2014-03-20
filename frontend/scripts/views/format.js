@@ -27,12 +27,19 @@ define([
     events : {
       'input textarea' : 'updateData',
       'click img.expand' : 'toggleExpand',
-      'click img.shrink' : 'toggleExpand'
+      'click img.shrink' : 'toggleExpand',
+      'change input:checkbox' : 'checkboxStateChanged'
     },
 
     toggleExpand : function() {
       var el = this.$('input[type="checkbox"]');
       el.prop('checked', !el.prop('checked'));
+    },
+
+    checkboxStateChanged : function() {
+      var nchecked = this.$('#result-browse input:checkbox:checked').length;
+      var total = this.$('#result-browse input:checkbox').length;
+      this.$('#result-menu > input:checkbox').prop('checked', nchecked === total);
     },
 
     render : function() {

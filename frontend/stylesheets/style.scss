@@ -161,6 +161,48 @@ div#banner {
   }
 }
 
+/**
+ * Shamelessly stolen from 'nojs'.
+ * https://github.com/oskargustafsson/nojs
+ */
+$tab-height: 20px;
+.content-tabs {
+  position: relative;
+  overflow: auto;
+
+  input {
+    @extend .hidden;
+
+    &:checked + .tab {
+      @extend .show-state;
+    }
+  }
+
+  .tab {
+    height: $tab-height;
+    float: left;
+  }
+
+  article {
+    display: none;
+    float: right;
+  }
+
+  // This somehow forces Chrome 31 to repaint, which it otherwise does not
+  input:checked ~ article:last-of-type:first-of-type {
+    display: block;
+  }
+
+  input:checked + .tab + article {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-left: -100%;
+    margin-top: $tab-height + 15px;
+  }
+}
+
+
 hr {
   border: solid 1px $color8;
   clear: left;

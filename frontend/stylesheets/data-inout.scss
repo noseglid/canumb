@@ -12,12 +12,17 @@
     margin: 10px 0px;
     padding: 10px;
     resize: none;
+    border: solid 2px #fff;
     @include box-sizing(border-box);
 
     &.loading {
       background-image: url('/images/ajax-loader-black-on-white.gif');
       background-repeat: no-repeat;
       background-position: right 20px bottom 20px;
+    }
+
+    &.error {
+      border-color: $clrError;
     }
   }
 

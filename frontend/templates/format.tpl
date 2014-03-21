@@ -12,12 +12,25 @@
   </div>
 
   <div id="result">
-    <div id="result-menu">
-      <input type="checkbox" />
-      <img src="/images/plus-large.png" class="expand" />
-      <img src="/images/minus-large.png" class="shrink" />
+    <div class="content-tabs">
+      <input type="radio" name="format-tabs" id="format-tabs-browse" checked="checked" />
+      <label class="tab button" for="format-tabs-browse">browse</label>
+      <article>
+        <input type="checkbox" id="all-expand-collapse" />
+        <img src="/images/plus-large.png" class="expand" />
+        <img src="/images/minus-large.png" class="shrink" />
+        <div id="browse-area" class="format-result"></div>
+      </article>
+
+      <input type="radio" name="format-tabs" id="format-tabs-formatted" />
+      <label class="tab button" for="format-tabs-formatted">formatted</label>
+      <article><div id="formatted-area" class="format-result"></div></article>
+
+      <input type="radio" name="format-tabs" id="format-tabs-minified" />
+      <label class="tab button" for="format-tabs-minified">minified</label>
+      <article><div id="minified-area" class="format-result"></div></article>
+      <hr/>
     </div>
 
-    <div id="result-browse"></div>
   </div>
 </div>

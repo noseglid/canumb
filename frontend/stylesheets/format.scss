@@ -7,6 +7,15 @@
     border-radius: 5px;
     background-color: white;
     padding: 20px;
+    clear: both;
+    font-size: 14px;
+
+    div.format-result {
+      background-color: white;
+      border: solid 1px black;
+      border-radius: 10px;
+      padding: 10px;
+    }
 
     input[type="checkbox"]:checked ~ img.shrink {
       display: inline;
@@ -21,10 +30,23 @@
       display: none;
       cursor: pointer;
     }
-
   }
 
-  #result-browse {
+  .content-tabs .button {
+    margin-bottom: 0px;
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  .content-tabs .button {
+    color: black;
+    margin-left: 5px;
+  }
+
+  .content-tabs .button:nth-child(2) {
+    margin-left: 0px;
+  }
+
+  #browse-area {
     $clrObject    : #439400;
     $clrObjectKey : #555555;
     $clrArray     : #0b61a4;
@@ -32,9 +54,6 @@
     $clrString    : #64aa2b;
     $clrNumber    : #ff7640;
     $clrBoolean   : #66a3d2;
-
-    clear: both;
-    font-size: 14px;
 
     font-family: $monoFont;
     overflow: auto;
@@ -63,14 +82,6 @@
       position: absolute;
       bottom: -9999px;
       opacity: 0;
-    }
-
-    /* The topmost element should have some niceties */
-    &>.object, &>.array, &>.string, &>.number, &>.boolean {
-      background-color: white;
-      border: solid 1px black;
-      border-radius: 10px;
-      padding: 10px;
     }
 
     .string {
@@ -139,5 +150,13 @@
       color: $shade7;
       font-style: italic;
     }
+  }
+
+  #formatted-area,
+  #minified-area {
+    font-family: $monoFont;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: black;
   }
 }

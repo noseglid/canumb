@@ -37,22 +37,23 @@ define([
     },
 
     checkboxStateChanged : function() {
-      var nchecked = this.$('#result-browse input:checkbox:checked').length;
-      var total = this.$('#result-browse input:checkbox').length;
-      this.$('#result-menu > input:checkbox').prop('checked', nchecked === total);
+      var nchecked = this.$('#browse-area input:checkbox:checked').length;
+      var total = this.$('#browse-area input:checkbox').length;
+      this.$('#all-expand-collapse').prop('checked', nchecked === total);
     },
 
     render : function() {
-      this.$('textarea').css('border-color', 'white');
+      this.$('textarea').removeClass('error');
 
       if (null === this.model.get('parsed')) {
         this.$('#result').fadeOut(fadeTime);
         return;
       }
 
-      this.$('#result-browse').html(_.template(jsonTemplate, {
-        root : this.model.get('parsed')
-      }));
+      var jsonobj = this.model.get('parsed');
+      this.$('#browse-area').html(_.template(jsonTemplate, { root : jsonobj }));
+      this.$('#formatted-area').html(JSON.stringify(jsonobj, null, 4));
+      this.$('#minified-area').html(JSON.stringify(jsonobj));
 
       this.$('#result').fadeIn(fadeTime);
     },
@@ -62,7 +63,7 @@ define([
     },
 
     error : function() {
-      this.$('textarea').css('border-color', 'red');
+      this.$('textarea').addClass('error');
       this.$('#result').fadeOut(fadeTime);
     }
   });

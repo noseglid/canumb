@@ -10,7 +10,7 @@ various encoded format (base64 encoder decoder, uri encoder decoder).
 It's built in way to allow for extension when the future demands other input formats
 to be crunched.
 
-## See it in action
+## Demo
 Canumb is [hosted online for you to try out][CanumbAtHeroku]. You're free to
 use this as much as you want, either through the frontend or integrating
 in the API.

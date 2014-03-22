@@ -29,6 +29,8 @@ define([
       try {
         this.set('parsed', JSON.parse(this.get('data')));
       } catch (e) {
+        if (!(e instanceof SyntaxError)) throw e;
+
         this.set('error', {
           'title' : 'Invalid JSON',
           'message' : e.message

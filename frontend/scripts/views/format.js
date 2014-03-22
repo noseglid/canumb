@@ -54,6 +54,7 @@ define([
       this.$('#browse-area').html(_.template(jsonTemplate, { root : jsonobj }));
       this.$('#formatted-area').html(JSON.stringify(jsonobj, null, 4));
       this.$('#minified-area').html(JSON.stringify(jsonobj));
+      this.checkboxStateChanged();
 
       this.$('#result').fadeIn(fadeTime);
     },

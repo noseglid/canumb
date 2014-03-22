@@ -92,7 +92,6 @@ div#banner {
   margin: 0px;
   min-width: $contentWidth;
   height: $bannerHeight;
-  @include linear-gradient(to bottom, $color1, $color3);
 
   h1 {
     text-align: center;

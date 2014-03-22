@@ -54,6 +54,7 @@
     $clrString    : #64aa2b;
     $clrNumber    : #ff7640;
     $clrBoolean   : #66a3d2;
+    $clrNull      : #ffce40;
 
     font-family: $monoFont;
     overflow: auto;
@@ -95,6 +96,10 @@
 
     .boolean {
       color: $clrBoolean;
+    }
+
+    .null {
+      color: $clrNull;
     }
 
     .object,

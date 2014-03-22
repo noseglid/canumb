@@ -31,8 +31,22 @@ function recurse(obj, index) {
   <% }
 
   switch (typeof obj) {
+  case 'undefined':
+  case 'function':
+  case 'xml':
+    /* Not an JSON type. Should never occur. */
+    break;
+
   case 'object':
-    printNested(obj instanceof Array ? 'array' : 'object');
+    if (obj === null) {
+      print('<div class="null" title="null">');
+      print('null');
+      print('</div>');
+    } else if (obj instanceof Array) {
+      printNested('array');
+    } else if (obj instanceof Object) {
+      printNested('object');
+    }
     break;
 
   case 'string':

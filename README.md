@@ -72,6 +72,15 @@ Canumb can hash data using a wide array of algorithms:
 
 **Note**: If you're using this, or its accompanying api to hash any password for you site/application, you're insane. All texts into this API is clear-text (albeit maybe HTTPS if the server is set up for this). Don't do that. Don't be that guy.
 
+### Formatting
+
+Canumb can turn difficult-to-read data and turn it into something more manageable. Currently it only supports JSON in this sense, but it does it quite well. This is a frontend feature only.
+
+Input any valid JSON and you will get an expandable, browsable menu to look through the data. Excellent for
+interpreting what is other primarily meant for machines to read.
+
+You will also have the opportunity to get the minified, or a nicely indented version of your input data.
+
 ## Contribute
 Just make a pull request and your contribution will be considered (and assuming it's useful, merged) as soon as possible. This'll get your name on the contributors list aswell.
 

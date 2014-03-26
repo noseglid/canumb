@@ -20,7 +20,7 @@ exports.testBase64Decode = function(test) {
       testdonecb();
     });
   });
-}
+};
 
 exports.testInvalidBase64Decode = function(test) {
   api.request(['decode', 'base64'], 'POST', { 'data' : '*' }, function(actual, code) {
@@ -28,7 +28,7 @@ exports.testInvalidBase64Decode = function(test) {
     test.equals(actual.code, 'InvalidArgument');
     test.done();
   });
-}
+};
 
 exports.testUriDecode = function(test) {
   var tests = [
@@ -48,7 +48,7 @@ exports.testUriDecode = function(test) {
       testdonecb();
     });
   });
-}
+};
 
 exports.testInvalidUriDecode = function(test) {
   api.request(['decode', 'uri'], 'POST', { 'data' : '%3' }, function(actual, code) {
@@ -56,7 +56,7 @@ exports.testInvalidUriDecode = function(test) {
     test.equals(actual.code, 'InvalidArgument');
     test.done();
   });
-}
+};
 
 exports.testBase85Decode = function(test) {
   var tests = [
@@ -75,7 +75,7 @@ exports.testBase85Decode = function(test) {
       testdonecb();
     });
   });
-}
+};
 
 exports.testInvalidBase85Decode = function(test) {
   var tests = [
@@ -97,7 +97,7 @@ exports.testInvalidBase85Decode = function(test) {
       testdonecb();
     });
   });
-}
+};
 
 exports.testMultipart = function(test) {
   api.multipartRequest(['decode', 'uri'], { 'data' : 'hello' }, function(actual, code) {

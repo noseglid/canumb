@@ -19,9 +19,9 @@ exports.toBinBasic = function(test) {
   test.equals(oct.to.bin('1'),    '1');
   test.equals(oct.to.bin('7'),    '111');
   test.equals(oct.to.bin('10'),   '1000');
-  test.equals(oct.to.bin('100'),  '1000000')
-  test.equals(oct.to.bin('02'),   '10')
-  test.equals(oct.to.bin('0001'), '1')
+  test.equals(oct.to.bin('100'),  '1000000');
+  test.equals(oct.to.bin('02'),   '10');
+  test.equals(oct.to.bin('0001'), '1');
   test.equals(oct.to.bin(new Array(24 + 1).join('7')), new Array(3 * 24 + 1).join('1'));
   test.done();
 };
@@ -50,7 +50,7 @@ exports.toDecBasic = function(test) {
   test.equals(oct.to.dec('0001'), '1');
   test.equals(oct.to.dec('143'),  '99');
   test.equals(oct.to.dec('144'),  '100');
-  test.equals(oct.to.dec('6666'), '3510')
+  test.equals(oct.to.dec('6666'), '3510');
   test.equals(oct.to.dec(new Array(24 + 1).join('7')), '4722366482869645213695');
   test.equals(oct.to.dec(new Array(28 + 1).join('7')), '19342813113834066795298815');
   test.done();

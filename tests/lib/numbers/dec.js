@@ -54,7 +54,7 @@ exports.toDecBasic = function(test) {
   test.equals(dec.to.dec('0001'), '1');
   test.equals(dec.to.dec('99'),   '99');
   test.equals(dec.to.dec('100'),  '100');
-  test.equals(dec.to.dec('6666'), '6666')
+  test.equals(dec.to.dec('6666'), '6666');
   test.equals(dec.to.dec('4722366482869645213695'), '4722366482869645213695');
   test.done();
 };

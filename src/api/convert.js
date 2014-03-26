@@ -39,24 +39,29 @@ function api(request, response, next)
   }
 
   if (digitMax < request.body.number.length) {
-    throw new errors.TooLarge("Number can't be more than 1000 digits.");
+    throw new errors.TooLarge('Number can\'t be more than 1000 digits.');
   }
 
   var result = {};
 
   switch(request.params.base) {
-  case 'bin': result = convert(bin, request.body.number);               break;
-  case 'oct': result = convert(oct, request.body.number);               break;
-  case 'dec': result = convert(dec, request.body.number);               break;
-  case 'hex': result = convert(hex, request.body.number.toLowerCase()); break;
-
+  case 'bin':
+    result = convert(bin, request.body.number);
+    break;
+  case 'oct':
+    result = convert(oct, request.body.number);
+    break;
+  case 'dec':
+    result = convert(dec, request.body.number);
+    break;
+  case 'hex':
+    result = convert(hex, request.body.number.toLowerCase());
+    break;
   default:
     throw new errors.InvalidArgument(
-      "Base not supported: '" + request.params.base + "'"
+      'Base not supported: \'' + request.params.base + '\''
     );
-    break;
-
-  };
+  }
 
   response.send(result);
   return next();
@@ -107,7 +112,7 @@ exports.doc.errors = [
     'type'        : errors.InvalidArgument,
     'description' : 'Thrown if an unknown base is supplied.'
   }
-]
+];
 
 exports.entry = [
   require('restify').bodyParser({

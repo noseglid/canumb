@@ -1,9 +1,7 @@
 define([
-  'backbone',
-  'jquery'
+  'backbone'
 ], function(
-  Backbone,
-  $
+  Backbone
 ) {
   return Backbone.Model.extend({
 

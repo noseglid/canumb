@@ -32,14 +32,14 @@ define([
       this.update(this, null, {});
     },
 
-    update : function(model, response, options) {
+    update : function(model, response) {
       this.set('decoded', response);
       this.set('error', null);
 
       this.trigger('syncFinished');
     },
 
-    error : function(model, xhr, options) {
+    error : function(model, xhr) {
       this.trigger('syncFinished');
       this.set('decoded', null);
       this.set('error', null); // Set to null to trigger a change

@@ -9,7 +9,7 @@
   },
   "scripts": {
     "postinstall": "./node_modules/.bin/bower install --config.interactive=false && ./node_modules/.bin/grunt",
-    "test": "node tests/main.js",
+    "test": "./node_modules/.bin/jshint . && node tests/main.js",
     "start": "node src/main.js"
   },
   "dependencies": {
@@ -26,7 +26,8 @@
     "node-bourbon": "1.0.x",
     "nodeunit": "0.8.x",
     "newrelic": "1.4.x",
-    "request": "2.34.x"
+    "request": "2.34.x",
+    "jshint": "2.4.x"
   },
   "keywords": [
     "number",

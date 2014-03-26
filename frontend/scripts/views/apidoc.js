@@ -1,14 +1,16 @@
 define([
   'jquery',
   'backbone',
+  'underscore',
   'vex',
   'growl',
 
-  "text!/templates/apidoc.tpl",
-  "text!/templates/apidoc-details.tpl"
+  'text!/templates/apidoc.tpl',
+  'text!/templates/apidoc-details.tpl'
 ], function(
   $,
   Backbone,
+  _,
   vex,
   growl,
 
@@ -43,7 +45,7 @@ define([
       var contents = _.template(template, {
         'apis' : this.model.get('apis'),
         'version' : this.model.get('version')
-      })
+      });
 
       var self = this;
       vex.open({

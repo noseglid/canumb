@@ -88,7 +88,7 @@ function lookup(input, output, key) {
  */
 function pad(width, number)
 {
-  return Array(1 + width - number.length).join('0') + number;
+  return new Array(1 + width - number.length).join('0') + number;
 }
 
 /**

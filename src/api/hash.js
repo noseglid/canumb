@@ -1,7 +1,5 @@
 var crypto = require('crypto');
 var _      = require('underscore');
-var base85 = require('base85');
-var fs      = require('fs');
 
 var errors = require('../lib/errors.js');
 
@@ -22,7 +20,7 @@ var hashes = [
 function api(request, response, next)
 {
   if (-1 === hashes.indexOf(request.params.algorithm)) {
-    throw new errors.InvalidArgument("Unsupported algorithm: '" + request.params.algorithm);
+    throw new errors.InvalidArgument('Unsupported algorithm: \'' + request.params.algorithm + '\'');
   }
 
   var dataProvider;
@@ -96,7 +94,7 @@ exports.doc.input = [
     'type'        : 'string',
     'description' : 'The data to hash. May be sent as a file.'
   }
-]
+];
 
 exports.doc.description = 'Hashes data using a specified algorithm.';
 

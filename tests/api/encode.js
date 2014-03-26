@@ -43,7 +43,7 @@ exports.testUriEncode = function(test) {
       testdonecb();
     });
   });
-}
+};
 
 exports.testBase85Encode = function(test) {
   var tests = [
@@ -60,7 +60,7 @@ exports.testBase85Encode = function(test) {
       testdonecb();
     });
   });
-}
+};
 
 exports.testMultipart = function(test) {
   api.multipartRequest(['encode', 'uri'], { 'data' : 'hello' }, function(actual, code) {

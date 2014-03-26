@@ -4,6 +4,8 @@ function api(request, response, next)
   response.send({
     'version' : require('../../package.json').version
   });
+
+  next();
 }
 
 exports.api  = 'meta';
@@ -16,8 +18,8 @@ exports.doc = {};
 
 exports.doc.input = [];
 
-exports.doc.description = 'Returns meta information, such as version.'
+exports.doc.description = 'Returns meta information, such as version.';
 
-exports.doc.errors = [ ]
+exports.doc.errors = [ ];
 
 exports.entry  = api;

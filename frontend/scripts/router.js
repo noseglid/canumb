@@ -1,6 +1,7 @@
 define([
   'underscore',
   'backbone',
+  'jquery',
 
   'views/apidoc',
   'models/apidoc'
@@ -8,6 +9,8 @@ define([
 ], function(
   _,
   Backbone,
+  $,
+
   ApidocView,
   ApidocModel
 ) {
@@ -21,12 +24,12 @@ define([
     },
 
     routes : {
-      "apidoc"  : "apidoc",
-      "convert" : "tab",
-      "encode"  : "tab",
-      "decode"  : "tab",
-      "hash"    : "tab",
-      "format"  : "tab"
+      'apidoc'  : 'apidoc',
+      'convert' : 'tab',
+      'encode'  : 'tab',
+      'decode'  : 'tab',
+      'hash'    : 'tab',
+      'format'  : 'tab'
     },
 
     apidoc : function() {

@@ -3,8 +3,8 @@ define([
   'underscore',
   'backbone',
 
-  "text!/templates/decenc.tpl",
-  "text!/templates/decenc-result.tpl"
+  'text!/templates/decenc.tpl',
+  'text!/templates/decenc-result.tpl'
 ], function(
   $,
   _,
@@ -41,12 +41,12 @@ define([
         return;
       }
 
-      this,$('#encode-result').html(_.template(resultTemplate, {
+      this.$('#encode-result').html(_.template(resultTemplate, {
         'data' : this.model.get('encoded')
       })).fadeIn(fadeTime);
     },
 
-    error : function(e) {
+    error : function() {
       var err = this.model.get('error');
       if (!err) {
         return;

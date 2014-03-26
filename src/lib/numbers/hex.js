@@ -1,7 +1,6 @@
 var _ = require('underscore');
 
 var bin     = require('./bin.js');
-var dec     = require('./dec.js');
 var numhelp = require('./numhelp.js');
 var errors = require('../errors.js');
 
@@ -33,10 +32,10 @@ function hex2dec(number)
   number = number.toLowerCase();
   validate(number);
 
-  var add = function(x, y) {
+  var add = function(ix, iy) {
     var c = 0, r = [];
-    var x = x.split('').map(Number);
-    var y = y.split('').map(Number);
+    var x = ix.split('').map(Number);
+    var y = iy.split('').map(Number);
 
     while (x.length || y.length) {
       var s = (x.pop() || 0) + (y.pop() || 0) + c;
@@ -46,10 +45,10 @@ function hex2dec(number)
     if (c)
       r.unshift(c);
     return r.join('');
-  }
+  };
 
   var decimal = '0';
-  _.each(number.split(''), function(c, index) {
+  _.each(number.split(''), function(c) {
     var n = parseInt(c, 16);
     for (var t = 8; t; t >>= 1) {
       decimal = add(decimal, decimal);
@@ -72,4 +71,4 @@ exports.to = {
   oct : hex2oct,
   dec : hex2dec,
   hex : hex2hex
-}
+};

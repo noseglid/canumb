@@ -4,8 +4,8 @@ define([
   'growl',
   'backbone',
 
-  "text!/templates/hash.tpl",
-  "text!/templates/hash-result.tpl"
+  'text!/templates/hash.tpl',
+  'text!/templates/hash-result.tpl'
 ], function(
   $,
   _,
@@ -64,7 +64,7 @@ define([
       })).show();
     },
 
-    error : function(e) {
+    error : function() {
       var err = this.model.get('error');
       if (!err) {
         return;
@@ -80,8 +80,8 @@ define([
       this.$('textarea').removeClass('loading');
       this.$('#upload-ajax-loader').hide();
       this.$('#upload-nice-text').text('');
-      (this.model.get('data') instanceof FormData) ?
-        this.resetTextArea() : this.resetFile();
+      if (this.model.get('data') instanceof FormData) this.resetTextArea();
+      else this.resetFile();
     },
 
     updateDataFromTextArea : function() {
@@ -106,8 +106,8 @@ define([
     },
 
     updateAlgorithm : function() {
-      (this.model.get('data') instanceof FormData) ?
-        this.$('#upload-ajax-loader').show() : this.$('textarea').addClass('loading');
+      if (this.model.get('data') instanceof FormData) this.$('#upload-ajax-loader').show();
+      else this.$('textarea').addClass('loading');
 
       var val = this.$('input[name="algorithm"]:checked').val();
       this.model.set('algorithm', val);
@@ -121,7 +121,7 @@ define([
       this.$('#source-upload').prop('checked', true);
       this.$('#upload-ajax-loader').show();
       var formData = new FormData(this.$('#upload-form')[0]);
-      this.model.set('data', false, { "silent" : true });
+      this.model.set('data', false, { 'silent' : true });
       this.model.set('data', formData);
     },
 
@@ -140,7 +140,7 @@ define([
     },
 
     resetTextArea : function() {
-      this.$('textarea').val('')
+      this.$('textarea').val('');
     }
   });
 });

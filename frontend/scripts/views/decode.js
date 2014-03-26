@@ -4,8 +4,8 @@ define([
   'growl',
   'backbone',
 
-  "text!/templates/decenc.tpl",
-  "text!/templates/decenc-result.tpl"
+  'text!/templates/decenc.tpl',
+  'text!/templates/decenc-result.tpl'
 ], function(
   $,
   _,
@@ -43,12 +43,12 @@ define([
         return;
       }
 
-      this,$('#decode-result').html(_.template(resultTemplate, {
+      this.$('#decode-result').html(_.template(resultTemplate, {
         'data' : this.model.get('decoded').utf8
       })).fadeIn(fadeTime);
     },
 
-    error : function(e) {
+    error : function() {
       var err = this.model.get('error');
       if (!err) {
         return;

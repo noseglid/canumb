@@ -1,4 +1,3 @@
-var _      = require('underscore');
 var base85 = require('base85');
 
 var errors = require('../lib/errors.js');
@@ -25,10 +24,9 @@ function api(request, response, next)
 
   default:
     throw new errors.InvalidArgument(
-      "Unsupported algorithm: '" + request.params.algorithm
+      'Unsupported algorithm: \'' + request.params.algorithm + '\''
     );
-    break;
-  };
+  }
 
   response.send(resp);
   return next();
@@ -54,7 +52,7 @@ exports.doc.input = [
     'type'        : 'string',
     'description' : 'The data to encode.'
   }
-]
+];
 
 exports.doc.description = 'Encodes data using a specified algorithm.';
 

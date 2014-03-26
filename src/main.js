@@ -1,5 +1,6 @@
 /* If environment for New Relic is set, fire it up */
-process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME && require('newrelic');
+if (process.env.NEW_RELIC_LICENSE_KEY && process.env.NEW_RELIC_APP_NAME)
+  require('newrelic');
 
 var fs      = require('fs');
 var restify = require('restify');
@@ -28,10 +29,10 @@ server.use(restify.CORS());
 
 fs.readdir(apidir, function(err, files) {
   if (err)
-    throw new errors.Error("Could not find APIs. " + err);
+    throw new errors.Error('Could not find APIs. ' + err);
 
   files = _.filter(files, function(file) {
-    return file.match('^[a-z]+\.js$');
+    return file.match(/^[a-z]+\.js$/);
   });
 
   var apiList = _.map(files, function(file) {
@@ -47,10 +48,10 @@ function setupAPI(apiList) {
   server.get('/doc', _.bind(serveDocumentation, {}, apiList));
 
   _.each(apiList, function(api) {
-    var list = _.map(api.rest, function(p) { return p.name });
+    var list = _.map(api.rest, function(p) { return p.name; });
     var path = util.format('/%s', api.api);
     if (0 < list.length) path += '/:' + list.join('/:');
-    console.log("'%s' api '%s', path '%s'", api.method, api.api, path);
+    console.log('\'%s\' api \'%s\', path \'%s\'', api.method, api.api, path);
 
     /* Register specific API */
     server[api.method](path, api.entry);
@@ -61,7 +62,7 @@ function setupAPI(apiList) {
 
   var regex = /^\/?.*/;
   var pub   = './public';
-  console.log("'get' public pages from '%s', path '%s'", pub, regex);
+  console.log('\'get\' public pages from \'%s\', path \'%s\'', pub, regex);
   server.get(regex, restify.serveStatic({
     'default'   : 'index.html',
     'directory' : pub
@@ -69,16 +70,16 @@ function setupAPI(apiList) {
 }
 
 function serveDocumentation(apiList, request, response, next) {
-  var apiList = _.map(apiList, function(api) {
+  var mappedList = _.map(apiList, function(api) {
     return {
       'api'         : api.api,
       'description' : api.doc.description
-    }
+    };
   });
 
   response.send({
     'version' : version,
-    'apis'    : apiList
+    'apis'    : mappedList
   });
 
   return next();
@@ -92,7 +93,7 @@ function serveAPIDocumentation(api, request, response, next) {
       'httpcode'    : new err.type().statusCode,
       'resterror'   : new err.type().restCode
     };
-  })
+  });
 
   response.send({
     'api'         : api.api,
@@ -108,7 +109,7 @@ function serveAPIDocumentation(api, request, response, next) {
 
 server.listen(port, function() {
   console.log('%s (%s) listening at %s', server.name, version, server.url);
-})
+});
 
 server.on('uncaughtException', function(request, response, route, error) {
   if (error instanceof errors.APIError) {

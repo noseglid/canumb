@@ -14,8 +14,8 @@ function readJSONResponse(cb, res) {
   res.on('end', function(e) {
     var obj = JSON.parse(data);
     cb(obj, res.statusCode);
-  })
-};
+  });
+}
 
 function oldRequest(rest, method, data, done)
 {
@@ -90,7 +90,7 @@ function multipartRequest(rest, params, cb)
   var url = util.format('http://localhost:%d/%s', process.env.PORT, rest.join('/'));
 
   var _cb = function(err, res, body) {
-    cb(err ? null : JSON.parse(body), res.statusCode)
+    cb(err ? null : JSON.parse(body), res.statusCode);
   };
 
   var req = request.post(url, _cb);

@@ -4,8 +4,8 @@ define([
   'growl',
   'backbone',
 
-  "text!/templates/convert.tpl",
-  "text!/templates/convert-result.tpl"
+  'text!/templates/convert.tpl',
+  'text!/templates/convert-result.tpl'
 ], function(
   $,
   _,
@@ -51,9 +51,9 @@ define([
 
       this.$('#convert-result').html(_.template(resultTemplate, {
         bin : converted.bin[this.align ? 'group8' : 'standard'],
-        oct : converted.oct['standard'],
-        dec : converted.dec['standard'],
-        hex : converted.hex['standard'],
+        oct : converted.oct.standard,
+        dec : converted.dec.standard,
+        hex : converted.hex.standard,
         checked : this.align ? 'checked="checked"' : ''
       })).fadeIn(fadeTime);
     },

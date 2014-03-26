@@ -15,7 +15,7 @@ function base64(data)
     'ascii' : buffer.toString('ascii'),
     'utf8'  : buffer.toString('utf8'),
     'hex'   : buffer.toString('hex')
-  }
+  };
 }
 
 function uri(data)
@@ -23,7 +23,7 @@ function uri(data)
   try {
     return { 'utf8' : decodeURIComponent(data) };
   } catch (e) {
-    throw new errors.InvalidArgument("Unable to decode uri: " + data);
+    throw new errors.InvalidArgument('Unable to decode uri: ' + data);
   }
 }
 
@@ -36,7 +36,7 @@ function fnbase85(data)
       data[1]               !== '~' ||
       data[data.length - 2] !== '~' ||
       data[data.length - 1] !== '>') {
-    throw new errors.InvalidArgument("Base85 data must be enclosed by '<~' and '~>'.");
+    throw new errors.InvalidArgument('Base85 data must be enclosed by \'<~\' and \'~>\'.');
   }
 
   var re =
@@ -76,10 +76,9 @@ function api(request, response, next)
 
   default:
     throw new errors.InvalidArgument(
-      "Unsupported algorithm: '" + request.params.algorithm + "'"
+      'Unsupported algorithm: \'' + request.params.algorithm + '\''
     );
-    break;
-  };
+  }
 
   response.send(handler(request.body.data));
   return next();

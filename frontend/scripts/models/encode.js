@@ -32,7 +32,7 @@ define([
       this.update(this, null, {});
     },
 
-    update : function(model, response, options) {
+    update : function(model, response) {
       var val = response ? response[this.get('algorithm')] : null;
       this.set('encoded', val);
       this.set('error', null);
@@ -40,7 +40,7 @@ define([
       this.trigger('syncFinished');
     },
 
-    error : function(model, xhr, options) {
+    error : function(model, xhr) {
       this.trigger('syncFinished');
       this.set('encoded', null);
       this.set('error', null); // Set to null to trigger a change

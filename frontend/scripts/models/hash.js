@@ -1,9 +1,11 @@
 define([
   'backbone',
-  'jquery'
+  'jquery',
+  'underscore'
 ], function(
   Backbone,
-  $
+  $,
+  _
 ) {
   return Backbone.Model.extend({
 
@@ -42,7 +44,7 @@ define([
         },
         'data' : formData,
         'success' : _.bind(this.update, this, this),
-        'error' : function(xhr, textStatus, error) {
+        'error' : function(xhr) {
           self.error(self, xhr);
         },
         contentType: false,
@@ -57,11 +59,11 @@ define([
        * which FormData doesn't trigger
        */
 
-       this.resync = false;
-       if (this.syncing) {
-         this.resync = true;
-         return;
-       }
+      this.resync = false;
+      if (this.syncing) {
+        this.resync = true;
+        return;
+      }
 
       this.syncing = true;
       if (typeof this.get('data') === 'string') {
@@ -71,7 +73,7 @@ define([
       }
     },
 
-    update : function(model, response, options) {
+    update : function(model, response) {
       this.set('hashed', response);
       this.set('error', null);
 
@@ -84,7 +86,7 @@ define([
       this.trigger('syncFinished');
     },
 
-    error : function(model, xhr, options) {
+    error : function(model, xhr) {
       this.syncing = false;
       this.trigger('syncFinished');
 

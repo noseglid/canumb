@@ -5,7 +5,7 @@ function APIError(message, statusCode, restCode)
   this.statusCode = statusCode; /* The HTTP error code */
   this.restCode   = restCode;   /* An easy-to-read REST error */
   this.message    = message;
-};
+}
 
 /* Funky inheritance since 'Error' constructor
    returns instance rather than manipulatiing 'this' */

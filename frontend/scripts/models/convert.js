@@ -31,13 +31,13 @@ define([
       this.update(this, null, {});
     },
 
-    update : function(model, response, options) {
+    update : function(model, response) {
       this.trigger('syncFinished');
       this.set('converted', response);
       this.set('error', null);
     },
 
-    error : function(model, xhr, options) {
+    error : function(model, xhr) {
       this.trigger('syncFinished');
 
       /* That conversion didn't work, must set converted to match

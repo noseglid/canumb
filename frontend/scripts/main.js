@@ -1,58 +1,58 @@
 requirejs.config({
-  "baseUrl" : "/scripts",
-  "paths" : {
-    "text"              : "libs/text",
-    "underscore"        : "libs/underscore-min",
-    "backbone"          : "libs/backbone",
-    "jquery"            : "libs/jquery.min",
-    "jquery-ui-widget"  : "libs/ui.widget.jquery",
-    "growl"             : "libs/jquery.growl",
-    "google-analytics"  : [ "//www.google-analytics.com/analytics", "libs/analytics" ],
-    "vex"               : "libs/vex.min",
-    "vexDialog"         : "libs/vex.dialog.min",
+  'baseUrl' : '/scripts',
+  'paths' : {
+    'text'              : 'libs/text',
+    'underscore'        : 'libs/underscore-min',
+    'backbone'          : 'libs/backbone',
+    'jquery'            : 'libs/jquery.min',
+    'jquery-ui-widget'  : 'libs/ui.widget.jquery',
+    'growl'             : 'libs/jquery.growl',
+    'google-analytics'  : [ '//www.google-analytics.com/analytics', 'libs/analytics' ],
+    'vex'               : 'libs/vex.min',
+    'vexDialog'         : 'libs/vex.dialog.min',
   },
 
-  "shim" : {
-    "underscore" : {
-      "exports" : "_"
+  'shim' : {
+    'underscore' : {
+      'exports' : '_'
     },
-    "growl" : {
-      "deps" : [ "jquery" ]
+    'growl' : {
+      'deps' : [ 'jquery' ]
     },
-    "backbone" : {
-      "deps" : [ "jquery", "underscore" ],
-      "exports" : "Backbone"
+    'backbone' : {
+      'deps' : [ 'jquery', 'underscore' ],
+      'exports' : 'Backbone'
     },
-    "google-analytics" : {
-      "exports" : "ga"
+    'google-analytics' : {
+      'exports' : 'ga'
     },
-    "vex" : {
-      "deps" : [ "jquery" ]
+    'vex' : {
+      'deps' : [ 'jquery' ]
     },
-    "vexDialog" : {
-      "deps" : [ "vex", "jquery" ]
+    'vexDialog' : {
+      'deps' : [ 'vex', 'jquery' ]
     }
   }
 });
 
 require([
-  "jquery",
-  "backbone",
-  "router",
-  "google-analytics",
+  'jquery',
+  'backbone',
+  'router',
+  'google-analytics',
 
-  "views/convert",
-  "models/convert",
-  "views/decode",
-  "models/decode",
-  "views/encode",
-  "models/encode",
-  "views/hash",
-  "models/hash",
-  "views/format",
-  "models/format",
-  "views/version",
-  "models/version"
+  'views/convert',
+  'models/convert',
+  'views/decode',
+  'models/decode',
+  'views/encode',
+  'models/encode',
+  'views/hash',
+  'models/hash',
+  'views/format',
+  'models/format',
+  'views/version',
+  'models/version'
 ], function(
   $,
   Backbone,
@@ -75,14 +75,14 @@ require([
   ga('create', 'UA-47615700-1', 'auto');
   ga('send', 'pageview');
 
-  var BackboneOriginalSync = Backbone.sync;
+  var backboneOriginalSync = Backbone.sync;
   Backbone.sync = function(method, model, options) {
     var url = typeof model.url === 'function' ? model.url() : model.url;
     ga('send', 'pageview', { page : url });
-    BackboneOriginalSync(method, model, options);
+    backboneOriginalSync(method, model, options);
   };
 
-  var router = new Router();
+  new Router();
   Backbone.history.start();
 
   $(function() {

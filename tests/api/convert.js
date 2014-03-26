@@ -15,7 +15,7 @@ exports.testBinary = function(test) {
     test.equals(actual.hex.standard, 'f');
     test.done();
   });
-}
+};
 
 exports.testInvalidBinary = function(test) {
   var done = _.after(3, test.done);
@@ -36,7 +36,7 @@ exports.testInvalidBinary = function(test) {
     test.equals(actual.code, 'MissingArgument');
     done();
   });
-}
+};
 
 exports.testOctal = function(test) {
   api.request(['convert', 'oct'], 'POST', { 'number' : '77' }, function(actual, code) {
@@ -47,7 +47,7 @@ exports.testOctal = function(test) {
     test.equals(actual.hex.standard, '3f');
     test.done();
   });
-}
+};
 
 exports.testInvalidOctal = function(test) {
   var done = _.after(3, test.done);
@@ -68,7 +68,7 @@ exports.testInvalidOctal = function(test) {
     test.equals(actual.code, 'MissingArgument');
     done();
   });
-}
+};
 
 exports.testDecimal = function(test) {
   api.request(['convert', 'dec'], 'POST', { 'number' : '99' }, function(actual, code) {
@@ -79,7 +79,7 @@ exports.testDecimal = function(test) {
     test.equals(actual.hex.standard, '63');
     test.done();
   });
-}
+};
 
 exports.testInvalidDecimal = function(test) {
   var done = _.after(3, test.done);
@@ -100,7 +100,7 @@ exports.testInvalidDecimal = function(test) {
     test.equals(actual.code, 'MissingArgument');
     done();
   });
-}
+};
 
 exports.testHexadecimal = function(test) {
   api.request(['convert', 'hex'], 'POST', { 'number' : 'ff' }, function(actual, code) {
@@ -111,7 +111,7 @@ exports.testHexadecimal = function(test) {
     test.equals(actual.hex.standard, 'ff');
     test.done();
   });
-}
+};
 
 exports.testInvalidHexadecimal = function(test) {
   var done = _.after(3, test.done);
@@ -132,7 +132,7 @@ exports.testInvalidHexadecimal = function(test) {
     test.equals(actual.code, 'MissingArgument');
     done();
   });
-}
+};
 
 exports.testMultipart = function(test) {
   api.multipartRequest(['convert', 'dec'], { 'number' : '12' }, function(actual, code) {

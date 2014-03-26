@@ -19,10 +19,10 @@ exports.toBinBasic = function(test) {
   test.equals(hex.to.bin('1'),    '1');
   test.equals(hex.to.bin('7'),    '111');
   test.equals(hex.to.bin('a'),    '1010');
-  test.equals(hex.to.bin('f'),    '1111')
-  test.equals(hex.to.bin('1f'),   '11111')
-  test.equals(hex.to.bin('0001'), '1')
-  test.equals(hex.to.bin('000a'), '1010')
+  test.equals(hex.to.bin('f'),    '1111');
+  test.equals(hex.to.bin('1f'),   '11111');
+  test.equals(hex.to.bin('0001'), '1');
+  test.equals(hex.to.bin('000a'), '1010');
   test.equals(hex.to.bin('ffffffffffffffffff'), new Array(72 + 1).join('1'));
   test.done();
 };
@@ -73,7 +73,7 @@ exports.toDecBasic = function(test) {
   test.equals(hex.to.dec('63'),   '99');
   test.equals(hex.to.dec('64'),   '100');
   test.equals(hex.to.dec('ff'),   '255');
-  test.equals(hex.to.dec('6666'), '26214')
+  test.equals(hex.to.dec('6666'), '26214');
   test.equals(hex.to.dec('12345678909876543'), '20988295476698113347');
   test.equals(hex.to.dec('ffffffffffffffffff'), '4722366482869645213695');
   test.done();

@@ -3,8 +3,8 @@ define([
   'backbone',
   'jquery',
 
-  'views/apidoc',
-  'models/apidoc'
+  'scripts/views/apidoc',
+  'scripts/models/apidoc'
 
 ], function(
   _,

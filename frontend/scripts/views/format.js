@@ -3,8 +3,8 @@ define([
   'underscore',
   'backbone',
 
-  'text!/templates/format.tpl',
-  'text!/templates/json.tpl'
+  'text!templates/format.tpl',
+  'text!templates/json.tpl'
 ], function(
   $,
   _,

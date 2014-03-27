@@ -4,8 +4,8 @@ define([
   'growl',
   'backbone',
 
-  'text!/templates/convert.tpl',
-  'text!/templates/convert-result.tpl'
+  'text!templates/convert.tpl',
+  'text!templates/convert-result.tpl'
 ], function(
   $,
   _,

@@ -89,6 +89,7 @@ module.exports = function(grunt) {
           '--include-path ./node_modules/node-bourbon/assets/stylesheets/',
           '--include-path ./bower_components/vex/css/',
           '--include-path ./bower_components/growl/stylesheets/',
+          '--output-style compressed',
           './frontend/stylesheets/style.scss',
           './public/stylesheets/style.css'
         ].join(' ')
@@ -97,12 +98,37 @@ module.exports = function(grunt) {
 
     'curl' : {
       './public/scripts/libs/analytics.js' : 'http://www.google-analytics.com/analytics.js'
+    },
+
+    'requirejs' : {
+      'compile' : {
+        'options' : {
+          'baseUrl' : 'public',
+          'name' : 'scripts/main',
+          'mainConfigFile' : 'public/scripts/main.js',
+          'out' : 'public/scripts/main-built.js',
+          'preserveLicenseComments' : false,
+          'paths' : {
+            'google-analytics'  : 'scripts/libs/analytics'
+          }
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-curl');
 
-  grunt.registerTask('default', [ 'copy', 'exec', 'curl' ]);
+  grunt.registerTask('develPage', 'Create a development index page', function() {
+    var file = grunt.file.read('public/index.html');
+    grunt.file.write(
+      'public/index-dev.html',
+      file.replace(/data-main="scripts\/main-built"/, 'data-main="scripts/main"')
+    );
+  });
+
+  grunt.registerTask('default', [ 'copy', 'exec', 'curl', 'requirejs' ]);
+  grunt.registerTask('dev', [ 'copy', 'exec', 'develPage' ]);
 };

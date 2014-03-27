@@ -4,8 +4,8 @@ define([
   'growl',
   'backbone',
 
-  'text!/templates/hash.tpl',
-  'text!/templates/hash-result.tpl'
+  'text!templates/hash.tpl',
+  'text!templates/hash-result.tpl'
 ], function(
   $,
   _,

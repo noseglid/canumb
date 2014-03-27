@@ -3,8 +3,8 @@ define([
   'underscore',
   'backbone',
 
-  'text!/templates/decenc.tpl',
-  'text!/templates/decenc-result.tpl'
+  'text!templates/decenc.tpl',
+  'text!templates/decenc-result.tpl'
 ], function(
   $,
   _,

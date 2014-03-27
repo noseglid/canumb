@@ -5,8 +5,8 @@ define([
   'vex',
   'growl',
 
-  'text!/templates/apidoc.tpl',
-  'text!/templates/apidoc-details.tpl'
+  'text!templates/apidoc.tpl',
+  'text!templates/apidoc-details.tpl'
 ], function(
   $,
   Backbone,

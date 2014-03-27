@@ -3,7 +3,7 @@ define([
   'backbone',
   'underscore',
 
-  'text!/templates/version.tpl'
+  'text!templates/version.tpl'
 ], function(
   $,
   Backbone,

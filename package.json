@@ -26,9 +26,9 @@
     "node-sass": "0.8.x",
     "node-bourbon": "1.0.x",
     "nodeunit": "0.8.x",
-    "newrelic": "1.4.x",
+    "newrelic": "1.5.x",
     "request": "2.34.x",
-    "jshint": "2.4.x"
+    "jshint": "2.5.x"
   },
   "keywords": [
     "number",

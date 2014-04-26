@@ -26,20 +26,16 @@ define([
 
     events : {
       'input textarea' : 'updateData',
-      'click img.expand' : 'toggleExpand',
-      'click img.shrink' : 'toggleExpand',
-      'change input:checkbox' : 'checkboxStateChanged'
+      'click img.expand' : function() {
+        this.setExpand(true);
+      },
+      'click img.shrink' : function() {
+        this.setExpand(false);
+      }
     },
 
-    toggleExpand : function() {
-      var el = this.$('input[type="checkbox"]');
-      el.prop('checked', !el.prop('checked'));
-    },
-
-    checkboxStateChanged : function() {
-      var nchecked = this.$('#browse-area input:checkbox:checked').length;
-      var total = this.$('#browse-area input:checkbox').length;
-      this.$('#all-expand-collapse').prop('checked', nchecked === total);
+    setExpand : function(state) {
+      this.$('input[type="checkbox"]').prop('checked', state);
     },
 
     render : function() {
@@ -54,7 +50,7 @@ define([
       this.$('#browse-area').html(_.template(jsonTemplate, { root : jsonobj }));
       this.$('#formatted-area').html(JSON.stringify(jsonobj, null, 4));
       this.$('#minified-area').html(JSON.stringify(jsonobj));
-      this.checkboxStateChanged();
+      this.setExpand(false);
 
       this.$('#result').fadeIn(fadeTime);
     },

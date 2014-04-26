@@ -16,9 +16,8 @@
       <input type="radio" name="format-tabs" id="format-tabs-browse" checked="checked" />
       <label class="tab button" for="format-tabs-browse">browse</label>
       <article>
-        <input type="checkbox" id="all-expand-collapse" />
-        <img src="/images/plus-large.png" class="expand" />
-        <img src="/images/minus-large.png" class="shrink" />
+        <img src="/images/expand-all.png" class="expand" />
+        <img src="/images/collapse-all.png" class="shrink" />
         <div id="browse-area" class="format-result"></div>
       </article>
 

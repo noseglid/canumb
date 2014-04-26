@@ -17,17 +17,8 @@
       padding: 10px;
     }
 
-    input[type="checkbox"]:checked ~ img.shrink {
-      display: inline;
-    }
-
-    input[type="checkbox"]:not(:checked) ~ img.expand {
-      display: inline;
-    }
-
     img.expand,
     img.shrink {
-      display: none;
       cursor: pointer;
     }
   }

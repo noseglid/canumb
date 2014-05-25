@@ -1,7 +1,7 @@
 {
   "name": "canumb",
   "version": "0.3.2",
-  "description": "Number conversion as a service",
+  "description": "Data interpretation as a service",
   "main": "main.js",
   "repository": {
     "type": "git",
@@ -40,7 +40,16 @@
     "hexadecimal",
     "binary",
     "double",
-    "float"
+    "float",
+    "base64",
+    "base85",
+    "encode",
+    "decode",
+    "hash",
+    "md5",
+    "sha1",
+    "sha256",
+    "sha512"
   ],
   "author": "Alexander Olsson <noseglid@gmail.com>",
   "contributors": [],

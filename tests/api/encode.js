@@ -47,8 +47,8 @@ exports.testUriEncode = function(test) {
 
 exports.testBase85Encode = function(test) {
   var tests = [
-    { 'data' : 'Hello, world!', 'expected' : '<~87cURD_*#TDfTZ)+T~>' },
-    { 'data' : 'ay dios mio', 'expected' : '<~@<iu+BlA&8D/!n~>' }
+    { 'data' : 'Hello, world!', 'expected' : 'nm=QNz.92Pz/PV8aP' },
+    { 'data' : 'ay dios mio', 'expected' : 'vr&#ax(w5nze0[' }
   ];
 
   test.expect(tests.length);

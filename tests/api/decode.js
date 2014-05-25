@@ -60,10 +60,10 @@ exports.testInvalidUriDecode = function(test) {
 
 exports.testBase85Decode = function(test) {
   var tests = [
-    { 'data' : '<~DIn!&EZf"5DJik~>',  'expected' : 'never gonna' },
-    { 'data' : '<~Ch7]2H#IgJA8c[0~>', 'expected' : 'let you down' },
-    { 'data' : '<~_kk8H_mT~>',        'expected' : 'åäö' },
-    { 'data' : '<~+9~>',              'expected' : ' ' },
+    { 'data' : 'zE[05AV/1kzF&>',  'expected' : 'never gonna' },
+    { 'data' : 'y?mYhD2E*Fwn=Wf', 'expected' : 'let you down' },
+    { 'data' : '.>>nD.)P',        'expected' : 'åäö' },
+    { 'data' : 'ao',              'expected' : ' ' },
   ];
 
   test.expect(tests.length);

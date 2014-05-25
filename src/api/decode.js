@@ -32,16 +32,9 @@ function fnbase85(data)
   /* Ignore leading and trailing white spaces for easier verification */
   data = data.trim();
 
-  if (data[0]               !== '<' ||
-      data[1]               !== '~' ||
-      data[data.length - 2] !== '~' ||
-      data[data.length - 1] !== '>') {
-    throw new errors.InvalidArgument('Base85 data must be enclosed by \'<~\' and \'~>\'.');
-  }
-
   var re =
-    /[^\n !"#$%&'()*+,\-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\]\^_`abcdefghijklmnopqrstu]/;
-  if (re.test(data.slice(2, -2))) {
+    /[^0-9a-zA-Z.-:+=^!/*?&<>()[\]{}@%$#]/;
+  if (re.test(data)) {
     throw new errors.InvalidArgument('Invalid characters in base85 data.');
   }
 

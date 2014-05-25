@@ -2,7 +2,7 @@ requirejs.config({
   'baseUrl' : '/',
   'paths' : {
     'text'              : 'scripts/libs/text',
-    'underscore'        : 'scripts/libs/underscore-min',
+    'underscore'        : 'scripts/libs/underscore',
     'backbone'          : 'scripts/libs/backbone',
     'jquery'            : 'scripts/libs/jquery.min',
     'jquery-ui-widget'  : 'scripts/libs/ui.widget.jquery',

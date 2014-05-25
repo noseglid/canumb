@@ -12,8 +12,7 @@ module.exports = function(grunt) {
               "bower_components/jQuery/dist/jquery.min.js",
               "bower_components/jQuery/dist/jquery.min.map",
               "bower_components/backbone/backbone.js",
-              "bower_components/underscore/underscore-min.js",
-              "bower_components/underscore/underscore-min.map",
+              "bower_components/underscore/underscore.js",
               "bower_components/growl/javascripts/jquery.growl.js",
               "bower_components/vex/js/vex.dialog.min.js",
               "bower_components/vex/js/vex.min.js"
